@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=ParkingLotManager
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ParkingLotManager\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=plate
+comment1.target=Vehicle\ findByPlate(java.lang.String)
+comment2.params=plate
+comment2.target=Ticket\ findActiveTicketByPlate(java.lang.String)
+comment3.params=vehicle
+comment3.target=ParkingSpot\ findAvailableSpot(Vehicle)
+comment4.params=ID
+comment4.target=User\ findUserByID(int)
+numComments=5

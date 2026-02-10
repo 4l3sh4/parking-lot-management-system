@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=Payable
+comment0.text=\r\n\ Enumeration\ class\ VehicleType\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\r\n\ @author\ (your\ name\ here)\r\n\ @version\ (version\ number\ or\ date\ here)\r\n
+comment1.params=duration
+comment1.target=double\ calculateFee(java.time.Duration)
+numComments=2

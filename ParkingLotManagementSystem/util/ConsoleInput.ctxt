@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=ConsoleInput
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ ConsoleInput\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=scanner
+comment1.target=java.lang.String\ readLineString(java.util.Scanner)
+comment2.params=scanner
+comment2.target=java.lang.String\ readString(java.util.Scanner)
+comment3.params=scanner
+comment3.target=double\ readDouble(java.util.Scanner)
+comment4.params=scanner
+comment4.target=int\ readInt(java.util.Scanner)
+numComments=5

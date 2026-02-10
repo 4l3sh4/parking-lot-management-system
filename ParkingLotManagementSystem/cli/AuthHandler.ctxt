@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=AuthHandler
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Login\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=s
+comment1.target=void\ login(java.util.Scanner)
+comment2.params=s
+comment2.target=void\ createNewAccount(java.util.Scanner)
+numComments=3
