@@ -77,12 +77,44 @@ public class LoadData {
     public static void loadUsers() {
         FileHandler.createFilesIfNotExists();
         try (FileReader reader = new FileReader(new File(FileHandler.USERS_FILE))) {
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-            List<User> users = FileHandler.gson.fromJson(reader, listType);
-            if (users == null)
-                users = new ArrayList<>();
-            DataManager.users = (ArrayList<User>) users;
-        } catch (IOException e) {
+    
+            com.google.gson.JsonElement root = com.google.gson.JsonParser.parseReader(reader);
+    
+            ArrayList<User> users = new ArrayList<>();
+    
+            if (root != null && root.isJsonArray()) {
+                com.google.gson.JsonArray arr = root.getAsJsonArray();
+    
+                for (com.google.gson.JsonElement el : arr) {
+                    if (!el.isJsonObject()) continue;
+    
+                    com.google.gson.JsonObject o = el.getAsJsonObject();
+    
+                    int id = o.get("ID").getAsInt();
+                    String first = o.get("firstName").getAsString();
+                    String last = o.get("lastName").getAsString();
+                    String email = o.get("email").getAsString();
+                    String pass = o.get("password").getAsString();
+    
+                    String role = "CLIENT";
+                    if (o.has("role") && !o.get("role").isJsonNull()) {
+                        role = o.get("role").getAsString();
+                    }
+    
+                    User u;
+                    if ("ADMIN".equalsIgnoreCase(role)) {
+                        u = new model.Admin(id, first, last, email, pass);
+                    } else {
+                        u = new model.Client(id, first, last, email, pass);
+                    }
+    
+                    users.add(u);
+                }
+            }
+    
+            DataManager.users = users;
+    
+        } catch (Exception e) {
             System.err.println("Error loading users: " + e.getMessage());
             DataManager.users = new ArrayList<>();
         }

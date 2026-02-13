@@ -13,11 +13,13 @@ public class Admin extends User {
 
     public Admin() {
         super();
+        setRole("ADMIN");
         initActions();
     }
 
     public Admin(int ID, String firstName, String lastName, String email, String password) {
         super(ID, firstName, lastName, email, password);
+        setRole("ADMIN");
         initActions(); 
     }
 

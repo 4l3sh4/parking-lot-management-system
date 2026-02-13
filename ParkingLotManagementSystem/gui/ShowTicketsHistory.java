@@ -172,9 +172,9 @@ public class ShowTicketsHistory implements Actionable {
                 BorderFactory.createLineBorder(Color.BLUE, 2),
                 BorderFactory.createEmptyBorder(12, 12, 12, 12)));
 
-        card.setPreferredSize(new Dimension(400, 260));
-        card.setMaximumSize(new Dimension(400, 260));
-        card.setMinimumSize(new Dimension(400, 260));
+        card.setPreferredSize(new Dimension(300, 260));
+        card.setMaximumSize(new Dimension(300, 260));
+        card.setMinimumSize(new Dimension(300, 260));
 
         card.add(new JLabel("Ticket ID:"));
         card.add(new JLabel(String.valueOf(ticket.getID())));

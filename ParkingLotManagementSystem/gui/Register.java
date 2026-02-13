@@ -138,17 +138,21 @@ public class Register extends JPanel {
 
             User user;
             if ("Admin".equals(accType.getSelectedItem())) {
-                user = new Admin(IDGenerator.getNextUserID(),
+                user = new Admin(
+                        IDGenerator.getNextUserID(),
                         firstName.getText().trim(),
                         lastName.getText().trim(),
                         email.getText().trim(),
-                        pass);
+                        pass
+                );
             } else {
-                user = new Client(IDGenerator.getNextUserID(),
+                user = new Client(
+                        IDGenerator.getNextUserID(),
                         firstName.getText().trim(),
                         lastName.getText().trim(),
                         email.getText().trim(),
-                        pass);
+                        pass
+                );
             }
 
             DataManager.users.add(user);

@@ -12,11 +12,13 @@ public class Client extends User {
 
     public Client() {
         super();
+        setRole("CLIENT");
         initActions();
     }
 
     public Client(int ID, String firstName, String lastName, String email, String password) {
         super(ID, firstName, lastName, email, password);
+        setRole("CLIENT");
         initActions();
     }
 
