@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=Ticket
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Ticket\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Ticket()
 comment10.params=
@@ -25,6 +24,10 @@ comment19.params=spotNumber
 comment19.target=void\ setSpotNumber(int)
 comment2.params=vehicle\ spotNumber
 comment2.target=Ticket(Vehicle,\ int)
+comment20.params=
+comment20.target=void\ exitVehicle()
+comment21.params=
+comment21.target=java.lang.String\ toString()
 comment3.params=ID\ vehicle\ entryTime\ exitTime\ totalFee\ spotNumber
 comment3.target=Ticket(int,\ Vehicle,\ java.time.LocalDateTime,\ java.time.LocalDateTime,\ double,\ int)
 comment4.params=
@@ -39,4 +42,4 @@ comment8.params=
 comment8.target=java.lang.String\ getEntryDate()
 comment9.params=
 comment9.target=java.lang.String\ getEntryTimeToString()
-numComments=20
+numComments=22

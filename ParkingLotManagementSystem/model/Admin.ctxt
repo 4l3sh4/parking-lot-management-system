@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=Admin
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Admin\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=Admin()
 comment2.params=ID\ firstName\ lastName\ email\ password
 comment2.target=Admin(int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
-numComments=3
+comment3.params=
+comment3.target=void\ initActions()
+numComments=4

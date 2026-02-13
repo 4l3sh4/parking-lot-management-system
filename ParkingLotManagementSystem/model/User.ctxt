@@ -1,6 +1,5 @@
 #BlueJ class context
 comment0.target=User
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ User\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=User()
 comment10.params=
@@ -12,7 +11,9 @@ comment12.target=java.lang.String\ getPassword()
 comment13.params=
 comment13.target=Actionable[]\ getActions()
 comment14.params=
-comment14.target=java.lang.String\ getFullName()
+comment14.target=gui.Actionable[]\ getGUIActions()
+comment15.params=
+comment15.target=java.lang.String\ getFullName()
 comment2.params=ID\ firstName\ lastName\ email\ password
 comment2.target=User(int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ java.lang.String)
 comment3.params=ID
@@ -29,4 +30,4 @@ comment8.params=
 comment8.target=int\ getID()
 comment9.params=
 comment9.target=java.lang.String\ getFirstName()
-numComments=15
+numComments=16

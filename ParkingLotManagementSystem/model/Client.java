@@ -1,33 +1,44 @@
 package model;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import cli.Logout;
 import cli.ShowSpotsStatus;
 import cli.VehicleEntry;
 import cli.VehicleExit;
-/**
- * Write a description of class Client here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Client extends User {
-    
-    public Client(){
+
+    public Client() {
+        super();
+        initActions();
+    }
+
+    public Client(int ID, String firstName, String lastName, String email, String password) {
+        super(ID, firstName, lastName, email, password);
+        initActions();
+    }
+
+    private void initActions() {
         super.actions = new Actionable[] {
                 new VehicleEntry(),
                 new VehicleExit(),
                 new ShowSpotsStatus(),
                 new Logout()
+        };
+
+        super.guiActions = new gui.Actionable[] {
+                new gui.ShowSpotsStatus(),
+                new gui.VehicleEntry(),
+                new gui.VehicleExit(),
+                new gui.Logout()
         };
     }
-    
-     public Client(int ID, String firstName, String lastName, String email, String password) {
-        super(ID, firstName, lastName, email, password);
-        super.actions = new Actionable[] {
-                new VehicleEntry(),
-                new VehicleExit(),
-                new ShowSpotsStatus(),
-                new Logout()
-        };
+
+    // ✅ runs after loading from file (constructors won't run!)
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        initActions();
     }
 }

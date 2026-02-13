@@ -6,12 +6,6 @@ import model.ParkingSpot;
 import model.Ticket;
 import model.Vehicle;
 import model.User;
-/**
- * Write a description of class DataManager here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 
 public class DataManager {
     

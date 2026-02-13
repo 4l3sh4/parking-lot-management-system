@@ -11,6 +11,7 @@ import model.Car;
 import model.SUV_Truck;
 import model.Handicapped_Vehicle;
 import util.ConsoleInput;
+import storage.SaveData;
 
 import storage.DataManager;
 /**
@@ -78,6 +79,7 @@ public class VehicleHandler {
         vehicle.setBrand(brand);
         vehicle.setModel(model);
         DataManager.registeredVehicles.add(vehicle);
+        SaveData.saveAll();
         return vehicle;
     }
 }

@@ -4,17 +4,12 @@ import java.util.Scanner;
 
 import model.User;
 import storage.DataManager;
+import storage.SaveData;
 import util.ConsoleInput;
 import model.IDGenerator;
 import model.Admin;
 import model.Client;
 
-/**
- * Write a description of class Login here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class AuthHandler {
     
     public static void login(Scanner s) {
@@ -70,6 +65,7 @@ public class AuthHandler {
             user = new Client(IDGenerator.getNextUserID(), firstName, lastName, email, password);
         }
         DataManager.users.add(user);
+        SaveData.saveAll();
         NavigationHandler.showMenu(s, user);
     }
 }

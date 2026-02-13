@@ -2,14 +2,10 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.Duration;
 
 import model.IDGenerator;
-/**
- * Write a description of class Ticket here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Ticket {
     
     private int ID;
@@ -109,4 +105,34 @@ public class Ticket {
         this.spotNumber = spotNumber;
     }
     
+    public void exitVehicle() {
+        this.exitTime = LocalDateTime.now();
+        totalFee = vehicle.calculateFee(Duration.between(entryTime, exitTime));
+    }
+    
+    @Override
+    public String toString() {
+        String output = "\tTicket ID: "+getID()+"\n"+
+            "\tVehicle License Plate Number: "+
+                                            getVehicle().getLicensePlateNumber()+"\n"+
+            "\tVehicle Brand: "+getVehicle().getBrand()+"\n"+
+            "\tVehicle Model: "+getVehicle().getModel()+"\n"+
+            "\tVehicle Color: "+getVehicle().getColor()+"\n"+
+            "\tVehicle Owner: "+ParkingLotManager.findUserByID(getVehicle().getVehicleOwnerID())
+                                    .getFullName()+"\n"+
+            "\tEntry Date: "+getEntryDate()+"\n"+
+            "\tEntry Time: "+getEntryTimeToString()+"\n"+
+            "\tSpot Number: "+getSpotNumber()+"\n";
+        if (exitTime == null) {
+            return output + "\t--------------------------------";
+        } else {
+            return output + 
+                "\tExit Date: "+getExitDate()+"\n"+
+                "\tExit Time: "+getExitTimeToString()+"\n"+
+                "\tDuration in Minutes: "+
+                        Duration.between(getEntryTime(), getExitTime()).toMinutes()+"\n"+
+                "\tTotal Fee: "+getTotalFee()+"$"+"\n"+
+                        "\t--------------------------------";
+        }
+    }
 }

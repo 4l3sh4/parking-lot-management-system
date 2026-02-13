@@ -1,12 +1,5 @@
 package model;
 
-
-/**
- * Write a description of class IDGenerator here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class IDGenerator {
     
     private static int nextUserID = 0;
@@ -23,5 +16,23 @@ public class IDGenerator {
     
     public static int getNextTicketID() {
         return nextTicketID++;
+    }
+    
+    public static int getSaveNextUserID() {
+        return nextUserID;
+    }
+    
+    public static int getSaveNextSpotNum() {
+        return nextSpotNum;
+    }
+    
+    public static int getSaveNextTicketID() {
+        return nextTicketID;
+    }
+    
+    public static void setData(int nextUserID, int nextSpotNum, int nextTicketID) {
+        IDGenerator.nextUserID = nextUserID;
+        IDGenerator.nextSpotNum = nextSpotNum;
+        IDGenerator.nextTicketID = nextTicketID;
     }
 }

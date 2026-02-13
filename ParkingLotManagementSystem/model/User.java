@@ -1,12 +1,6 @@
 package model;
 
-
-/**
- * Write a description of class User here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+import model.Actionable;
 
 public abstract class User{
     
@@ -15,7 +9,8 @@ public abstract class User{
     private String lastName;
     private String email;
     private String password;
-    protected Actionable[] actions;
+    protected transient Actionable[] actions;
+    protected transient gui.Actionable[] guiActions;
     
     public User() {
         
@@ -71,6 +66,10 @@ public abstract class User{
     
     public Actionable[] getActions() {
         return actions;
+    }
+    
+    public gui.Actionable[] getGUIActions() {
+        return guiActions;
     }
     
     public String getFullName() {

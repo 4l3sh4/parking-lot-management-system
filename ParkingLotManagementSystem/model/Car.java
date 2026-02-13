@@ -1,12 +1,7 @@
 package model;
 
 import java.time.Duration;
-/**
- * Write a description of class Car here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Car extends Vehicle {
     public Car(String licensePlate) {
         super(licensePlate);

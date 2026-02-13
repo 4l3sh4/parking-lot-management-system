@@ -7,13 +7,9 @@ import model.ParkingSpot;
 import model.User;
 import model.SpotType;
 import storage.DataManager;
+import storage.SaveData;
 import util.ConsoleInput;
-/**
- * Write a description of class AddNewParkingSpot here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class AddNewParkingSpot implements Actionable {
     
     @Override
@@ -34,6 +30,7 @@ public class AddNewParkingSpot implements Actionable {
         } while (selected<0 || selected>=types.length);
         ParkingSpot spot = new ParkingSpot(types[selected]);
         DataManager.parkingSpots.add(spot);
+        SaveData.saveAll();
         System.out.println("Parking Spot added succesfully");
     }
     

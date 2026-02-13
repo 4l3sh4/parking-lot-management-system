@@ -14,12 +14,7 @@ import model.SUV_Truck;
 import model.Handicapped_Vehicle;
 
 import storage.DataManager;
-/**
- * Write a description of class ShowSpotsStatus here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class ShowSpotsStatus implements Actionable {
     
     @Override

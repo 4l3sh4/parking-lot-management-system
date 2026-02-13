@@ -10,12 +10,8 @@ import model.ParkingSpot;
 import model.Ticket;
 import util.ConsoleInput;
 import storage.DataManager;
-/**
- * Write a description of class VehicleEntry here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+import storage.SaveData;
+
 public class VehicleEntry implements Actionable {
     
     @Override
@@ -57,6 +53,7 @@ public class VehicleEntry implements Actionable {
         
         Ticket ticket = new Ticket(vehicle, spot.getSpotNumber());
         DataManager.activeTickets.add(ticket);
+        SaveData.saveAll();
         System.out.println("Vehicle entered succesfully");
         System.out.println("------------------------");
         System.out.println("Ticket ID: "+ticket.getID());

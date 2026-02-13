@@ -67,6 +67,7 @@ public class ParkingSpot {
     
     public void free() {
         this.isOccupied = false;
+        this.vehicle = null;
     }
     
     public void setVehicle(Vehicle vehicle) {

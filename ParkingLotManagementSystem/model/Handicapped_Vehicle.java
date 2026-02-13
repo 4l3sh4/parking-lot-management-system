@@ -1,12 +1,7 @@
 package model;
 
 import java.time.Duration;
-/**
- * Write a description of class Car here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class Handicapped_Vehicle extends Vehicle {
     //RM2/hour (FREE only if have handicapped card holder in handicapped spots) 
     private boolean hasHandicappedCard;

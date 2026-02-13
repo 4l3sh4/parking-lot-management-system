@@ -1,12 +1,7 @@
 package model;
 
 import storage.DataManager;
-/**
- * Write a description of class ParkingLotManager here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 public class ParkingLotManager {
     
     public static Vehicle findByPlate(String plate) {
@@ -24,6 +19,17 @@ public class ParkingLotManager {
         Ticket ticket = null;
         for (Ticket t : DataManager.activeTickets) {
             if (t.getVehicle().getLicensePlateNumber().toLowerCase().equals(plate.toLowerCase())) {
+                ticket = t;
+                break;
+            }
+        }
+        return ticket;
+    }
+    
+    public static Ticket findActiveTicketBySpot(int spotNum) {
+        Ticket ticket = null;
+        for (Ticket t : DataManager.activeTickets) {
+            if (t.getSpotNumber() == spotNum) {
                 ticket = t;
                 break;
             }
@@ -71,5 +77,16 @@ public class ParkingLotManager {
             }
         }
         return user;
+    }
+    
+    public static ParkingSpot findSpotByNum(int spotNum) {
+        ParkingSpot spot = null;
+        for (ParkingSpot s : DataManager.parkingSpots) {
+            if (s.getSpotNumber() == spotNum) {
+                spot = s;
+                break;
+            }
+        }
+        return spot;
     }
 }
