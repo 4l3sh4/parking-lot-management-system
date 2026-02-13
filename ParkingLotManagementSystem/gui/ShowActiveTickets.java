@@ -11,6 +11,8 @@ import javax.swing.Box;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Component;
 
 import model.Ticket;
 import model.User;
@@ -54,13 +56,29 @@ public class ShowActiveTickets implements Actionable {
             panel.add(row);
             panel.add(Box.createVerticalStrut(15));
         }
-
-        JScrollPane scrollPane = new JScrollPane(panel);
+        
+        // wrapper that holds title + content
+        JPanel wrapper = new JPanel();
+        wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
+        wrapper.setOpaque(false);
+        
+        // Title
+        JLabel title = new JLabel("Active Tickets");
+        title.setFont(new Font("Tahoma", Font.BOLD, 30));
+        title.setForeground(new Color(33, 102, 255));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        wrapper.add(title);
+        wrapper.add(Box.createVerticalStrut(15));
+        wrapper.add(panel);
+        
+        // Scroll wrapper, not panel
+        JScrollPane scrollPane = new JScrollPane(wrapper);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        
         return scrollPane;
     }
 

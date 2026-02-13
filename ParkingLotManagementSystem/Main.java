@@ -3,6 +3,7 @@ import storage.LoadData;
 import model.User;
 import storage.FileHandler;
 
+import java.time.LocalDateTime;
 import model.Vehicle;
 import model.Car;     
 import model.Ticket;
@@ -12,7 +13,7 @@ import model.SpotType;
 import model.Motorcycle;
 import model.SUV_Truck;
 import model.Handicapped_Vehicle;
-
+import model.Ticket;
 
 import storage.DataManager;
 import storage.SaveData;
@@ -27,49 +28,94 @@ public class Main {
         LoadData.loadAllData();
         //cli.NavigationHandler.welcome(new Scanner(System.in));
         
-        // TEMP PARKING SPOTS TEST DATA (delete later)
-        if (DataManager.parkingSpots.isEmpty()) {
+        // ===== TEMP TEST REGISTERED VEHICLES =====
+        if (DataManager.registeredVehicles.isEmpty()) {
         
-            // Available spots
-            DataManager.parkingSpots.add(new ParkingSpot(1, false, null, SpotType.COMPACT));
-            DataManager.parkingSpots.add(new ParkingSpot(2, false, null, SpotType.REGULAR));
-            DataManager.parkingSpots.add(new ParkingSpot(3, false, null, SpotType.HANDICAPPED));
-            DataManager.parkingSpots.add(new ParkingSpot(4, false, null, SpotType.RESERVED));
+            Vehicle v1 = new Car("REG111");
+            v1.setBrand("Toyota");
+            v1.setModel("Vios");
+            v1.setColor(Color.RED);
+            v1.setVehicleOwnerID(1);
+            DataManager.registeredVehicles.add(v1);
         
-            // Occupied spots
+            Vehicle v2 = new Motorcycle("REG222");
+            v2.setBrand("Yamaha");
+            v2.setModel("R15");
+            v2.setColor(Color.BLUE);
+            v2.setVehicleOwnerID(2);
+            DataManager.registeredVehicles.add(v2);
         
-            Vehicle v5 = new Car("AAA111");
-            v5.setBrand("Toyota");
-            v5.setModel("Vios");
-            v5.setColor(Color.RED);
-            v5.setVehicleOwnerID(5);
-            DataManager.parkingSpots.add(new ParkingSpot(5, true, v5, SpotType.REGULAR));
+            Vehicle v3 = new SUV_Truck("REG333");
+            v3.setBrand("Ford");
+            v3.setModel("Ranger");
+            v3.setColor(Color.BLACK);
+            v3.setVehicleOwnerID(3);
+            DataManager.registeredVehicles.add(v3);
         
-            Vehicle v6 = new Motorcycle("BBB222");
-            v6.setBrand("Yamaha");
-            v6.setModel("R15");
-            v6.setColor(Color.BLUE);
-            v6.setVehicleOwnerID(6);
-            DataManager.parkingSpots.add(new ParkingSpot(6, true, v6, SpotType.COMPACT));
+            Vehicle v4 = new Handicapped_Vehicle("REG444", true);
+            v4.setBrand("Honda");
+            v4.setModel("City");
+            v4.setColor(Color.WHITE);
+            v4.setVehicleOwnerID(4);
+            DataManager.registeredVehicles.add(v4);
         
-            Vehicle v7 = new SUV_Truck("CCC333");
-            v7.setBrand("Ford");
-            v7.setModel("Ranger");
-            v7.setColor(Color.BLACK);
-            v7.setVehicleOwnerID(7);
-            DataManager.parkingSpots.add(new ParkingSpot(7, true, v7, SpotType.RESERVED));
+            SaveData.saveAll();
+        }    
         
-            Vehicle v8 = new Handicapped_Vehicle("DDD444", true);
-            v8.setBrand("Honda");
-            v8.setModel("City");
-            v8.setColor(Color.WHITE);
-            v8.setVehicleOwnerID(8);
-            DataManager.parkingSpots.add(new ParkingSpot(8, true, v8, SpotType.HANDICAPPED));
+        // ===== TEMP TEST TICKET HISTORY =====
+        if (DataManager.ticketHistory.isEmpty()) {
+        
+            Vehicle v1 = new Car("P101010");
+            v1.setBrand("Toyota");
+            v1.setModel("Vios");
+            v1.setColor(Color.RED);
+            v1.setVehicleOwnerID(1);
+        
+            Ticket t1 = new Ticket(
+                1,
+                v1,
+                LocalDateTime.now().minusHours(8),
+                LocalDateTime.now().minusHours(4),
+                35.0,
+                1
+            );
+        
+            Vehicle v2 = new Car("P121212");
+            v2.setBrand("Honda");
+            v2.setModel("City");
+            v2.setColor(Color.WHITE);
+            v2.setVehicleOwnerID(2);
+        
+            Ticket t2 = new Ticket(
+                2,
+                v2,
+                LocalDateTime.now().minusHours(6),
+                LocalDateTime.now().minusHours(3),
+                14.0,
+                2
+            );
+        
+            Vehicle v3 = new Car("P131313");
+            v3.setBrand("Mazda");
+            v3.setModel("CX5");
+            v3.setColor(Color.BLACK);
+            v3.setVehicleOwnerID(3);
+        
+            Ticket t3 = new Ticket(
+                3,
+                v3,
+                LocalDateTime.now().minusHours(10),
+                LocalDateTime.now().minusHours(5),
+                42.0,
+                3
+            );
+        
+            DataManager.ticketHistory.add(t1);
+            DataManager.ticketHistory.add(t2);
+            DataManager.ticketHistory.add(t3);
         
             SaveData.saveAll();
         }
-
-        
         NavigationHandler.initialize();
 
     }

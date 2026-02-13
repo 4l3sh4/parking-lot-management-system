@@ -75,5 +75,15 @@
     "spotNumber": 9,
     "isOccupied": false,
     "type": "REGULAR"
+  },
+  {
+    "spotNumber": 4,
+    "isOccupied": false,
+    "type": "COMPACT"
+  },
+  {
+    "spotNumber": 5,
+    "isOccupied": false,
+    "type": "COMPACT"
   }
 ]

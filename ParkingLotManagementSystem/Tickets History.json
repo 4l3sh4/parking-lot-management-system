@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "ID": 1,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "P101010",
+      "OwnerID": 1,
+      "Color": "RED",
+      "Brand": "Toyota",
+      "Model": "Vios"
+    },
+    "entryTime": "2026-02-13T21:02:29.6990872",
+    "exitTime": "2026-02-14T01:02:29.6990872",
+    "totalFee": 35.0,
+    "spotNumber": 1
+  },
+  {
+    "ID": 2,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "P121212",
+      "OwnerID": 2,
+      "Color": "WHITE",
+      "Brand": "Honda",
+      "Model": "City"
+    },
+    "entryTime": "2026-02-13T23:02:29.6990872",
+    "exitTime": "2026-02-14T02:02:29.6990872",
+    "totalFee": 14.0,
+    "spotNumber": 2
+  },
+  {
+    "ID": 3,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "P131313",
+      "OwnerID": 3,
+      "Color": "BLACK",
+      "Brand": "Mazda",
+      "Model": "CX5"
+    },
+    "entryTime": "2026-02-13T19:02:29.6990872",
+    "exitTime": "2026-02-14T00:02:29.6990872",
+    "totalFee": 42.0,
+    "spotNumber": 3
+  }
+]
