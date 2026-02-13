@@ -9,6 +9,10 @@ import model.Ticket;
 import model.Color;
 import model.ParkingSpot;
 import model.SpotType;
+import model.Motorcycle;
+import model.SUV_Truck;
+import model.Handicapped_Vehicle;
+
 
 import storage.DataManager;
 import storage.SaveData;
@@ -23,40 +27,49 @@ public class Main {
         LoadData.loadAllData();
         //cli.NavigationHandler.welcome(new Scanner(System.in));
         
-        // TEMP TEST DATA (delete later)
-        if (DataManager.activeTickets.isEmpty()) {
+        // TEMP PARKING SPOTS TEST DATA (delete later)
+        if (DataManager.parkingSpots.isEmpty()) {
         
-            Vehicle v1 = new Car("ABC123");
-            v1.setBrand("Toyota");
-            v1.setModel("Vios");
-            v1.setColor(Color.RED);
-            v1.setVehicleOwnerID(1);
-            DataManager.activeTickets.add(new Ticket(v1, 1));
+            // Available spots
+            DataManager.parkingSpots.add(new ParkingSpot(1, false, null, SpotType.COMPACT));
+            DataManager.parkingSpots.add(new ParkingSpot(2, false, null, SpotType.REGULAR));
+            DataManager.parkingSpots.add(new ParkingSpot(3, false, null, SpotType.HANDICAPPED));
+            DataManager.parkingSpots.add(new ParkingSpot(4, false, null, SpotType.RESERVED));
         
-            Vehicle v2 = new Car("DEF456");
-            v2.setBrand("Honda");
-            v2.setModel("City");
-            v2.setColor(Color.BLUE);
-            v2.setVehicleOwnerID(2);
-            DataManager.activeTickets.add(new Ticket(v2, 2));
+            // Occupied spots
         
-            Vehicle v3 = new Car("GHI789");
-            v3.setBrand("Mazda");
-            v3.setModel("CX5");
-            v3.setColor(Color.WHITE);
-            v3.setVehicleOwnerID(3);
-            DataManager.activeTickets.add(new Ticket(v3, 3));
+            Vehicle v5 = new Car("AAA111");
+            v5.setBrand("Toyota");
+            v5.setModel("Vios");
+            v5.setColor(Color.RED);
+            v5.setVehicleOwnerID(5);
+            DataManager.parkingSpots.add(new ParkingSpot(5, true, v5, SpotType.REGULAR));
         
-            Vehicle v4 = new Car("JKL321");
-            v4.setBrand("Perodua");
-            v4.setModel("Bezza");
-            v4.setColor(Color.BLACK);
-            v4.setVehicleOwnerID(4);
-            DataManager.activeTickets.add(new Ticket(v4, 4));
+            Vehicle v6 = new Motorcycle("BBB222");
+            v6.setBrand("Yamaha");
+            v6.setModel("R15");
+            v6.setColor(Color.BLUE);
+            v6.setVehicleOwnerID(6);
+            DataManager.parkingSpots.add(new ParkingSpot(6, true, v6, SpotType.COMPACT));
+        
+            Vehicle v7 = new SUV_Truck("CCC333");
+            v7.setBrand("Ford");
+            v7.setModel("Ranger");
+            v7.setColor(Color.BLACK);
+            v7.setVehicleOwnerID(7);
+            DataManager.parkingSpots.add(new ParkingSpot(7, true, v7, SpotType.RESERVED));
+        
+            Vehicle v8 = new Handicapped_Vehicle("DDD444", true);
+            v8.setBrand("Honda");
+            v8.setModel("City");
+            v8.setColor(Color.WHITE);
+            v8.setVehicleOwnerID(8);
+            DataManager.parkingSpots.add(new ParkingSpot(8, true, v8, SpotType.HANDICAPPED));
         
             SaveData.saveAll();
         }
 
+        
         NavigationHandler.initialize();
 
     }
