@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "ID": 4,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "ABC123",
+      "OwnerID": 1,
+      "Color": "RED",
+      "Brand": "Toyota",
+      "Model": "Vios"
+    },
+    "entryTime": "2026-02-14T02:31:13.6307534",
+    "totalFee": 0.0,
+    "spotNumber": 1
+  },
+  {
+    "ID": 5,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "DEF456",
+      "OwnerID": 2,
+      "Color": "BLUE",
+      "Brand": "Honda",
+      "Model": "City"
+    },
+    "entryTime": "2026-02-14T02:31:13.6307534",
+    "totalFee": 0.0,
+    "spotNumber": 2
+  },
+  {
+    "ID": 6,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "GHI789",
+      "OwnerID": 3,
+      "Color": "WHITE",
+      "Brand": "Mazda",
+      "Model": "CX5"
+    },
+    "entryTime": "2026-02-14T02:31:13.6307534",
+    "totalFee": 0.0,
+    "spotNumber": 3
+  },
+  {
+    "ID": 7,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "JKL321",
+      "OwnerID": 4,
+      "Color": "BLACK",
+      "Brand": "Perodua",
+      "Model": "Bezza"
+    },
+    "entryTime": "2026-02-14T02:31:13.6307534",
+    "totalFee": 0.0,
+    "spotNumber": 4
+  }
+]

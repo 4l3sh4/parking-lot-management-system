@@ -32,6 +32,7 @@ public class Client extends User {
                 new gui.ShowSpotsStatus(),
                 new gui.VehicleEntry(),
                 new gui.VehicleExit(),
+                new gui.ShowActiveTickets(), 
                 new gui.Logout()
         };
     }

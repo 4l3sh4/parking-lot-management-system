@@ -1,6 +1,6 @@
 package gui;
 
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 import model.User;
 
 public interface Actionable
@@ -9,5 +9,5 @@ public interface Actionable
     
     public void execute(User u);
     
-    public JPanel getPanel();
+    public JComponent getPanel();
 }
