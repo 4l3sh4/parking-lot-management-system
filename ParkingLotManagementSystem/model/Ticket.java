@@ -164,24 +164,12 @@ public class Ticket {
                     true, 
                     DataManager.currentFineScheme);
             this.fines += overstayingFine;
-            
-            // Create fine record for the customer's vehicle
-            FineManager.createFine(
-                    vehicle.getLicensePlateNumber(),
-                    overstayingFine,
-                    "Overstaying (more than 24 hours)");
         }
         
         // Check reserved spot without reservation violation
         if (this.isReservedSpotWithoutReservation) {
             double reservationFine = 50.0; // Fixed RM 50 for reserved spot violation
             this.fines += reservationFine;
-            
-            // Create fine record for the customer's vehicle
-            FineManager.createFine(
-                    vehicle.getLicensePlateNumber(),
-                    reservationFine,
-                    "Reserved spot without reservation");
         }
     }
 }

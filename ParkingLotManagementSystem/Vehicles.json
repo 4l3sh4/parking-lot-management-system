@@ -115,5 +115,13 @@
     "Brand": "TOYOTA",
     "Model": "123",
     "HasHandicappedCard": false
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "A1O",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "123",
+    "Model": "123"
   }
 ]
