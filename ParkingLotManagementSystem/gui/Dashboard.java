@@ -49,7 +49,7 @@ public class Dashboard {
         sidePanel.add(Box.createVerticalStrut(14));
 
         // Buttons (same labels/actions list)
-        for (int i = 1; i < user.getGUIActions().length; i++) {
+        for (int i = 0; i < user.getGUIActions().length; i++) {
             SideButton btn = new SideButton(
                 user.getGUIActions()[i].getLabel(),
                 user.getGUIActions()[i],
