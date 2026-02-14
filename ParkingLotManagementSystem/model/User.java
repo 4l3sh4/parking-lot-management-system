@@ -1,7 +1,5 @@
 package model;
 
-import model.Actionable;
-
 public abstract class User{
     
     private int ID; //unique id
@@ -10,6 +8,7 @@ public abstract class User{
     private String email;
     private String password;
     private String role;
+    private boolean vip;
     protected transient Actionable[] actions;
     protected transient gui.Actionable[] guiActions;
     
@@ -51,6 +50,14 @@ public abstract class User{
     
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isVip() {
+        return vip;
+    }
+
+    public void setVip(boolean vip) {
+        this.vip = vip;
     }
     
     public int getID() {

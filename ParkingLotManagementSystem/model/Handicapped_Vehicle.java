@@ -1,7 +1,5 @@
 package model;
 
-import java.time.Duration;
-
 public class Handicapped_Vehicle extends Vehicle {
     //RM2/hour (FREE only if have handicapped card holder in handicapped spots) 
     private boolean hasHandicappedCard;
@@ -10,16 +8,8 @@ public class Handicapped_Vehicle extends Vehicle {
         super(licensePlate);
         this.hasHandicappedCard = hasHandicappedCard;
     }
-
-    @Override
-    public double calculateFee(java.time.Duration duration) {
-        //FREE only if handicapped card holder
-        if (hasHandicappedCard) {
-            return 0.0;
-        }
-
-        long minutes = duration.toMinutes();
-        double hoursToCharge = Math.ceil(minutes / 60.0);
-        return hoursToCharge * 2.0; // Discounted rate
+    
+    public boolean getHasHandicappedCard() {
+        return hasHandicappedCard;
     }
 }

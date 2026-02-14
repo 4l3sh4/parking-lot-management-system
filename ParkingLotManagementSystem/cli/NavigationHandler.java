@@ -5,7 +5,6 @@ import java.util.Scanner;
 import model.User;
 import model.Admin;
 import util.ConsoleInput;
-import model.Actionable;
 
 /**
  * Write a description of class NavigationHandler here.

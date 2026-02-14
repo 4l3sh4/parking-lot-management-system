@@ -78,6 +78,15 @@ public class VehicleEntry implements Actionable {
         String plate = askPlate();
         if (plate == null) return;
     
+        // 1a) Alert if vehicle has unpaid fines
+        double unpaidFines = FineManager.getTotalUnpaidFines(plate);
+        if (unpaidFines > 0) {
+            JOptionPane.showMessageDialog(null,
+                    String.format("** ALERT **\n\nThis vehicle has UNPAID FINES: RM %.2f\n\nYou will have the option to pay these fines during exit.", unpaidFines),
+                    "Unpaid Fines Alert",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    
         // 2) Block duplicate active ticket for same plate
         if (hasActiveTicketForPlate(plate)) {
             showErr("This plate already has an active ticket.\nVehicle cannot enter twice.");
@@ -133,8 +142,8 @@ public class VehicleEntry implements Actionable {
                 hasHandicapCard = askHandicapCard();
             }
     
-            // Choose from suitable AVAILABLE spots (excluding RESERVED)
-            ArrayList<ParkingSpot> suitable = getSuitableAvailableSpots_NoReserved(vType);
+            // Choose from suitable AVAILABLE spots (including RESERVED)
+            ArrayList<ParkingSpot> suitable = getSuitableAvailableSpots(vType);
     
             if (suitable.isEmpty()) {
                 JOptionPane.showMessageDialog(null,
@@ -199,16 +208,24 @@ public class VehicleEntry implements Actionable {
             return;
         }
     
-        // 8) Occupy spot + create ticket
+        // 8) If this spot had someone else's reservation, cancel it (spot is now taken)
+        Reservation spotReservation = findReservationBySpot(chosenSpot.getSpotNumber());
+        if (spotReservation != null && !spotReservation.matchesPlate(plate)) {
+            spotReservation.cancel();
+            JOptionPane.showMessageDialog(null,
+                "This spot had an active reservation for another plate.\n"
+                + "Reservation has been cancelled.",
+                "Reservation Cancelled",
+                JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // 9) Occupy spot + create ticket
         chosenSpot.occupy(vehicle);
     
         Ticket t = new Ticket(vehicle, chosenSpot.getSpotNumber());
         DataManager.activeTickets.add(t);
     
-        // Optional: if reservation used, cancel it now so it can't be reused
-        if (res != null && res.isActive()) {
-            res.cancel();
-        }
+        // Reservation remains active until exit so it expires after the visit.
     
         SaveData.saveAll();
     
@@ -330,6 +347,17 @@ public class VehicleEntry implements Actionable {
         return null;
     }
 
+    private Reservation findReservationBySpot(String spotNumber) {
+        if (DataManager.reservations == null) return null;
+
+        for (Reservation r : DataManager.reservations) {
+            if (r != null && r.matchesSpot(spotNumber)) {
+                return r;
+            }
+        }
+        return null;
+    }
+
     private ParkingSpot findSpotBySpotNumber(String spotNumber) {
         for (ParkingSpot s : DataManager.parkingSpots) {
             if (s != null && s.getSpotNumber().equalsIgnoreCase(spotNumber)) return s;
@@ -340,7 +368,7 @@ public class VehicleEntry implements Actionable {
     // =========================
     // Filtering suitable spots
     // =========================
-    private ArrayList<ParkingSpot> getSuitableAvailableSpots_NoReserved(VehicleType vt) {
+    private ArrayList<ParkingSpot> getSuitableAvailableSpots(VehicleType vt) {
         ArrayList<ParkingSpot> result = new ArrayList<>();
 
         for (ParkingSpot s : DataManager.parkingSpots) {
@@ -352,9 +380,6 @@ public class VehicleEntry implements Actionable {
             // backup safety: don’t show spots already used by active ticket
             if (hasActiveTicketForSpot(s.getSpotNumber())) continue;
 
-            // NON-reservation users: never show RESERVED
-            if (s.getType() == SpotType.RESERVED) continue;
-
             if (isSpotAllowed(vt, s.getType())) result.add(s);
         }
 
@@ -362,6 +387,7 @@ public class VehicleEntry implements Actionable {
     }
 
     private boolean isSpotAllowed(VehicleType vt, SpotType st) {
+        if (st == SpotType.RESERVED) return true;
         switch (vt) {
             case MOTORCYCLE:
                 return st == SpotType.COMPACT;

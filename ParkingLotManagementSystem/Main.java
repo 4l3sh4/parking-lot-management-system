@@ -1,23 +1,16 @@
 import gui.NavigationHandler;
 import storage.LoadData;
-import model.User;
-import storage.FileHandler;
 
-import java.time.LocalDateTime;
 import model.Vehicle;
 import model.Car;     
 import model.Ticket;
 import model.Color;
-import model.ParkingSpot;
-import model.SpotType;
 import model.Motorcycle;
 import model.SUV_Truck;
 import model.Handicapped_Vehicle;
-import model.Ticket;
 
 import storage.DataManager;
 import storage.SaveData;
-import storage.LoadData;
 import java.util.ArrayList;
 
 

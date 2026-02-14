@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "plate": "AO3",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-14T23:58:33.7691411"
+  },
+  {
+    "plate": "CAT",
+    "spotNumber": "F1-R4-S2",
+    "active": false,
+    "createdAt": "2026-02-14T23:59:45.847266"
+  },
+  {
+    "plate": "AO3",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:01:25.2937554"
+  },
+  {
+    "plate": "A1O",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:37:54.3550332"
+  },
+  {
+    "plate": "ABC",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:41:39.4738026"
+  },
+  {
+    "plate": "DEF",
+    "spotNumber": "F1-R4-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:41:47.6335597"
+  },
+  {
+    "plate": "GHI",
+    "spotNumber": "F2-R1-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:41:58.9891493"
+  },
+  {
+    "plate": "JKL",
+    "spotNumber": "F2-R2-S2",
+    "active": true,
+    "createdAt": "2026-02-15T00:42:06.1710315"
+  },
+  {
+    "plate": "AO3",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-15T01:42:12.3884383"
+  }
+]

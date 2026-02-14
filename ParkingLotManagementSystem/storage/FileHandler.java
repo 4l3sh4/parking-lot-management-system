@@ -2,18 +2,6 @@ package storage;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import model.User;
-import model.Vehicle;
-import model.Admin;
-import model.Motorcycle;
-import model.Car;
-import model.SUV_Truck;
-import model.Handicapped_Vehicle;
 
 public class FileHandler {
     public static final String SPOTS_FILE = "Parking Spots.json";
@@ -23,18 +11,7 @@ public class FileHandler {
     public static final String USERS_FILE = "Users.json";
     public static final String IDS_FILE = "IDs.json";
     public static final String RESERVATIONS_FILE = "data/Reservations.json";
-
-    
-    public static final Gson gson = new GsonBuilder()
-            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-            .registerTypeAdapter(User.class, new UserAdapter())
-            .registerTypeAdapter(Vehicle.class, new VehicleAdapter())
-            .registerTypeAdapter(Motorcycle.class, new VehicleAdapter())
-            .registerTypeAdapter(Car.class, new VehicleAdapter())
-            .registerTypeAdapter(SUV_Truck.class, new VehicleAdapter())
-            .registerTypeAdapter(Handicapped_Vehicle.class, new VehicleAdapter())
-            .setPrettyPrinting()
-            .create();
+    public static final String FINES_FILE = "Fines.json";
     
     public static void createFilesIfNotExists() {
         File spotsFile = new File(SPOTS_FILE);
@@ -96,6 +73,15 @@ public class FileHandler {
         if (!reservationsFile.exists()) {
             try {
                 reservationsFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        File finesFile = new File(FINES_FILE);
+        if (!finesFile.exists()) {
+            try {
+                finesFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -98,9 +98,44 @@ public class VehicleExit implements Actionable {
             return;
         }
 
-        // 4) Calculate fee (Ticket will set exit time + duration hours + breakdown fields if you updated Ticket)
-        ticket.exitVehicle(spot.getHourlyRate());
-        double totalDue = ticket.getTotalFee();
+        // 4a) Check and get unpaid fines from PREVIOUS sessions BEFORE calculating current session
+        double unpaidFinesFromPrevious = FineManager.getTotalUnpaidFines(plate);
+
+        // 4b) Calculate fee (Ticket will set exit time + duration hours + breakdown fields)
+        ticket.exitVehicle(spot);
+        double currentSessionFines = ticket.getFines();
+        double currentSessionFinesToPay = currentSessionFines;
+        
+        // 4c) Give option to defer current session fine payment (applies to all fine schemes)
+        boolean deferCurrentSessionFine = false;
+        if (currentSessionFines > 0) {
+            int deferChoice = JOptionPane.showConfirmDialog(null,
+                    String.format("Fine for current session: RM %.2f\n\nYou can defer this payment to your next visit.\n\nDo you want to PAY NOW?", currentSessionFines),
+                    "Fine Payment Option",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE);
+            
+            if (deferChoice != JOptionPane.YES_OPTION) {
+                deferCurrentSessionFine = true;
+                currentSessionFinesToPay = 0; // Don't include in total due
+            }
+        }
+        
+        double totalDue = ticket.getParkingFee() + currentSessionFinesToPay + unpaidFinesFromPrevious;
+
+        // 4d) Show unpaid fines from previous sessions if any
+        if (unpaidFinesFromPrevious > 0) {
+            int showFines = JOptionPane.showConfirmDialog(null,
+                    String.format("This vehicle has UNPAID FINES from previous sessions: RM %.2f\n\nDo you want to pay them now?", unpaidFinesFromPrevious),
+                    "Unpaid Fines",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            
+            if (showFines != JOptionPane.YES_OPTION) {
+                totalDue -= unpaidFinesFromPrevious; // Remove from total if not paying
+                unpaidFinesFromPrevious = 0;
+            }
+        }
 
         // 5) Ask payment method: CASH/CARD only
         PaymentMethod method = askPaymentMethod(totalDue);
@@ -122,6 +157,37 @@ public class VehicleExit implements Actionable {
                     JOptionPane.INFORMATION_MESSAGE);
         }
 
+        // 5b) Determine how much was paid towards fines
+        double amountPaidTowardsFines = Math.min(amountPaid, unpaidFinesFromPrevious + currentSessionFinesToPay);
+        
+        // 5c) Mark previous unpaid fines as paid if they were included in the payment
+        if (unpaidFinesFromPrevious > 0 && amountPaidTowardsFines >= unpaidFinesFromPrevious) {
+            FineManager.payAllFines(plate);
+        }
+
+        // 5d) Create Fine records for deferred or unpaid fines from CURRENT session
+        if (deferCurrentSessionFine) {
+            // Customer chose to defer payment - create Fine records for entire current session fines
+            if (ticket.isOverstaying()) {
+                FineManager.createFine(plate, currentSessionFines, "Overstaying (more than 24 hours)");
+            }
+            if (ticket.isReservedSpotViolation()) {
+                FineManager.createFine(plate, 50.0, "Reserved spot without reservation");
+            }
+        } else {
+            // Customer chose to pay now - only create Fine records if there's unpaid amount
+            double unpaidCurrentSessionFines = Math.max(0, currentSessionFines - (amountPaidTowardsFines - unpaidFinesFromPrevious));
+            if (unpaidCurrentSessionFines > 0) {
+                if (ticket.isOverstaying()) {
+                    double overstayingFineAmount = Math.min(currentSessionFines, unpaidCurrentSessionFines);
+                    FineManager.createFine(plate, overstayingFineAmount, "Overstaying (more than 24 hours)");
+                }
+                if (ticket.isReservedSpotViolation()) {
+                    FineManager.createFine(plate, 50.0, "Reserved spot without reservation");
+                }
+            }
+        }
+
         // 6) Free spot
         spot.free();
 
@@ -129,12 +195,15 @@ public class VehicleExit implements Actionable {
         DataManager.activeTickets.remove(ticket);
         DataManager.ticketHistory.add(ticket);
 
+        // 7b) End reservation after exit (if this was a reserved booking)
+        cancelReservationForExit(spot.getSpotNumber());
+
         // 8) Save
         SaveData.saveAll();
 
         // 9) Receipt
         JOptionPane.showMessageDialog(null,
-                makeReceipt(ticket, spot, method, amountPaid, change),
+                makeReceipt(ticket, spot, method, amountPaid, change, unpaidFinesFromPrevious, currentSessionFines, deferCurrentSessionFine),
                 "Exit Processed",
                 JOptionPane.INFORMATION_MESSAGE);
     }
@@ -219,6 +288,17 @@ public class VehicleExit implements Actionable {
         }
     }
 
+    private void cancelReservationForExit(String spotNumber) {
+        if (DataManager.reservations == null) return;
+        for (Reservation r : DataManager.reservations) {
+            if (r == null || !r.isActive()) continue;
+            if (r.matchesSpot(spotNumber)) {
+                r.cancel();
+                return;
+            }
+        }
+    }
+
     private Ticket findActiveTicketByPlate(String plate) {
         if (DataManager.activeTickets == null) return null;
 
@@ -245,7 +325,7 @@ public class VehicleExit implements Actionable {
     }
 
     private String makeReceipt(Ticket t, ParkingSpot spot,
-                               PaymentMethod method, double amountPaid, double change) {
+                               PaymentMethod method, double amountPaid, double change, double unpaidFinesFromPrevious, double currentSessionFines, boolean deferCurrentSessionFine) {
 
         String exitDate = (t.getExitDate() == null || t.getExitDate().trim().isEmpty())
                 ? "-"
@@ -257,10 +337,12 @@ public class VehicleExit implements Actionable {
 
         long hours = t.getDurationHours();     
         double rate = t.getHourlyRate();       
-        double parkingFee = t.getParkingFee(); 
-
-        double finesDue = 0.00;                // if you later support fines, replace with t.getFinesDue()
-        double totalDue = t.getTotalFee();
+        double parkingFee = t.getParkingFee();
+        
+        // Calculate what was actually paid vs deferred
+        double currentSessionFinesPaid = deferCurrentSessionFine ? 0 : currentSessionFines;
+        double finesDue = currentSessionFinesPaid + unpaidFinesFromPrevious;
+        double totalDue = t.getParkingFee() + finesDue;
         double remainingBalance = Math.max(0.0, totalDue - amountPaid);
 
         StringBuilder sb = new StringBuilder();
@@ -273,9 +355,36 @@ public class VehicleExit implements Actionable {
 
           .append("Duration: ").append(hours).append(" hour(s)\n")
           .append(String.format("Hourly Rate: RM %.2f / hour\n", rate))
-          .append(String.format("Breakdown: %d x RM %.2f = RM %.2f\n\n", hours, rate, parkingFee))
-          .append(String.format("Fines Due: RM %.2f\n", finesDue))
-          .append(String.format("Total Due: RM %.2f\n", totalDue))
+          .append(String.format("Parking Fee: %d x RM %.2f = RM %.2f\n\n", hours, rate, parkingFee));
+        
+        // Show fine details
+        if (currentSessionFines > 0) {
+            if (deferCurrentSessionFine) {
+                sb.append("Fines (Current Session - DEFERRED): RM ").append(String.format("%.2f\n", currentSessionFines));
+                sb.append("  ** Payment deferred to next visit **\n");
+            } else {
+                sb.append("Fines (Current Session): RM ").append(String.format("%.2f\n", currentSessionFines));
+            }
+            if (t.isOverstaying()) {
+                sb.append("  - Overstaying: RM ").append(String.format("%.2f\n", currentSessionFines));
+            }
+            if (t.isReservedSpotViolation()) {
+                sb.append("  - Reserved Spot Without Reservation: RM 50.00\n");
+            }
+        }
+        
+        if (unpaidFinesFromPrevious > 0) {
+            sb.append(String.format("Fines (Previous Sessions): RM %.2f\n", unpaidFinesFromPrevious));
+        }
+        
+        sb.append("\n")
+          .append(String.format("Total Fines Due: RM %.2f\n", finesDue));
+        
+        if (deferCurrentSessionFine && currentSessionFines > 0) {
+            sb.append(String.format("Total Fines Deferred: RM %.2f\n", currentSessionFines));
+        }
+        
+        sb.append(String.format("Total Due: RM %.2f\n", totalDue))
           .append("Payment Method: ").append(method).append("\n")
           .append(String.format("Total Paid: RM %.2f\n", amountPaid))
           .append(String.format("Remaining Balance: RM %.2f\n", remainingBalance));

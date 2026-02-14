@@ -1,50 +1,101 @@
 [
   {
+    "UserType": "Client",
     "ID": 34,
     "firstName": "1",
     "lastName": "1",
     "email": "1",
-    "password": "1",
-    "role": "ADMIN"
+    "vip": false,
+    "password": "1"
   },
   {
+    "UserType": "Client",
     "ID": 35,
     "firstName": "2",
     "lastName": "2",
     "email": "2",
-    "password": "2",
-    "role": "CLIENT"
+    "vip": false,
+    "password": "2"
   },
   {
+    "UserType": "Client",
     "ID": 36,
     "firstName": "3",
     "lastName": "3",
     "email": "3",
-    "password": "3",
-    "role": "CLIENT"
+    "vip": false,
+    "password": "3"
   },
   {
+    "UserType": "Client",
     "ID": 37,
     "firstName": "1",
     "lastName": "1",
     "email": "1",
-    "password": "1",
-    "role": "CLIENT"
+    "vip": false,
+    "password": "1"
   },
   {
+    "UserType": "Client",
     "ID": 38,
     "firstName": "2",
     "lastName": "2",
     "email": "2",
-    "password": "2",
-    "role": "ADMIN"
+    "vip": false,
+    "password": "2"
   },
   {
+    "UserType": "Client",
     "ID": 39,
     "firstName": "ari",
     "lastName": "ari",
     "email": "ari",
-    "password": "ari",
-    "role": "CLIENT"
+    "vip": false,
+    "password": "ari"
+  },
+  {
+    "UserType": "Client",
+    "ID": 40,
+    "firstName": "ALESHA",
+    "lastName": "NOOR",
+    "email": "alesha@gmail.com",
+    "vip": false,
+    "password": "1234"
+  },
+  {
+    "UserType": "Client",
+    "ID": 41,
+    "firstName": "BOB",
+    "lastName": "BURNER",
+    "email": "BOB@GMAIL.COM",
+    "vip": true,
+    "password": "1234"
+  },
+  {
+    "UserType": "Admin",
+    "ID": 0,
+    "firstName": "CAROLINE",
+    "lastName": "WALTER",
+    "email": "CAROLINE@GMAIL.COM",
+    "vip": false,
+    "password": "1234"
+  },
+  {
+    "UserType": "Client",
+    "ID": 0,
+    "firstName": "BARBRA",
+    "lastName": "BROS",
+    "email": "BARBRA@GMAIL.COM",
+    "vip": true,
+    "password": "1234"
+  },
+  {
+    "UserType": "Admin",
+    "ID": 0,
+    "firstName": "ALESHA",
+    "lastName": "NOOR",
+    "email": "ALESHA@GMAIL.COM",
+    "vip": false,
+    "password": "1234"
   }
 ]

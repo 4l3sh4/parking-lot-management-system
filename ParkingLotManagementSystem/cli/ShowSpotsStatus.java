@@ -6,7 +6,6 @@ import java.util.Scanner;
 import model.Actionable;
 import model.User;
 import model.ParkingSpot;
-import model.SpotType;
 import model.Vehicle;
 import model.Motorcycle;
 import model.Car;
