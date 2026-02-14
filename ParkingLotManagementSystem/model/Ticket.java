@@ -1,138 +1,62 @@
 package model;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.Duration;
-
-import model.IDGenerator;
 
 public class Ticket {
+
+    private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final DateTimeFormatter TIME_FMT = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter CODE_FMT = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
     
-    private int ID;
+    private int id;
+    private String ticketCode;
     private Vehicle vehicle;
+    private String spotNumber;
+
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
+
     private double totalFee;
-    private int spotNumber;
-    
-    public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public static DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("hh:mm");
-    
-    public Ticket() {
-        
-    }
-    
-    public Ticket(Vehicle vehicle, int spotNumber) {
-        this.ID = IDGenerator.getNextTicketID();
+
+    public Ticket(Vehicle vehicle, String spotNumber) {
+        this.id = IDGenerator.getNextTicketID();
         this.vehicle = vehicle;
+        this.spotNumber = spotNumber;
         this.entryTime = LocalDateTime.now();
         this.exitTime = null;
         this.totalFee = 0;
-        this.spotNumber = spotNumber;
+
+        this.ticketCode =
+                "T-" + vehicle.getLicensePlateNumber()
+                + "-" + entryTime.format(CODE_FMT);
     }
+
+    public int getId() { return id; }
+    public String getTicketCode() { return ticketCode; }
+    public Vehicle getVehicle() { return vehicle; }
+    public String getspotNumber() { return spotNumber; }
+    public String getSpotNumber() { return spotNumber; }
+    public String getEntryDate() {return entryTime.format(DATE_FMT);}
+    public String getEntryTimeToString() {return entryTime.format(TIME_FMT);}
+    public String getExitDate() {return exitTime == null ? "-" : exitTime.format(DATE_FMT);}
+    public String getExitTimeToString() {return exitTime == null ? "-" : exitTime.format(TIME_FMT);}
+    public boolean hasExited() {return exitTime != null;}
+    public double getTotalFee() { return totalFee; }
+
+    public void exitVehicle(double hourlyRate) {
     
-    public Ticket(int ID, Vehicle vehicle, LocalDateTime entryTime, LocalDateTime exitTime, double totalFee, int spotNumber) {
-        
-        this.ID = ID;
-        this.vehicle = vehicle;
-        this.entryTime = entryTime;
-        this.exitTime = exitTime;
-        this.totalFee = totalFee;
-        this.spotNumber = spotNumber;
-    }
-    
-    public int getID() {
-        return ID;
-    }
-    
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-    
-    public LocalDateTime getEntryTime() {
-        return entryTime;
-    }
-    
-    public LocalDateTime getExitTime() {
-        return exitTime;
-    }
-    
-    public String getEntryDate() {
-        return dateFormat.format(entryTime);
-    }
-    
-    public String getEntryTimeToString() {
-        return timeFormat.format(entryTime);
-    }
-    
-    public String getExitDate() {
-        return dateFormat.format(exitTime);
-    }
-    
-    public String getExitTimeToString() {
-        return timeFormat.format(exitTime);
-    }
-    
-    public double getTotalFee() {
-        return totalFee;
-    }
-    
-    public int getSpotNumber() {
-        return spotNumber;
-    }
-    
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-    
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-    
-    public void setEntryTime(LocalDateTime entryTime) {
-        this.entryTime = entryTime;
-    }
-    
-    public void setExitTime(LocalDateTime exitTime) {
-        this.exitTime = exitTime;
-    }
-    
-    public void setTotalFee(double totalFee) {
-        this.totalFee = totalFee;
-    }
-    
-    public void setSpotNumber(int spotNumber) {
-        this.spotNumber = spotNumber;
-    }
-    
-    public void exitVehicle() {
         this.exitTime = LocalDateTime.now();
-        totalFee = vehicle.calculateFee(Duration.between(entryTime, exitTime));
-    }
     
-    @Override
-    public String toString() {
-        String output = "\tTicket ID: "+getID()+"\n"+
-            "\tVehicle License Plate Number: "+
-                                            getVehicle().getLicensePlateNumber()+"\n"+
-            "\tVehicle Brand: "+getVehicle().getBrand()+"\n"+
-            "\tVehicle Model: "+getVehicle().getModel()+"\n"+
-            "\tVehicle Color: "+getVehicle().getColor()+"\n"+
-            "\tVehicle Owner: "+ParkingLotManager.findUserByID(getVehicle().getVehicleOwnerID())
-                                    .getFullName()+"\n"+
-            "\tEntry Date: "+getEntryDate()+"\n"+
-            "\tEntry Time: "+getEntryTimeToString()+"\n"+
-            "\tSpot Number: "+getSpotNumber()+"\n";
-        if (exitTime == null) {
-            return output + "\t--------------------------------";
-        } else {
-            return output + 
-                "\tExit Date: "+getExitDate()+"\n"+
-                "\tExit Time: "+getExitTimeToString()+"\n"+
-                "\tDuration in Minutes: "+
-                        Duration.between(getEntryTime(), getExitTime()).toMinutes()+"\n"+
-                "\tTotal Fee: "+getTotalFee()+"$"+"\n"+
-                        "\t--------------------------------";
+        long minutes = Duration.between(entryTime, exitTime).toMinutes();
+        long hours = (long) Math.ceil(minutes / 60.0);
+    
+        if (hours < 1) {
+            hours = 1;
         }
+    
+        totalFee = hours * hourlyRate;
     }
+
 }

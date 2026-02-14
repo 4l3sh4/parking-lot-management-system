@@ -51,24 +51,19 @@ public class SideButton extends JLabel {
 
             @Override
             public void mouseEntered(MouseEvent e) {
-                if (!selected) {
-                    setBackground(HOVER_BG);
-                }
+                if (!selected) setBackground(HOVER_BG);
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if (!selected) {
-                    setBackground(BASE_BG);
-                }
+                if (!selected) setBackground(BASE_BG);
             }
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                // keep selected color on the active page
                 setSelectedExclusive(SideButton.this);
 
-                // same functionality as before
+                // IMPORTANT: swap panel into Dashboard (NO POPUP)
                 action.execute(user);
             }
         });
@@ -90,9 +85,7 @@ public class SideButton extends JLabel {
     }
 
     private static void setSelectedExclusive(SideButton btn) {
-        if (selectedBtn != null) {
-            selectedBtn.setSelected(false);
-        }
+        if (selectedBtn != null) selectedBtn.setSelected(false);
         selectedBtn = btn;
         selectedBtn.setSelected(true);
     }

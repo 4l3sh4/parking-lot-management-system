@@ -15,20 +15,70 @@ import model.Vehicle;
 import model.User;
 import model.IDGenerator;
 import model.IDGeneratorState;
+import model.SpotType;
+import storage.SaveData;
+
 
 public class LoadData {
 
     public static void loadSpots() {
+    
         FileHandler.createFilesIfNotExists();
+    
         try (FileReader reader = new FileReader(new File(FileHandler.SPOTS_FILE))) {
+    
             Type listType = new TypeToken<ArrayList<ParkingSpot>>() {}.getType();
             List<ParkingSpot> spots = FileHandler.gson.fromJson(reader, listType);
-            if (spots == null)
-                spots = new ArrayList<>();
-            DataManager.parkingSpots = (ArrayList<ParkingSpot>) spots;
-        } catch (IOException e) {
-            System.err.println("Error loading slots: " + e.getMessage());
-            DataManager.parkingSpots = new ArrayList<>();
+    
+            if (spots == null || spots.isEmpty()) {
+                initDefaultSpots();
+            } else {
+                DataManager.parkingSpots = (ArrayList<ParkingSpot>) spots;
+            }
+    
+        } catch (Exception e) {
+            initDefaultSpots();
+        }
+    }
+    
+        
+    private static void initDefaultSpots() {
+    
+        DataManager.parkingSpots = new ArrayList<>();
+    
+        int floors = 4;
+        int rows = 4;
+        int slotsPerRow = 10;
+    
+        for (int f = 1; f <= floors; f++) {
+    
+            for (int r = 1; r <= rows; r++) {
+    
+                for (int s = 1; s <= slotsPerRow; s++) {
+    
+                    String id = "F" + f + "-R" + r + "-S" + s;
+    
+                    SpotType type;
+    
+                    // RULES (edit if you want)
+                    if (s == 1) {
+                        type = SpotType.HANDICAPPED;
+                    }
+                    else if (s == 2) {
+                        type = SpotType.RESERVED;
+                    }
+                    else if (s <= 5) {
+                        type = SpotType.COMPACT;
+                    }
+                    else {
+                        type = SpotType.REGULAR;
+                    }
+    
+                    DataManager.parkingSpots.add(
+                            new ParkingSpot(id, type)
+                    );
+                }
+            }
         }
     }
 
@@ -77,12 +127,44 @@ public class LoadData {
     public static void loadUsers() {
         FileHandler.createFilesIfNotExists();
         try (FileReader reader = new FileReader(new File(FileHandler.USERS_FILE))) {
-            Type listType = new TypeToken<ArrayList<User>>() {}.getType();
-            List<User> users = FileHandler.gson.fromJson(reader, listType);
-            if (users == null)
-                users = new ArrayList<>();
-            DataManager.users = (ArrayList<User>) users;
-        } catch (IOException e) {
+    
+            com.google.gson.JsonElement root = com.google.gson.JsonParser.parseReader(reader);
+    
+            ArrayList<User> users = new ArrayList<>();
+    
+            if (root != null && root.isJsonArray()) {
+                com.google.gson.JsonArray arr = root.getAsJsonArray();
+    
+                for (com.google.gson.JsonElement el : arr) {
+                    if (!el.isJsonObject()) continue;
+    
+                    com.google.gson.JsonObject o = el.getAsJsonObject();
+    
+                    int id = o.get("ID").getAsInt();
+                    String first = o.get("firstName").getAsString();
+                    String last = o.get("lastName").getAsString();
+                    String email = o.get("email").getAsString();
+                    String pass = o.get("password").getAsString();
+    
+                    String role = "CLIENT";
+                    if (o.has("role") && !o.get("role").isJsonNull()) {
+                        role = o.get("role").getAsString();
+                    }
+    
+                    User u;
+                    if ("ADMIN".equalsIgnoreCase(role)) {
+                        u = new model.Admin(id, first, last, email, pass);
+                    } else {
+                        u = new model.Client(id, first, last, email, pass);
+                    }
+    
+                    users.add(u);
+                }
+            }
+    
+            DataManager.users = users;
+    
+        } catch (Exception e) {
             System.err.println("Error loading users: " + e.getMessage());
             DataManager.users = new ArrayList<>();
         }
@@ -102,6 +184,20 @@ public class LoadData {
         }
     }
     
+    public static void loadReservations() {
+        FileHandler.createFilesIfNotExists();
+        try (FileReader reader = new FileReader(new File(FileHandler.RESERVATIONS_FILE))) {
+            Type listType = new TypeToken<ArrayList<model.Reservation>>() {}.getType();
+            List<model.Reservation> list = FileHandler.gson.fromJson(reader, listType);
+            if (list == null) list = new ArrayList<>();
+            DataManager.reservations = (ArrayList<model.Reservation>) list;
+        } catch (Exception e) {
+            System.err.println("Error loading reservations: " + e.getMessage());
+            DataManager.reservations = new ArrayList<>();
+        }
+    }
+
+    
     public static void loadAllData() {
         FileHandler.createFilesIfNotExists();
         loadSpots();
@@ -110,6 +206,7 @@ public class LoadData {
         loadVehicles();
         loadUsers();
         loadIDs();
+        loadReservations();
     }
     
 }

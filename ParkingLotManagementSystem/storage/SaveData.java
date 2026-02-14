@@ -66,6 +66,15 @@ public class SaveData {
             System.err.println("Error saving ids: " + e.getMessage());
         }
     }
+    
+    public static void saveReservations() {
+        FileHandler.createFilesIfNotExists();
+        try (FileWriter writer = new FileWriter(new File(FileHandler.RESERVATIONS_FILE))) {
+            FileHandler.gson.toJson(DataManager.reservations, writer);
+        } catch (Exception e) {
+            System.err.println("Error saving reservations: " + e.getMessage());
+        }
+    }
 
     public static void saveAll() {
         saveSpots();
@@ -74,5 +83,6 @@ public class SaveData {
         saveVehicles();
         saveUsers();
         saveIDs();
+        saveReservations();
     }
 }

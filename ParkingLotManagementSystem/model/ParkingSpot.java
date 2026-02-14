@@ -1,82 +1,79 @@
 package model;
 
-
-/**
- * Write a description of class ParkingSpot here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class ParkingSpot {
-    
-    private int spotNumber;
-    private boolean isOccupied;
-    private Vehicle vehicle;
+
+    private String spotNumber;      // F1-R1-S1
     private SpotType type;
-    
-    public ParkingSpot() {
-        
-    }
-    
-    public ParkingSpot(SpotType type) {
-        this.spotNumber = IDGenerator.getNextSpotNum();
-        this.isOccupied = false;
-        this.vehicle = null;
-        this.type = type;
-        
-    }
-    
-    public ParkingSpot(int spotNumber, boolean isOccupied, Vehicle vehicle, SpotType type) {
+    private boolean occupied;
+    private Vehicle vehicle;
+    private double hourlyRate;
+
+    public ParkingSpot(String spotNumber, SpotType type) {
         this.spotNumber = spotNumber;
-        this.isOccupied = isOccupied;
-        this.vehicle = vehicle;
         this.type = type;
+        this.occupied = false;
+        this.vehicle = null;
+        this.hourlyRate = assignRate(type);
     }
-    
-    public boolean isAvailable() {
-        return !isOccupied;
+
+    private double assignRate(SpotType type) {
+        switch (type) {
+            case COMPACT: return 2.0;
+            case REGULAR: return 5.0;
+            case HANDICAPPED: return 2.0;
+            case RESERVED: return 10.0;
+            default: return 0.0;
+        }
     }
-    
-    public int getSpotNumber() {
+
+    public String getSpotNumber() {
         return spotNumber;
     }
-    
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-    
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-    
+
     public SpotType getType() {
         return type;
     }
-    
-    public void setSpotNumber(int spotNumber) {
-        this.spotNumber = spotNumber;
+
+    public boolean isAvailable() {
+        return !occupied;
     }
-    
-    public void setOccupied(boolean isOccupied) {
-        this.isOccupied = isOccupied;
+
+    public boolean isOccupied() {
+        return occupied;
     }
-    
-    public void occupy() {
-        this.isOccupied = true;
+
+    public Vehicle getVehicle() {
+        return vehicle;
     }
-    
-    public void free() {
-        this.isOccupied = false;
-        this.vehicle = null;
+
+    public double getHourlyRate() {
+        return hourlyRate;
     }
-    
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
     }
-    
-    public void setSpotType(SpotType type) {
-        this.type = type;
+
+    public void occupy(Vehicle v) {
+        if (occupied) {
+            throw new IllegalStateException("Spot already occupied.");
+        }
+        this.vehicle = v;
+        this.occupied = true;
+    }
+
+    public void free() {
+        this.vehicle = null;
+        this.occupied = false;
     }
     
-    
+
+    @Override
+    public String toString() {
+        return spotNumber + " (" + type + ") - " + (occupied ? "Occupied" : "Available");
+    }
 }

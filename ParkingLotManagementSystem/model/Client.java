@@ -7,16 +7,19 @@ import cli.Logout;
 import cli.ShowSpotsStatus;
 import cli.VehicleEntry;
 import cli.VehicleExit;
+import cli.ShowTicketsHistory;
 
 public class Client extends User {
 
     public Client() {
         super();
+        setRole("CLIENT");
         initActions();
     }
 
     public Client(int ID, String firstName, String lastName, String email, String password) {
         super(ID, firstName, lastName, email, password);
+        setRole("CLIENT");
         initActions();
     }
 
@@ -25,6 +28,7 @@ public class Client extends User {
                 new VehicleEntry(),
                 new VehicleExit(),
                 new ShowSpotsStatus(),
+                new ShowTicketsHistory(),
                 new Logout()
         };
 
@@ -32,6 +36,8 @@ public class Client extends User {
                 new gui.ShowSpotsStatus(),
                 new gui.VehicleEntry(),
                 new gui.VehicleExit(),
+                new gui.ShowActiveTickets(), 
+                new gui.ShowTicketsHistory(),
                 new gui.Logout()
         };
     }

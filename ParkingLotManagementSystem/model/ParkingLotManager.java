@@ -26,17 +26,17 @@ public class ParkingLotManager {
         return ticket;
     }
     
-    public static Ticket findActiveTicketBySpot(int spotNum) {
+    public static Ticket findActiveTicketBySpot(String spotNum) {
         Ticket ticket = null;
         for (Ticket t : DataManager.activeTickets) {
-            if (t.getSpotNumber() == spotNum) {
+            if (t.getSpotNumber().equalsIgnoreCase(spotNum)) {
                 ticket = t;
                 break;
             }
         }
         return ticket;
     }
-    
+
     public static ParkingSpot findAvailableSpot(Vehicle vehicle) {
         
         SpotType[] types;
@@ -79,14 +79,14 @@ public class ParkingLotManager {
         return user;
     }
     
-    public static ParkingSpot findSpotByNum(int spotNum) {
-        ParkingSpot spot = null;
+    public static ParkingSpot findSpotByNum(String spotNumber) {
         for (ParkingSpot s : DataManager.parkingSpots) {
-            if (s.getSpotNumber() == spotNum) {
-                spot = s;
-                break;
+    
+            if (s.getSpotNumber().equalsIgnoreCase(spotNumber)) {
+                return s;
             }
         }
-        return spot;
+        return null;
     }
+
 }

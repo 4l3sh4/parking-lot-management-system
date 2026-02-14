@@ -1,9 +1,0 @@
-#BlueJ class context
-comment0.target=AddNewParkingSpot
-comment1.params=
-comment1.target=java.lang.String\ getLabel()
-comment2.params=s\ u
-comment2.target=void\ execute(java.util.Scanner,\ model.User)
-comment3.params=
-comment3.target=boolean\ isAdminOnly()
-numComments=4

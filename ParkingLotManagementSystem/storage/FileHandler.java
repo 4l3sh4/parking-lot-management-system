@@ -22,6 +22,8 @@ public class FileHandler {
     public static final String VEHICLES_FILE = "Vehicles.json";
     public static final String USERS_FILE = "Users.json";
     public static final String IDS_FILE = "IDs.json";
+    public static final String RESERVATIONS_FILE = "data/Reservations.json";
+
     
     public static final Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())

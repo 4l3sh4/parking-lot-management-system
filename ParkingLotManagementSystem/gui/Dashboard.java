@@ -10,6 +10,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 import model.User;
 
@@ -20,6 +21,9 @@ public class Dashboard {
     private static final Color SIDEBAR_BG = new Color(238, 240, 243);
     private static final Color SIDEBAR_BORDER = new Color(220, 225, 232);
     private static final Color TITLE = new Color(25, 28, 33);
+
+    // the ONE place where pages should be swapped
+    private static JPanel contentArea;
 
     public Dashboard(User user) {
         JPanel dashboard = new JPanel(new BorderLayout());
@@ -44,8 +48,8 @@ public class Dashboard {
         sidePanel.add(menuTitle);
         sidePanel.add(Box.createVerticalStrut(14));
 
-        // Buttons (same functionality)
-        for (int i = 1; i < user.getGUIActions().length; i++) {
+        // Buttons (same labels/actions list)
+        for (int i = 0; i < user.getGUIActions().length; i++) {
             SideButton btn = new SideButton(
                 user.getGUIActions()[i].getLabel(),
                 user.getGUIActions()[i],
@@ -61,11 +65,29 @@ public class Dashboard {
         JPanel content = new JPanel(new BorderLayout());
         content.setBackground(BG);
         content.setBorder(BorderFactory.createEmptyBorder(22, 22, 22, 22));
-        content.add(user.getGUIActions()[0].getPanel(), BorderLayout.CENTER);
+
+        // content area where we swap panels
+        contentArea = new JPanel(new BorderLayout());
+        contentArea.setOpaque(false);
+        content.add(contentArea, BorderLayout.CENTER);
+
+        // default first page
+        if (user.getGUIActions().length > 0) {
+            user.getGUIActions()[0].execute(user);
+        }
 
         dashboard.add(sidePanel, BorderLayout.WEST);
         dashboard.add(content, BorderLayout.CENTER);
 
         NavigationHandler.switchTo(dashboard);
+    }
+
+    public static void setContent(JComponent panel) {
+        if (contentArea == null) return;
+
+        contentArea.removeAll();
+        contentArea.add(panel, BorderLayout.CENTER);
+        contentArea.revalidate();
+        contentArea.repaint();
     }
 }

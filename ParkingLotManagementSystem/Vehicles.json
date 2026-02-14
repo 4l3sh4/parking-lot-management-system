@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "REG111",
+    "OwnerID": 1,
+    "Color": "RED",
+    "Brand": "Toyota",
+    "Model": "Vios"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "REG222",
+    "OwnerID": 2,
+    "Color": "BLUE",
+    "Brand": "Yamaha",
+    "Model": "R15"
+  },
+  {
+    "VehicleType": "SUV_TRUCK",
+    "LicensePlateNumber": "REG333",
+    "OwnerID": 3,
+    "Color": "BLACK",
+    "Brand": "Ford",
+    "Model": "Ranger"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "REG444",
+    "OwnerID": 4,
+    "Color": "WHITE",
+    "Brand": "Honda",
+    "Model": "City"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "WKF110",
+    "OwnerID": 35,
+    "Color": "SILVER",
+    "Brand": "PERODUA",
+    "Model": "MYVI"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "WP028",
+    "OwnerID": 36,
+    "Color": "SILVER",
+    "Brand": "PROTON",
+    "Model": "PERSONA"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "PSJ181",
+    "OwnerID": 35,
+    "Color": "RED",
+    "Brand": "HONDA",
+    "Model": "SCOOTER"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "QWER12",
+    "OwnerID": 35,
+    "Color": "RED",
+    "Brand": "-",
+    "Model": "-"
+  }
+]

@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "id": 18,
+    "ticketCode": "T-REG333-20260214180112",
+    "vehicle": {
+      "VehicleType": "SUV_TRUCK",
+      "LicensePlateNumber": "REG333",
+      "OwnerID": 3,
+      "Color": "BLACK",
+      "Brand": "Ford",
+      "Model": "Ranger"
+    },
+    "spotNumber": "F2-R1-S1",
+    "entryTime": "2026-02-14T18:01:12.6298343",
+    "exitTime": "2026-02-14T18:01:12.6308344",
+    "totalFee": 5.0
+  },
+  {
+    "id": 19,
+    "ticketCode": "T-REG444-20260214180112",
+    "vehicle": {
+      "VehicleType": "HANDICAPPED_VEHICLE",
+      "LicensePlateNumber": "REG444",
+      "OwnerID": 4,
+      "Color": "WHITE",
+      "Brand": "Honda",
+      "Model": "City"
+    },
+    "spotNumber": "F3-R2-S8",
+    "entryTime": "2026-02-14T18:01:12.6308344",
+    "exitTime": "2026-02-14T18:01:12.6308344",
+    "totalFee": 10.0
+  },
+  {
+    "id": 16,
+    "ticketCode": "T-ZXC123-20260214153628",
+    "vehicle": {
+      "VehicleType": "HANDICAPPED_VEHICLE",
+      "LicensePlateNumber": "ZXC123",
+      "OwnerID": 36,
+      "Color": "BLUE",
+      "Brand": "PERODUA",
+      "Model": "AXIA"
+    },
+    "spotNumber": "F1-R1-S6",
+    "entryTime": "2026-02-14T15:36:28.9748667",
+    "exitTime": "2026-02-14T18:36:23.5937801",
+    "totalFee": 15.0
+  },
+  {
+    "id": 21,
+    "ticketCode": "T-PSJ181-20260214184435",
+    "vehicle": {
+      "VehicleType": "MOTORCYCLE",
+      "LicensePlateNumber": "PSJ181",
+      "OwnerID": 35,
+      "Color": "RED",
+      "Brand": "HONDA",
+      "Model": "SCOOTER"
+    },
+    "spotNumber": "F1-R4-S3",
+    "entryTime": "2026-02-14T18:44:35.2802206",
+    "exitTime": "2026-02-14T18:44:44.0414816",
+    "totalFee": 2.0
+  },
+  {
+    "id": 22,
+    "ticketCode": "T-QWER12-20260214190759",
+    "vehicle": {
+      "VehicleType": "HANDICAPPED_VEHICLE",
+      "LicensePlateNumber": "QWER12",
+      "OwnerID": 35,
+      "Color": "RED",
+      "Brand": "-",
+      "Model": "-"
+    },
+    "spotNumber": "F1-R3-S2",
+    "entryTime": "2026-02-14T19:07:59.0782599",
+    "exitTime": "2026-02-14T19:08:18.7460222",
+    "totalFee": 10.0
+  }
+]
