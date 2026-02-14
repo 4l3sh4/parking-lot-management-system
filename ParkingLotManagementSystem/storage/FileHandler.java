@@ -11,6 +11,7 @@ public class FileHandler {
     public static final String USERS_FILE = "Users.json";
     public static final String IDS_FILE = "IDs.json";
     public static final String RESERVATIONS_FILE = "data/Reservations.json";
+    public static final String FINES_FILE = "Fines.json";
     
     public static void createFilesIfNotExists() {
         File spotsFile = new File(SPOTS_FILE);
@@ -72,6 +73,15 @@ public class FileHandler {
         if (!reservationsFile.exists()) {
             try {
                 reservationsFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        File finesFile = new File(FINES_FILE);
+        if (!finesFile.exists()) {
+            try {
+                finesFile.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }

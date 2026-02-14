@@ -67,6 +67,7 @@ public class JSONUtil {
         json.append("    \"firstName\": ").append(quote(user.getFirstName())).append(",\n");
         json.append("    \"lastName\": ").append(quote(user.getLastName())).append(",\n");
         json.append("    \"email\": ").append(quote(user.getEmail())).append(",\n");
+        json.append("    \"vip\": ").append(user.isVip()).append(",\n");
         json.append("    \"password\": ").append(quote(user.getPassword())).append("\n");
         json.append("  }");
         
@@ -224,6 +225,7 @@ public class JSONUtil {
         String lastName = extractStringValue(json, "lastName");
         String email = extractStringValue(json, "email");
         String password = extractStringValue(json, "password");
+        boolean vip = extractBooleanValue(json, "vip");
         
         User user;
         if ("Admin".equalsIgnoreCase(userType)) {
@@ -237,6 +239,7 @@ public class JSONUtil {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPassword(password);
+        user.setVip(vip);
         
         return user;
     }

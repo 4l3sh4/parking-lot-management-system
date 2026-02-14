@@ -14,6 +14,7 @@ import model.User;
 import model.IDGenerator;
 import model.IDGeneratorState;
 import model.SpotType;
+import model.Fine;
 
 
 public class LoadData {
@@ -142,7 +143,7 @@ public class LoadData {
             if (state == null)
                 state = new IDGeneratorState();
             IDGenerator.setData(state.getNextUserID(), state.getNextSpotNum(),
-                            state.getNextTicketID());
+                            state.getNextTicketID(), state.getNextFineID());
         } catch (IOException e) {
             System.err.println("Error loading IDs: " + e.getMessage());
         }
@@ -161,6 +162,19 @@ public class LoadData {
         }
     }
 
+    public static void loadFines() {
+        FileHandler.createFilesIfNotExists();
+        try {
+            String json = readFile(FileHandler.FINES_FILE);
+            List<Fine> fines = JSONUtil.fromJsonArray(json, Fine.class);
+            if (fines == null) fines = new ArrayList<>();
+            DataManager.fines = (ArrayList<Fine>) fines;
+        } catch (Exception e) {
+            System.err.println("Error loading fines: " + e.getMessage());
+            DataManager.fines = new ArrayList<>();
+        }
+    }
+
     
     public static void loadAllData() {
         FileHandler.createFilesIfNotExists();
@@ -171,6 +185,7 @@ public class LoadData {
         loadUsers();
         loadIDs();
         loadReservations();
+        loadFines();
     }
     
     // Helper method to read file content

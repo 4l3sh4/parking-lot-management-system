@@ -102,6 +102,20 @@ public class VehicleExit implements Actionable {
         ticket.exitVehicle(spot);
         double totalDue = ticket.getTotalFee();
 
+        // 4b) Check and show unpaid fines from previous sessions
+        double unpaidFinesFromPrevious = FineManager.getTotalUnpaidFines(plate);
+        if (unpaidFinesFromPrevious > 0) {
+            int showFines = JOptionPane.showConfirmDialog(null,
+                    String.format("This vehicle has UNPAID FINES: RM %.2f\n\nDo you want to pay them now?", unpaidFinesFromPrevious),
+                    "Unpaid Fines",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+            
+            if (showFines == JOptionPane.YES_OPTION) {
+                totalDue += unpaidFinesFromPrevious;
+            }
+        }
+
         // 5) Ask payment method: CASH/CARD only
         PaymentMethod method = askPaymentMethod(totalDue);
         if (method == null) return; // user cancelled
@@ -122,6 +136,11 @@ public class VehicleExit implements Actionable {
                     JOptionPane.INFORMATION_MESSAGE);
         }
 
+        // 5b) Mark any previous unpaid fines as paid
+        if (unpaidFinesFromPrevious > 0 && amountPaid >= totalDue) {
+            FineManager.payAllFines(plate);
+        }
+
         // 6) Free spot
         spot.free();
 
@@ -129,12 +148,15 @@ public class VehicleExit implements Actionable {
         DataManager.activeTickets.remove(ticket);
         DataManager.ticketHistory.add(ticket);
 
+        // 7b) End reservation after exit (if this was a reserved booking)
+        cancelReservationForExit(spot.getSpotNumber());
+
         // 8) Save
         SaveData.saveAll();
 
         // 9) Receipt
         JOptionPane.showMessageDialog(null,
-                makeReceipt(ticket, spot, method, amountPaid, change),
+                makeReceipt(ticket, spot, method, amountPaid, change, unpaidFinesFromPrevious),
                 "Exit Processed",
                 JOptionPane.INFORMATION_MESSAGE);
     }
@@ -219,6 +241,17 @@ public class VehicleExit implements Actionable {
         }
     }
 
+    private void cancelReservationForExit(String spotNumber) {
+        if (DataManager.reservations == null) return;
+        for (Reservation r : DataManager.reservations) {
+            if (r == null || !r.isActive()) continue;
+            if (r.matchesSpot(spotNumber)) {
+                r.cancel();
+                return;
+            }
+        }
+    }
+
     private Ticket findActiveTicketByPlate(String plate) {
         if (DataManager.activeTickets == null) return null;
 
@@ -245,7 +278,7 @@ public class VehicleExit implements Actionable {
     }
 
     private String makeReceipt(Ticket t, ParkingSpot spot,
-                               PaymentMethod method, double amountPaid, double change) {
+                               PaymentMethod method, double amountPaid, double change, double unpaidFinesFromPrevious) {
 
         String exitDate = (t.getExitDate() == null || t.getExitDate().trim().isEmpty())
                 ? "-"
@@ -257,10 +290,10 @@ public class VehicleExit implements Actionable {
 
         long hours = t.getDurationHours();     
         double rate = t.getHourlyRate();       
-        double parkingFee = t.getParkingFee(); 
-
-        double finesDue = 0.00;                // if you later support fines, replace with t.getFinesDue()
-        double totalDue = t.getTotalFee();
+        double parkingFee = t.getParkingFee();
+        double currentSessionFines = t.getFines();
+        double finesDue = currentSessionFines + unpaidFinesFromPrevious;
+        double totalDue = t.getTotalFee() + unpaidFinesFromPrevious;
         double remainingBalance = Math.max(0.0, totalDue - amountPaid);
 
         StringBuilder sb = new StringBuilder();
@@ -273,8 +306,25 @@ public class VehicleExit implements Actionable {
 
           .append("Duration: ").append(hours).append(" hour(s)\n")
           .append(String.format("Hourly Rate: RM %.2f / hour\n", rate))
-          .append(String.format("Breakdown: %d x RM %.2f = RM %.2f\n\n", hours, rate, parkingFee))
-          .append(String.format("Fines Due: RM %.2f\n", finesDue))
+          .append(String.format("Parking Fee: %d x RM %.2f = RM %.2f\n\n", hours, rate, parkingFee));
+        
+        // Show fine details
+        if (currentSessionFines > 0) {
+            sb.append("Fines (Current Session): RM ").append(String.format("%.2f\n", currentSessionFines));
+            if (t.isOverstaying()) {
+                sb.append("  - Overstaying: RM ").append(String.format("%.2f\n", currentSessionFines));
+            }
+            if (t.isReservedSpotViolation()) {
+                sb.append("  - Reserved Spot Without Reservation: RM 50.00\n");
+            }
+        }
+        
+        if (unpaidFinesFromPrevious > 0) {
+            sb.append(String.format("Fines (Previous Sessions): RM %.2f\n", unpaidFinesFromPrevious));
+        }
+        
+        sb.append("\n")
+          .append(String.format("Total Fines Due: RM %.2f\n", finesDue))
           .append(String.format("Total Due: RM %.2f\n", totalDue))
           .append("Payment Method: ").append(method).append("\n")
           .append(String.format("Total Paid: RM %.2f\n", amountPaid))

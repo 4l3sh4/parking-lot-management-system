@@ -76,6 +76,15 @@ public class SaveData {
         }
     }
 
+    public static void saveFines() {
+        FileHandler.createFilesIfNotExists();
+        try (FileWriter writer = new FileWriter(new File(FileHandler.FINES_FILE))) {
+            writer.write(JSONUtil.toJson(DataManager.fines));
+        } catch (Exception e) {
+            System.err.println("Error saving fines: " + e.getMessage());
+        }
+    }
+
     public static void saveAll() {
         FileHandler.createFilesIfNotExists();
         
@@ -86,5 +95,6 @@ public class SaveData {
         saveUsers();
         saveIDs();
         saveReservations();
+        saveFines();
     }
 }

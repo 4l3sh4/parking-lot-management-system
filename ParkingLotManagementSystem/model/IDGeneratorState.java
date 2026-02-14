@@ -5,6 +5,7 @@ public class IDGeneratorState
     private int nextUserID = IDGenerator.getSaveNextUserID();
     private int nextSpotNum = IDGenerator.getSaveNextSpotNum();
     private int nextTicketID = IDGenerator.getSaveNextTicketID();
+    private int nextFineID = IDGenerator.getSaveNextFineID();
     
     public IDGeneratorState() {}
     
@@ -18,5 +19,9 @@ public class IDGeneratorState
     
     public int getNextTicketID() {
         return nextTicketID;
+    }
+    
+    public int getNextFineID() {
+        return nextFineID;
     }
 }

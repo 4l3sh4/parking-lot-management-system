@@ -5,6 +5,7 @@
     "firstName": "1",
     "lastName": "1",
     "email": "1",
+    "vip": false,
     "password": "1"
   },
   {
@@ -13,6 +14,7 @@
     "firstName": "2",
     "lastName": "2",
     "email": "2",
+    "vip": false,
     "password": "2"
   },
   {
@@ -21,6 +23,7 @@
     "firstName": "3",
     "lastName": "3",
     "email": "3",
+    "vip": false,
     "password": "3"
   },
   {
@@ -29,6 +32,7 @@
     "firstName": "1",
     "lastName": "1",
     "email": "1",
+    "vip": false,
     "password": "1"
   },
   {
@@ -37,6 +41,7 @@
     "firstName": "2",
     "lastName": "2",
     "email": "2",
+    "vip": false,
     "password": "2"
   },
   {
@@ -45,6 +50,7 @@
     "firstName": "ari",
     "lastName": "ari",
     "email": "ari",
+    "vip": false,
     "password": "ari"
   },
   {
@@ -53,6 +59,7 @@
     "firstName": "ALESHA",
     "lastName": "NOOR",
     "email": "alesha@gmail.com",
+    "vip": false,
     "password": "1234"
   },
   {
@@ -61,6 +68,7 @@
     "firstName": "BOB",
     "lastName": "BURNER",
     "email": "BOB@GMAIL.COM",
+    "vip": true,
     "password": "1234"
   },
   {
@@ -69,6 +77,7 @@
     "firstName": "CAROLINE",
     "lastName": "WALTER",
     "email": "CAROLINE@GMAIL.COM",
+    "vip": false,
     "password": "1234"
   },
   {
@@ -77,6 +86,7 @@
     "firstName": "BARBRA",
     "lastName": "BROS",
     "email": "BARBRA@GMAIL.COM",
+    "vip": true,
     "password": "1234"
   }
 ]

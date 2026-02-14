@@ -3,6 +3,7 @@ package model;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import storage.DataManager;
 
 public class Ticket {
 
@@ -21,8 +22,11 @@ public class Ticket {
     private long durationHours;
     private double hourlyRate;
     private double parkingFee;   // hours × rate
+    private double fines;        // fines calculated based on scheme
+    private boolean isOverstaying; // track if overstaying (>24 hours)
+    private boolean isReservedSpotWithoutReservation; // track reserved spot violation
 
-    // totalFee can later become parkingFee + fines
+    // totalFee = parkingFee + fines
     private double totalFee;
 
     public Ticket(Vehicle vehicle, String spotNumber) {
@@ -35,7 +39,10 @@ public class Ticket {
         this.durationHours = 0;
         this.hourlyRate = 0.0;
         this.parkingFee = 0.0;
+        this.fines = 0.0;
         this.totalFee = 0.0;
+        this.isOverstaying = false;
+        this.isReservedSpotWithoutReservation = false;
 
         this.ticketCode =
                 "T-" + vehicle.getLicensePlateNumber()
@@ -62,6 +69,9 @@ public class Ticket {
     public long getDurationHours() { return durationHours; }
     public double getHourlyRate() { return hourlyRate; }
     public double getParkingFee() { return parkingFee; }
+    public double getFines() { return fines; }
+    public boolean isOverstaying() { return isOverstaying; }
+    public boolean isReservedSpotViolation() { return isReservedSpotWithoutReservation; }
 
     public double getTotalFee() { return totalFee; }
 
@@ -76,9 +86,12 @@ public class Ticket {
 
         this.durationHours = hours;
         this.parkingFee = hours * hourlyRate;
+        
+        // Calculate fines
+        calculateFines();
 
-        // for now, totalFee = parkingFee (later you can add fines)
-        this.totalFee = this.parkingFee;
+        // totalFee = parkingFee + fines
+        this.totalFee = this.parkingFee + this.fines;
     }
     
     public void exitVehicle(ParkingSpot spot) {
@@ -98,12 +111,77 @@ public class Ticket {
             if (handicappedVehicle.getHasHandicappedCard()) {
                 this.parkingFee = 0.0;
                 this.hourlyRate = 0.0;
+                this.fines = 0.0;
                 this.totalFee = 0.0;
                 return;
             }
         }
         
         this.parkingFee = hours * hourlyRate;
-        this.totalFee = this.parkingFee;
+        
+        // Check if reserved spot without reservation - fine applies
+        if (spot.getType() == SpotType.RESERVED) {
+            boolean hasReservation = checkReservation();
+            if (!hasReservation) {
+                this.isReservedSpotWithoutReservation = true;
+            }
+        }
+        
+        // Calculate fines
+        calculateFines();
+        
+        // totalFee = parkingFee + fines
+        this.totalFee = this.parkingFee + this.fines;
+    }
+    
+    /**
+     * Check if this ticket has an active reservation
+     */
+    private boolean checkReservation() {
+        if (DataManager.reservations == null) return false;
+        
+        String plate = vehicle.getLicensePlateNumber();
+        for (Reservation r : DataManager.reservations) {
+            if (r != null && r.isActiveForPlate(plate) && 
+                r.isActiveForSpot(spotNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Calculate fines based on duration and violations
+     */
+    private void calculateFines() {
+        this.fines = 0.0;
+        
+        // Check overstaying (>24 hours)
+        if (FineManager.isOverstaying(this.durationHours)) {
+            this.isOverstaying = true;
+            double overstayingFine = FineManager.calculateFine(
+                    this.durationHours, 
+                    true, 
+                    DataManager.currentFineScheme);
+            this.fines += overstayingFine;
+            
+            // Create fine record for the customer's vehicle
+            FineManager.createFine(
+                    vehicle.getLicensePlateNumber(),
+                    overstayingFine,
+                    "Overstaying (more than 24 hours)");
+        }
+        
+        // Check reserved spot without reservation violation
+        if (this.isReservedSpotWithoutReservation) {
+            double reservationFine = 50.0; // Fixed RM 50 for reserved spot violation
+            this.fines += reservationFine;
+            
+            // Create fine record for the customer's vehicle
+            FineManager.createFine(
+                    vehicle.getLicensePlateNumber(),
+                    reservationFine,
+                    "Reserved spot without reservation");
+        }
     }
 }

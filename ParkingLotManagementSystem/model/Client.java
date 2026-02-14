@@ -34,6 +34,7 @@ public class Client extends User {
 
         super.guiActions = new gui.Actionable[] {
                 new gui.ShowSpotsStatus(),
+            new gui.VipReservation(),
                 new gui.VehicleEntry(),
                 new gui.VehicleExit(),
                 new gui.ShowActiveTickets(), 

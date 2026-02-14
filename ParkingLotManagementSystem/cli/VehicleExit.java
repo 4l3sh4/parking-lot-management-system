@@ -93,6 +93,7 @@ public class VehicleExit implements Actionable {
         spot.free();
         DataManager.ticketHistory.add(ticket);
         DataManager.activeTickets.remove(ticket);
+        cancelReservationForExit(spot.getSpotNumber());
         SaveData.saveAll();
 
         // Receipt 
@@ -143,6 +144,17 @@ public class VehicleExit implements Actionable {
         } while (choice != 1 && choice != 2);
 
         return (choice == 1) ? PaymentMethod.CASH : PaymentMethod.CARD;
+    }
+
+    private void cancelReservationForExit(String spotNumber) {
+        if (DataManager.reservations == null) return;
+        for (model.Reservation r : DataManager.reservations) {
+            if (r == null || !r.isActive()) continue;
+            if (r.matchesSpot(spotNumber)) {
+                r.cancel();
+                return;
+            }
+        }
     }
 
     @Override

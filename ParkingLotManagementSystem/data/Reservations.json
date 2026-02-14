@@ -1,2 +1,20 @@
 [
+  {
+    "plate": "AO3",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-14T23:58:33.7691411"
+  },
+  {
+    "plate": "CAT",
+    "spotNumber": "F1-R4-S2",
+    "active": true,
+    "createdAt": "2026-02-14T23:59:45.847266"
+  },
+  {
+    "plate": "AO3",
+    "spotNumber": "F1-R3-S2",
+    "active": false,
+    "createdAt": "2026-02-15T00:01:25.2937554"
+  }
 ]
