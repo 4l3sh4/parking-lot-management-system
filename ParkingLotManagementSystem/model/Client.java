@@ -3,12 +3,6 @@ package model;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
-import cli.Logout;
-import cli.ShowSpotsStatus;
-import cli.VehicleEntry;
-import cli.VehicleExit;
-import cli.ShowTicketsHistory;
-
 public class Client extends User {
 
     public Client() {
@@ -24,14 +18,6 @@ public class Client extends User {
     }
 
     private void initActions() {
-        super.actions = new Actionable[] {
-                new VehicleEntry(),
-                new VehicleExit(),
-                new ShowSpotsStatus(),
-                new ShowTicketsHistory(),
-                new Logout()
-        };
-
         super.guiActions = new gui.Actionable[] {
                 new gui.ShowSpotsStatus(),
             new gui.VipReservation(),
