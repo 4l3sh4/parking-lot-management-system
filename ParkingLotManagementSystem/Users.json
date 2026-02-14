@@ -88,5 +88,14 @@
     "email": "BARBRA@GMAIL.COM",
     "vip": true,
     "password": "1234"
+  },
+  {
+    "UserType": "Admin",
+    "ID": 0,
+    "firstName": "ALESHA",
+    "lastName": "NOOR",
+    "email": "ALESHA@GMAIL.COM",
+    "vip": false,
+    "password": "1234"
   }
 ]

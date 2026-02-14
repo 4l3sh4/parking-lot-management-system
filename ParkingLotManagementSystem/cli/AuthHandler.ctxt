@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=AuthHandler
-comment1.params=s
-comment1.target=void\ login(java.util.Scanner)
-comment2.params=s
-comment2.target=void\ createNewAccount(java.util.Scanner)
-numComments=3
