@@ -170,12 +170,7 @@ public class ManageFines implements Actionable {
             Dashboard.setContent(getPanel());
         });
 
-        JButton markPaidBtn = new JButton("Mark Selected as Paid");
-        markPaidBtn.addActionListener(e -> markFineAsPaid());
-
         buttonPanel.add(refreshBtn);
-        buttonPanel.add(Box.createHorizontalStrut(10));
-        buttonPanel.add(markPaidBtn);
         buttonPanel.add(Box.createHorizontalGlue());
 
         // Table
@@ -218,14 +213,6 @@ public class ManageFines implements Actionable {
         panel.add(scrollPane, BorderLayout.CENTER);
 
         return panel;
-    }
-
-    private void markFineAsPaid() {
-        // Placeholder for marking fines as paid UI
-        JOptionPane.showMessageDialog(null,
-                "Feature to mark fines as paid via UI.\nCurrently, fines are marked paid when customers exit.",
-                "Info",
-                JOptionPane.INFORMATION_MESSAGE);
     }
 
     // ========================

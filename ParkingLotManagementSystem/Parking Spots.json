@@ -310,16 +310,8 @@
   {
     "spotNumber": "F2-R1-S2",
     "type": "RESERVED",
-    "occupied": true,
-    "vehicle": {
-    "VehicleType": "HANDICAPPED_VEHICLE",
-    "LicensePlateNumber": "AO3",
-    "OwnerID": 41,
-    "Color": "BLUE",
-    "Brand": "MOTOR",
-    "Model": "3",
-    "HasHandicappedCard": false
-  },
+    "occupied": false,
+    "vehicle": null,
     "hourlyRate": 10.0
   },
   {

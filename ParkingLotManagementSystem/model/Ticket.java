@@ -53,8 +53,6 @@ public class Ticket {
     public String getTicketCode() { return ticketCode; }
     public Vehicle getVehicle() { return vehicle; }
 
-    // keep both if you already used them elsewhere
-    public String getspotNumber() { return spotNumber; }
     public String getSpotNumber() { return spotNumber; }
 
     public String getEntryDate() { return entryTime.format(DATE_FMT); }

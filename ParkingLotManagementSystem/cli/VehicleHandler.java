@@ -52,16 +52,16 @@ public class VehicleHandler {
         
         Vehicle vehicle;
         switch (type) {
-            case VehicleType.MOTORCYCLE:
+            case MOTORCYCLE:
                 vehicle = new Motorcycle(licensePlateNumber);
                 break;
-            case VehicleType.CAR:
+            case CAR:
                 vehicle = new Car(licensePlateNumber);
                 break;
-            case VehicleType.SUV_TRUCK:
+            case SUV_TRUCK:
                 vehicle = new SUV_Truck(licensePlateNumber);
                 break;
-            case VehicleType.HANDICAPPED_VEHICLE:
+            case HANDICAPPED_VEHICLE:
                 System.out.println("Does the vehicle have a handicapped card? (y/n)");
                 String response = ConsoleInput.readString(s).toLowerCase();
                 boolean hasCard = response.equals("y");

@@ -5,8 +5,6 @@ import java.util.Scanner;
 import model.Actionable;
 import model.User;
 import model.Ticket;
-import model.Vehicle;
-import model.ParkingLotManager;
 import storage.DataManager;
 
 public class ShowActiveTickets implements Actionable {

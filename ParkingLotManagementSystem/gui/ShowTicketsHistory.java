@@ -69,7 +69,7 @@ public class ShowTicketsHistory implements Actionable {
 
         for (Ticket t : tickets) {
             if (t == null) continue;
-            String slot = t.getspotNumber();
+            String slot = t.getSpotNumber();
             if (slot == null) continue;
 
             DefaultComboBoxModel<String> m = (DefaultComboBoxModel<String>) slotBox.getModel();
@@ -128,7 +128,7 @@ public class ShowTicketsHistory implements Actionable {
 
                 // Slot filter
                 if (selectedSlot != null && !"Any".equals(selectedSlot)) {
-                    String ts = t.getspotNumber();
+                    String ts = t.getSpotNumber();
                     if (ts == null || !ts.equalsIgnoreCase(selectedSlot)) match = false;
                 }
 
@@ -225,7 +225,7 @@ public class ShowTicketsHistory implements Actionable {
         card.add(new JLabel(ticket.getExitDate() + " " + ticket.getExitTimeToString()));
 
         card.add(new JLabel("Slot Number:"));
-        card.add(new JLabel(ticket.getspotNumber()));
+        card.add(new JLabel(ticket.getSpotNumber()));
 
         card.add(new JLabel("Total Fee:"));
         card.add(new JLabel(String.valueOf(ticket.getTotalFee())));

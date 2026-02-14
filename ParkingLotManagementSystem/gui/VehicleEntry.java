@@ -78,6 +78,15 @@ public class VehicleEntry implements Actionable {
         String plate = askPlate();
         if (plate == null) return;
     
+        // 1a) Alert if vehicle has unpaid fines
+        double unpaidFines = FineManager.getTotalUnpaidFines(plate);
+        if (unpaidFines > 0) {
+            JOptionPane.showMessageDialog(null,
+                    String.format("** ALERT **\n\nThis vehicle has UNPAID FINES: RM %.2f\n\nYou will have the option to pay these fines during exit.", unpaidFines),
+                    "Unpaid Fines Alert",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+    
         // 2) Block duplicate active ticket for same plate
         if (hasActiveTicketForPlate(plate)) {
             showErr("This plate already has an active ticket.\nVehicle cannot enter twice.");

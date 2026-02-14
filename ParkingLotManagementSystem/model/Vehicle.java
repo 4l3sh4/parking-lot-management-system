@@ -1,7 +1,7 @@
 package model;
 
 
-public abstract class Vehicle implements Payable {
+public abstract class Vehicle {
     
     private String licensePlateNumber; 
     private int vehicleOwnerID;

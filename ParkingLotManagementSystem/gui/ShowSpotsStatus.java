@@ -10,7 +10,6 @@ import model.User;
 import model.Admin;
 import model.ParkingSpot;
 import model.SpotType;
-import model.Vehicle;
 import model.Reservation;
 import model.Ticket;
 import storage.SaveData;

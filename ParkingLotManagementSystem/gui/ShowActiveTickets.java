@@ -163,7 +163,7 @@ public class ShowActiveTickets implements Actionable {
         ticketPanel.add(new JLabel(ticket.getExitDate() + " " + ticket.getExitTimeToString()));
 
         ticketPanel.add(new JLabel("Spot Number:"));
-        ticketPanel.add(new JLabel(ticket.getspotNumber()));
+        ticketPanel.add(new JLabel(ticket.getSpotNumber()));
 
         return ticketPanel;
     }

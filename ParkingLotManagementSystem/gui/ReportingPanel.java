@@ -113,7 +113,7 @@ public class ReportingPanel implements Actionable {
                         safe(v.getModel()),
                         safe(String.valueOf(v.getColor())),
                         v.getVehicleOwnerID(),
-                        safe(t.getspotNumber()),
+                        safe(t.getSpotNumber()),
                         safe(t.getEntryDate()),
                         safe(t.getEntryTimeToString())
                 });
@@ -225,7 +225,7 @@ public class ReportingPanel implements Actionable {
                 model.addRow(new Object[] {
                         t.getTicketCode(),
                         safe(t.getVehicle().getLicensePlateNumber()),
-                        safe(t.getspotNumber()),
+                        safe(t.getSpotNumber()),
                         exitDateStr,
                         exitTimeStr,
                         fee

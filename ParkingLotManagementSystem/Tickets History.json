@@ -368,5 +368,125 @@
     "hourlyRate": 10.0,
     "parkingFee": 10.0,
     "totalFee": 60.0
+  },
+  {
+    "id": 23,
+    "ticketCode": "T-AO3-20260215005517",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F2-R1-S2",
+    "entryTime": "2026-02-15T00:55:17.2631264",
+    "exitTime": "2026-02-15T01:34:19.9283571",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 24,
+    "ticketCode": "T-AO3-20260215013512",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-15T01:35:12.676071",
+    "exitTime": "2026-02-15T01:35:33.6576703",
+    "durationHours": 1,
+    "hourlyRate": 2.0,
+    "parkingFee": 2.0,
+    "totalFee": 2.0
+  },
+  {
+    "id": 25,
+    "ticketCode": "T-AO3-20260215013624",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-15T01:36:24.9360913",
+    "exitTime": "2026-02-15T01:36:32.7426073",
+    "durationHours": 1,
+    "hourlyRate": 2.0,
+    "parkingFee": 2.0,
+    "totalFee": 2.0
+  },
+  {
+    "id": 26,
+    "ticketCode": "T-AO3-20260215013649",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F2-R1-S2",
+    "entryTime": "2026-02-15T01:36:49.7197492",
+    "exitTime": "2026-02-15T01:36:56.3801009",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 27,
+    "ticketCode": "T-AO3-20260215013743",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-15T01:37:43.9461543",
+    "exitTime": "2026-02-15T01:38:31.1380898",
+    "durationHours": 1,
+    "hourlyRate": 2.0,
+    "parkingFee": 2.0,
+    "totalFee": 2.0
+  },
+  {
+    "id": 28,
+    "ticketCode": "T-AO3-20260215014220",
+    "vehicle": {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+    "spotNumber": "F1-R3-S2",
+    "entryTime": "2026-02-15T01:42:20.5862648",
+    "exitTime": "2026-02-15T01:43:00.5179343",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 10.0
   }
 ]

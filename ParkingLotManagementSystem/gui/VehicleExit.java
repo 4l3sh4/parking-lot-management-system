@@ -106,12 +106,12 @@ public class VehicleExit implements Actionable {
         double currentSessionFines = ticket.getFines();
         double currentSessionFinesToPay = currentSessionFines;
         
-        // 4c) For HOURLY fine scheme, give option to defer current session fine payment
+        // 4c) Give option to defer current session fine payment (applies to all fine schemes)
         boolean deferCurrentSessionFine = false;
-        if (currentSessionFines > 0 && DataManager.currentFineScheme == FineScheme.HOURLY) {
+        if (currentSessionFines > 0) {
             int deferChoice = JOptionPane.showConfirmDialog(null,
-                    String.format("Fine for current session: RM %.2f\n\nWith HOURLY fine scheme, you can defer this payment to your next visit.\n\nDo you want to PAY NOW?", currentSessionFines),
-                    "Fine Payment - Hourly Scheme",
+                    String.format("Fine for current session: RM %.2f\n\nYou can defer this payment to your next visit.\n\nDo you want to PAY NOW?", currentSessionFines),
+                    "Fine Payment Option",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
             

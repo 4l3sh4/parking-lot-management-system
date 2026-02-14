@@ -1,7 +1,5 @@
 package model;
 
-import model.Actionable;
-
 public abstract class User{
     
     private int ID; //unique id
