@@ -286,7 +286,7 @@ public class ShowSpotsStatus implements Actionable {
         top.setFont(new Font("Tahoma", Font.BOLD, 12));
     
         String statusText = available ? "AVAILABLE" : "OCCUPIED";
-        if (reservedByReservation) statusText = "RESERVED";
+        if (reservedByReservation) statusText = "BOOKED";
         JLabel mid = new JLabel(statusText, SwingConstants.CENTER);
         mid.setFont(new Font("Tahoma", Font.PLAIN, 11));
     
@@ -304,7 +304,7 @@ public class ShowSpotsStatus implements Actionable {
         // Tooltip
         if (isAdmin) {
             String plate = (res == null) ? "-" : res.getPlate();
-            b.setToolTipText("Spot: " + spotNum + " | Type: " + type + " | Reserved Plate: " + plate);
+            b.setToolTipText("Spot: " + spotNum + " | Type: " + type + " | Booked Plate: " + plate);
         } else {
             b.setToolTipText("Spot: " + spotNum + " | Type: " + type);
         }

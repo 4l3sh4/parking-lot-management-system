@@ -30,21 +30,6 @@
     "totalFee": 0.0
   },
   {
-    "id": 16,
-    "ticketCode": "T-ZXC123-20260214153628",
-    "vehicle": {
-      "VehicleType": "HANDICAPPED_VEHICLE",
-      "LicensePlateNumber": "ZXC123",
-      "OwnerID": 36,
-      "Color": "BLUE",
-      "Brand": "PERODUA",
-      "Model": "AXIA"
-    },
-    "spotNumber": "F1-R1-S6",
-    "entryTime": "2026-02-14T15:36:28.9748667",
-    "totalFee": 0.0
-  },
-  {
     "id": 17,
     "ticketCode": "T-WKF110-20260214174546",
     "vehicle": {
@@ -57,6 +42,21 @@
     },
     "spotNumber": "F1-R1-S2",
     "entryTime": "2026-02-14T17:45:46.8451175",
+    "totalFee": 0.0
+  },
+  {
+    "id": 20,
+    "ticketCode": "T-WP028-20260214183612",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "WP028",
+      "OwnerID": 36,
+      "Color": "SILVER",
+      "Brand": "PROTON",
+      "Model": "PERSONA"
+    },
+    "spotNumber": "F1-R2-S2",
+    "entryTime": "2026-02-14T18:36:12.737396",
     "totalFee": 0.0
   }
 ]

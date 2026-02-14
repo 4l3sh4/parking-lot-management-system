@@ -23,6 +23,7 @@ public class VehicleExit implements Actionable {
     }
 
     private JPanel panel;
+    private static final java.awt.Color PRIMARY = new java.awt.Color(33, 102, 255);
 
     @Override
     public JPanel getPanel() {
@@ -33,11 +34,18 @@ public class VehicleExit implements Actionable {
 
         JLabel title = new JLabel("Vehicle Exit");
         title.setFont(new Font("Tahoma", Font.BOLD, 30));
+        title.setForeground(PRIMARY);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        JLabel hint = new JLabel("Click Process Exit to begin.");
+        hint.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        hint.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton exitBtn = new JButton("Process Exit");
+        exitBtn.setFont(new Font("Tahoma", Font.BOLD, 14));
         exitBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
         exitBtn.addActionListener(e -> startExitFlow());
+        
 
         panel.add(Box.createVerticalStrut(40));
         panel.add(title);
@@ -141,7 +149,7 @@ public class VehicleExit implements Actionable {
         return plate;
     }
 
-    // Don’t depend on ParkingLotManager (yours is still int-based and broken)
+    // Don’t depend on ParkingLotManager 
     private Ticket findActiveTicketByPlate(String plate) {
         for (Ticket t : DataManager.activeTickets) {
             if (t != null && t.getVehicle() != null &&
@@ -164,12 +172,21 @@ public class VehicleExit implements Actionable {
     }
 
     private String makeReceipt(Ticket t, ParkingSpot spot) {
+    
+        String exitDate = (t.getExitDate() == null || t.getExitDate().trim().isEmpty())
+                ? "-"
+                : t.getExitDate();
+    
+        String exitTime = (t.getExitTimeToString() == null || t.getExitTimeToString().trim().isEmpty())
+                ? "-"
+                : t.getExitTimeToString();
+    
         return "Ticket Code: " + t.getTicketCode() + "\n\n"
                 + "Plate: " + t.getVehicle().getLicensePlateNumber() + "\n"
                 + "Spot: " + spot.getSpotNumber() + "\n"
-                + "Spot Type: " + spot.getType() + "\n"
-                + "Entry Date: " + t.getEntryDate() + "\n"
-                + "Entry Time: " + t.getEntryTimeToString() + "\n\n"
+                + "Spot Type: " + spot.getType() + "\n\n"
+                + "Entry: " + t.getEntryDate() + " " + t.getEntryTimeToString() + "\n"
+                + "Exit:  " + exitDate + " " + exitTime + "\n\n"
                 + "Total Fee: $" + t.getTotalFee();
     }
 }

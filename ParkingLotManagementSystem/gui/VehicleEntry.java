@@ -275,8 +275,7 @@ public class VehicleEntry implements Actionable {
                 + "Plate: " + t.getVehicle().getLicensePlateNumber() + "\n"
                 + "Spot: " + spot.getSpotNumber() + "\n"
                 + "Spot Type: " + spot.getType() + "\n"
-                + "Entry Date: " + t.getEntryDate() + "\n"
-                + "Entry Time: " + t.getEntryTimeToString();
+                + "Entry: " + t.getEntryDate() + " " + t.getEntryTimeToString() + "\n";
     }
 
     // =========================

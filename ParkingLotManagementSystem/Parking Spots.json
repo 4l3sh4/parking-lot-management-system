@@ -40,15 +40,7 @@
   {
     "spotNumber": "F1-R1-S6",
     "type": "REGULAR",
-    "occupied": true,
-    "vehicle": {
-      "VehicleType": "HANDICAPPED_VEHICLE",
-      "LicensePlateNumber": "ZXC123",
-      "OwnerID": 36,
-      "Color": "BLUE",
-      "Brand": "PERODUA",
-      "Model": "AXIA"
-    },
+    "occupied": false,
     "hourlyRate": 5.0
   },
   {
@@ -84,7 +76,15 @@
   {
     "spotNumber": "F1-R2-S2",
     "type": "RESERVED",
-    "occupied": false,
+    "occupied": true,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "WP028",
+      "OwnerID": 36,
+      "Color": "SILVER",
+      "Brand": "PROTON",
+      "Model": "PERSONA"
+    },
     "hourlyRate": 10.0
   },
   {

@@ -36,6 +36,7 @@ public class Admin extends User {
                 new gui.ShowActiveTickets(),      
                 new gui.ShowSpotsStatus(),
                 new gui.ShowTicketsHistory(),
+                new gui.ReportingPanel(), 
                 new gui.Logout()
         };
     }

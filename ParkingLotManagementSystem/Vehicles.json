@@ -38,5 +38,29 @@
     "Color": "SILVER",
     "Brand": "PERODUA",
     "Model": "MYVI"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "WP028",
+    "OwnerID": 36,
+    "Color": "SILVER",
+    "Brand": "PROTON",
+    "Model": "PERSONA"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "PSJ181",
+    "OwnerID": 35,
+    "Color": "RED",
+    "Brand": "HONDA",
+    "Model": "SCOOTER"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "QWER12",
+    "OwnerID": 35,
+    "Color": "RED",
+    "Brand": "-",
+    "Model": "-"
   }
 ]
