@@ -184,6 +184,20 @@ public class LoadData {
         }
     }
     
+    public static void loadReservations() {
+        FileHandler.createFilesIfNotExists();
+        try (FileReader reader = new FileReader(new File(FileHandler.RESERVATIONS_FILE))) {
+            Type listType = new TypeToken<ArrayList<model.Reservation>>() {}.getType();
+            List<model.Reservation> list = FileHandler.gson.fromJson(reader, listType);
+            if (list == null) list = new ArrayList<>();
+            DataManager.reservations = (ArrayList<model.Reservation>) list;
+        } catch (Exception e) {
+            System.err.println("Error loading reservations: " + e.getMessage());
+            DataManager.reservations = new ArrayList<>();
+        }
+    }
+
+    
     public static void loadAllData() {
         FileHandler.createFilesIfNotExists();
         loadSpots();
@@ -192,6 +206,7 @@ public class LoadData {
         loadVehicles();
         loadUsers();
         loadIDs();
+        loadReservations();
     }
     
 }

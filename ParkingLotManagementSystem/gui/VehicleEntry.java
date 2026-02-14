@@ -10,6 +10,7 @@ import model.*;
 import model.Color;
 import storage.DataManager;
 import storage.SaveData;
+import model.Reservation;
 
 public class VehicleEntry implements Actionable {
 
@@ -67,67 +68,74 @@ public class VehicleEntry implements Actionable {
     // ENTRY FLOW
     // =========================
     private void startEntryFlow() {
-
-        // Safety: must have logged in user
+        // 0) Must be logged in
         if (currentUser == null) {
             showErr("System error: user not found (not logged in).");
             return;
         }
-
+    
         // 1) Plate
         String plate = askPlate();
         if (plate == null) return;
-
+    
         // 2) Block duplicate active ticket for same plate
         if (hasActiveTicketForPlate(plate)) {
             showErr("This plate already has an active ticket.\nVehicle cannot enter twice.");
             return;
         }
-
-        // 3) Vehicle type
-        VehicleType vType = askVehicleType();
-        if (vType == null) return;
-
-        // 4) Handicap card (pricing later; still collect if you want)
-        boolean hasHandicapCard = false;
-        if (vType == VehicleType.HANDICAPPED_VEHICLE) {
-            hasHandicapCard = askHandicapCard();
-        }
-
-        // 5) Reservation check (basic)
+    
+        // 3) Reservation check FIRST (if exists, we auto assign reserved spot)
         Reservation res = findReservationByPlate(plate);
         ParkingSpot chosenSpot = null;
-
-        if (res != null) {
-            chosenSpot = findSpotBySpotNumber(res.getReservedSpotNumber());
-
+    
+        if (res != null && res.isActive()) {
+    
+            chosenSpot = findSpotBySpotNumber(res.getSpotNumber());
+    
             if (chosenSpot == null) {
                 showErr("Reservation found but spot does not exist. Contact admin.");
                 return;
             }
+    
+            // Reserved must be RESERVED type
             if (chosenSpot.getType() != SpotType.RESERVED) {
                 showErr("Reservation found but assigned spot is not RESERVED. Contact admin.");
                 return;
             }
+    
+            // Reserved spot must be available
             if (!chosenSpot.isAvailable()) {
                 showErr("Reserved spot is currently occupied. Contact admin.");
                 return;
             }
+    
+            // Must not already be used by another active ticket
             if (hasActiveTicketForSpot(chosenSpot.getSpotNumber())) {
                 showErr("Reserved spot already has an active ticket.\nContact admin.");
                 return;
             }
-
+    
             JOptionPane.showMessageDialog(null,
                     "Reservation found.\nAssigned RESERVED spot: " + chosenSpot.getSpotNumber(),
                     "Reservation",
                     JOptionPane.INFORMATION_MESSAGE);
         }
-
-        // 6) If no reservation, choose from suitable AVAILABLE spots (grid)
+    
+        // 4) Only ask vehicle type if NO reservation
+        VehicleType vType = null;
+        boolean hasHandicapCard = false;
+    
         if (chosenSpot == null) {
+            vType = askVehicleType();
+            if (vType == null) return;
+    
+            if (vType == VehicleType.HANDICAPPED_VEHICLE) {
+                hasHandicapCard = askHandicapCard();
+            }
+    
+            // Choose from suitable AVAILABLE spots (excluding RESERVED)
             ArrayList<ParkingSpot> suitable = getSuitableAvailableSpots_NoReserved(vType);
-
+    
             if (suitable.isEmpty()) {
                 JOptionPane.showMessageDialog(null,
                         "No suitable available spots for this vehicle type.",
@@ -135,57 +143,82 @@ public class VehicleEntry implements Actionable {
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-
+    
             chosenSpot = chooseSpotGridDialog(suitable, "Select Parking Spot");
             if (chosenSpot == null) return;
         }
-
-        // Final safety checks
+    
+        // 5) Final safety checks
+        if (chosenSpot == null) {
+            showErr("System error: no spot selected.");
+            return;
+        }
+    
         if (!chosenSpot.isAvailable()) {
             showErr("Selected spot is already occupied.");
             return;
         }
-
-        // HARD BLOCK: no duplicate spot in active tickets
+    
         if (hasActiveTicketForSpot(chosenSpot.getSpotNumber())) {
             showErr("This spot already has an active ticket.\nPlease choose another spot.");
             return;
         }
-
-        // 7) Find or create vehicle
+    
+        // 6) Find or create vehicle
         Vehicle vehicle = findVehicleByPlate(plate);
-
-        // If exists but belongs to different owner => block (optional but smart)
+    
+        // If vehicle exists but belongs to different owner => block
         if (vehicle != null && vehicle.getVehicleOwnerID() != currentUser.getID()) {
             showErr("This plate is registered under a different owner.\nCannot use this vehicle.");
             return;
         }
-
+    
+        // If no vehicle exists, we MUST ask details
         if (vehicle == null) {
+    
+            // If reservation path: you still need vehicle type for object creation.
+            // So ask it here only if it wasn't asked earlier.
+            if (vType == null) {
+                vType = askVehicleType();
+                if (vType == null) return;
+    
+                if (vType == VehicleType.HANDICAPPED_VEHICLE) {
+                    hasHandicapCard = askHandicapCard();
+                }
+            }
+    
             vehicle = buildVehicle(plate, vType, hasHandicapCard);
             if (vehicle == null) return;
+    
             DataManager.registeredVehicles.add(vehicle);
         }
-
-        // 8) Occupy spot properly
-        chosenSpot.occupy(vehicle);
-
-        // 9) Double check then create ticket
+    
+        // 7) HARD FINAL CHECK AGAIN (plate)
         if (hasActiveTicketForPlate(vehicle.getLicensePlateNumber())) {
             showErr("This plate already has an active ticket.\n(Detected at final commit)");
             return;
         }
+    
+        // 8) Occupy spot + create ticket
+        chosenSpot.occupy(vehicle);
+    
         Ticket t = new Ticket(vehicle, chosenSpot.getSpotNumber());
         DataManager.activeTickets.add(t);
-
+    
+        // Optional: if reservation used, cancel it now so it can't be reused
+        if (res != null && res.isActive()) {
+            res.cancel();
+        }
+    
         SaveData.saveAll();
-
-        // 10) Show ticket
+    
+        // 9) Show ticket
         JOptionPane.showMessageDialog(null,
                 makeTicketMessage(t, chosenSpot),
                 "Ticket Generated",
                 JOptionPane.INFORMATION_MESSAGE);
     }
+
 
     // =========================
     // UI helpers
@@ -289,8 +322,11 @@ public class VehicleEntry implements Actionable {
     // =========================
     private Reservation findReservationByPlate(String plate) {
         if (DataManager.reservations == null) return null;
+    
         for (Reservation r : DataManager.reservations) {
-            if (r != null && r.matches(plate)) return r;
+            if (r != null && r.matchesPlate(plate)) {
+                return r;
+            }
         }
         return null;
     }

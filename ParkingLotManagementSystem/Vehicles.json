@@ -30,5 +30,13 @@
     "Color": "WHITE",
     "Brand": "Honda",
     "Model": "City"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "WKF110",
+    "OwnerID": 35,
+    "Color": "SILVER",
+    "Brand": "PERODUA",
+    "Model": "MYVI"
   }
 ]

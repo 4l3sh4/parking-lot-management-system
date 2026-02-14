@@ -11,6 +11,9 @@ import model.Admin;
 import model.ParkingSpot;
 import model.SpotType;
 import model.Vehicle;
+import model.Reservation;
+import model.Ticket;
+import storage.SaveData;
 import storage.DataManager;
 
 public class ShowSpotsStatus implements Actionable {
@@ -259,57 +262,135 @@ public class ShowSpotsStatus implements Actionable {
 
     // ===== one spot cell =====
     private JComponent makeSpotCell(ParkingSpot spot, boolean isAdmin) {
-
+    
         String spotNum = spot.getSpotNumber();
         SpotType type = spot.getType();
         boolean available = spot.isAvailable();
-
+    
+        Reservation res = findActiveReservationBySpot(spotNum);
+        boolean reservedByReservation = (res != null);
+    
         JButton b = new JButton();
         b.setLayout(new BorderLayout());
         b.setFocusPainted(false);
         b.setBorder(BorderFactory.createLineBorder(Color.BLUE, 1));
-
-        // read-only: no clicking
-        b.setEnabled(false);
-
-        // Background by state
+    
+        // Background overlay
         Color bg;
-        if (type == SpotType.RESERVED) bg = new Color(255, 245, 200);         // reserved label
-        else if (available) bg = new Color(220, 255, 220);                   // available
-        else bg = new Color(255, 220, 220);                                  // occupied
+        if (reservedByReservation) bg = new Color(255, 245, 200);     // reserved overlay
+        else if (available) bg = new Color(220, 255, 220);
+        else bg = new Color(255, 220, 220);
         b.setBackground(bg);
-
-        // Text
+    
         JLabel top = new JLabel(spotNum, SwingConstants.CENTER);
         top.setFont(new Font("Tahoma", Font.BOLD, 12));
-
+    
         String statusText = available ? "AVAILABLE" : "OCCUPIED";
+        if (reservedByReservation) statusText = "RESERVED";
         JLabel mid = new JLabel(statusText, SwingConstants.CENTER);
         mid.setFont(new Font("Tahoma", Font.PLAIN, 11));
-
+    
         JLabel bot = new JLabel(String.valueOf(type), SwingConstants.CENTER);
         bot.setFont(new Font("Tahoma", Font.PLAIN, 10));
-
+    
         JPanel text = new JPanel(new GridLayout(3, 1));
         text.setOpaque(false);
         text.add(top);
         text.add(mid);
         text.add(bot);
-
+    
         b.add(text, BorderLayout.CENTER);
-
-        // Tooltip: ADMIN can see plate, CLIENT cannot
+    
+        // Tooltip
         if (isAdmin) {
-            Vehicle v = spot.getVehicle();
-            String plate = (v == null || v.getLicensePlateNumber() == null) ? "-" : v.getLicensePlateNumber();
-            b.setToolTipText("Spot: " + spotNum + " | Type: " + type + " | Plate: " + plate);
+            String plate = (res == null) ? "-" : res.getPlate();
+            b.setToolTipText("Spot: " + spotNum + " | Type: " + type + " | Reserved Plate: " + plate);
         } else {
             b.setToolTipText("Spot: " + spotNum + " | Type: " + type);
         }
-
+    
         b.setPreferredSize(new Dimension(95, 70));
+    
+        // Click actions (ADMIN only)
+        b.setEnabled(isAdmin);
+    
+        if (isAdmin) {
+            b.addActionListener(e -> {
+                Reservation current = findActiveReservationBySpot(spotNum);
+    
+                // If occupied, admin should not reserve it
+                if (!spot.isAvailable()) {
+                    JOptionPane.showMessageDialog(null,
+                            "This spot is OCCUPIED.\nCannot reserve occupied spots.",
+                            "Not Allowed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                // ONLY allow reservation on RESERVED type spots
+                if (spot.getType() != SpotType.RESERVED) {
+                    JOptionPane.showMessageDialog(null,
+                            "Only RESERVED type spots can be reserved.\n"
+                            + "This spot is: " + spot.getType(),
+                            "Not Allowed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+    
+                if (current != null) {
+                    int ok = JOptionPane.showConfirmDialog(null,
+                            "Cancel reservation?\nSpot: " + spotNum + "\nPlate: " + current.getPlate(),
+                            "Cancel Reservation",
+                            JOptionPane.YES_NO_OPTION);
+    
+                    if (ok == JOptionPane.YES_OPTION) {
+                        current.cancel();
+                        SaveData.saveAll();
+                        Dashboard.setContent(getPanel()); // refresh
+                    }
+                    return;
+                }
+    
+                // Add new reservation
+                String plate = JOptionPane.showInputDialog(null,
+                        "Enter plate number to reserve spot:\n" + spotNum,
+                        "Add Reservation",
+                        JOptionPane.PLAIN_MESSAGE);
+    
+                if (plate == null) return;
+                plate = Reservation.normalizePlate(plate);
+                if (plate.isEmpty()) return;
+    
+                // block duplicate reservation by plate
+                if (findActiveReservationByPlate(plate) != null) {
+                    JOptionPane.showMessageDialog(null,
+                            "This plate already has an ACTIVE reservation.",
+                            "Duplicate Reservation",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+    
+                // optional: block if plate already has active ticket
+                if (hasActiveTicketForPlate(plate)) {
+                    JOptionPane.showMessageDialog(null,
+                            "This plate already has an ACTIVE ticket.\nExit first before reserving.",
+                            "Not Allowed",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+    
+                if (DataManager.reservations == null) DataManager.reservations = new ArrayList<>();
+                DataManager.reservations.add(new Reservation(plate, spotNum));
+    
+                SaveData.saveAll();
+                Dashboard.setContent(getPanel()); // refresh
+            });
+        }
+    
         return b;
     }
+
 
     // ===== grouping by floor =====
     private Map<String, List<ParkingSpot>> groupByFloor(List<ParkingSpot> spots) {
@@ -399,5 +480,33 @@ public class ShowSpotsStatus implements Actionable {
                 BorderFactory.createEmptyBorder(12, 12, 12, 12)
         );
     }
+    
+    private Reservation findActiveReservationBySpot(String spotNumber) {
+        if (DataManager.reservations == null) return null;
+        for (Reservation r : DataManager.reservations) {
+            if (r != null && r.isActive() && r.matchesSpot(spotNumber)) return r;
+        }
+        return null;
+    }
+    
+    private Reservation findActiveReservationByPlate(String plate) {
+        if (DataManager.reservations == null) return null;
+        for (Reservation r : DataManager.reservations) {
+            if (r != null && r.isActive() && r.matchesPlate(plate)) return r;
+        }
+        return null;
+    }
+    
+    private boolean hasActiveTicketForPlate(String plate) {
+        if (DataManager.activeTickets == null) return false;
+        String target = Reservation.normalizePlate(plate);
+        for (Ticket t : DataManager.activeTickets) {
+            if (t == null || t.getVehicle() == null) continue;
+            String p = t.getVehicle().getLicensePlateNumber();
+            if (Reservation.normalizePlate(p).equals(target)) return true;
+        }
+        return false;
+    }
+
     
 }

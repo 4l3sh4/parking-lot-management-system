@@ -43,5 +43,20 @@
     "spotNumber": "F1-R1-S6",
     "entryTime": "2026-02-14T15:36:28.9748667",
     "totalFee": 0.0
+  },
+  {
+    "id": 17,
+    "ticketCode": "T-WKF110-20260214174546",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "WKF110",
+      "OwnerID": 35,
+      "Color": "SILVER",
+      "Brand": "PERODUA",
+      "Model": "MYVI"
+    },
+    "spotNumber": "F1-R1-S2",
+    "entryTime": "2026-02-14T17:45:46.8451175",
+    "totalFee": 0.0
   }
 ]

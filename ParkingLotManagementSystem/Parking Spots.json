@@ -8,7 +8,15 @@
   {
     "spotNumber": "F1-R1-S2",
     "type": "RESERVED",
-    "occupied": false,
+    "occupied": true,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "WKF110",
+      "OwnerID": 35,
+      "Color": "SILVER",
+      "Brand": "PERODUA",
+      "Model": "MYVI"
+    },
     "hourlyRate": 10.0
   },
   {
