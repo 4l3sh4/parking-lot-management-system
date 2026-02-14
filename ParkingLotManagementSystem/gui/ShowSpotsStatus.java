@@ -175,7 +175,7 @@ public class ShowSpotsStatus implements Actionable {
         }
 
         card.add(new JLabel("Slot Number:"));
-        card.add(new JLabel(String.valueOf(spot.getSpotNumber())));
+        card.add(new JLabel(spot.getSpotNumber()));
 
         card.add(new JLabel("Slot Type:"));
         card.add(new JLabel(String.valueOf(spot.getType())));

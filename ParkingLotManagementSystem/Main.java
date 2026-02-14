@@ -18,7 +18,7 @@ import model.Ticket;
 import storage.DataManager;
 import storage.SaveData;
 import storage.LoadData;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class Main {
@@ -27,9 +27,11 @@ public class Main {
 
         LoadData.loadAllData();
         //cli.NavigationHandler.welcome(new Scanner(System.in));
+
+        // ===== REGISTERED VEHICLES =====
+        if (DataManager.registeredVehicles == null || DataManager.registeredVehicles.isEmpty()) {
         
-        // ===== TEMP TEST REGISTERED VEHICLES =====
-        if (DataManager.registeredVehicles.isEmpty()) {
+            DataManager.registeredVehicles = new ArrayList<>();
         
             Vehicle v1 = new Car("REG111");
             v1.setBrand("Toyota");
@@ -59,63 +61,39 @@ public class Main {
             v4.setVehicleOwnerID(4);
             DataManager.registeredVehicles.add(v4);
         
-            SaveData.saveAll();
-        }    
-        
-        // ===== TEMP TEST TICKET HISTORY =====
-        if (DataManager.ticketHistory.isEmpty()) {
-        
-            Vehicle v1 = new Car("P101010");
-            v1.setBrand("Toyota");
-            v1.setModel("Vios");
-            v1.setColor(Color.RED);
-            v1.setVehicleOwnerID(1);
-        
-            Ticket t1 = new Ticket(
-                1,
-                v1,
-                LocalDateTime.now().minusHours(8),
-                LocalDateTime.now().minusHours(4),
-                35.0,
-                1
-            );
-        
-            Vehicle v2 = new Car("P121212");
-            v2.setBrand("Honda");
-            v2.setModel("City");
-            v2.setColor(Color.WHITE);
-            v2.setVehicleOwnerID(2);
-        
-            Ticket t2 = new Ticket(
-                2,
-                v2,
-                LocalDateTime.now().minusHours(6),
-                LocalDateTime.now().minusHours(3),
-                14.0,
-                2
-            );
-        
-            Vehicle v3 = new Car("P131313");
-            v3.setBrand("Mazda");
-            v3.setModel("CX5");
-            v3.setColor(Color.BLACK);
-            v3.setVehicleOwnerID(3);
-        
-            Ticket t3 = new Ticket(
-                3,
-                v3,
-                LocalDateTime.now().minusHours(10),
-                LocalDateTime.now().minusHours(5),
-                42.0,
-                3
-            );
-        
-            DataManager.ticketHistory.add(t1);
-            DataManager.ticketHistory.add(t2);
-            DataManager.ticketHistory.add(t3);
-        
-            SaveData.saveAll();
+            System.out.println("Test vehicles generated.");
         }
+
+        if (DataManager.activeTickets == null || DataManager.activeTickets.isEmpty()) {
+
+            DataManager.activeTickets = new ArrayList<>();
+        
+            Ticket t1 = new Ticket(DataManager.registeredVehicles.get(0), "F1-R1-S3");
+            Ticket t2 = new Ticket(DataManager.registeredVehicles.get(1), "F1-R2-S4");
+        
+            DataManager.activeTickets.add(t1);
+            DataManager.activeTickets.add(t2);
+        
+            System.out.println("Test active tickets generated.");
+        }
+        
+        if (DataManager.ticketHistory == null || DataManager.ticketHistory.isEmpty()) {
+        
+            DataManager.ticketHistory = new ArrayList<>();
+        
+            Ticket old1 = new Ticket(DataManager.registeredVehicles.get(2), "F2-R1-S1");
+            old1.exitVehicle(5.0);
+            DataManager.ticketHistory.add(old1);
+        
+            Ticket old2 = new Ticket(DataManager.registeredVehicles.get(3), "F3-R2-S8");
+            old2.exitVehicle(10.0);
+            DataManager.ticketHistory.add(old2);
+        
+            System.out.println("Test ticket history generated.");
+        }
+
+        SaveData.saveAll();
+        
         NavigationHandler.initialize();
 
     }

@@ -1,6 +1,6 @@
 [
   {
-    "ID": 1,
+    "id": 0,
     "vehicle": {
       "VehicleType": "CAR",
       "LicensePlateNumber": "P101010",
@@ -9,13 +9,13 @@
       "Brand": "Toyota",
       "Model": "Vios"
     },
+    "spotNumber": "1",
     "entryTime": "2026-02-13T21:02:29.6990872",
     "exitTime": "2026-02-14T01:02:29.6990872",
-    "totalFee": 35.0,
-    "spotNumber": 1
+    "totalFee": 35.0
   },
   {
-    "ID": 2,
+    "id": 0,
     "vehicle": {
       "VehicleType": "CAR",
       "LicensePlateNumber": "P121212",
@@ -24,13 +24,13 @@
       "Brand": "Honda",
       "Model": "City"
     },
+    "spotNumber": "2",
     "entryTime": "2026-02-13T23:02:29.6990872",
     "exitTime": "2026-02-14T02:02:29.6990872",
-    "totalFee": 14.0,
-    "spotNumber": 2
+    "totalFee": 14.0
   },
   {
-    "ID": 3,
+    "id": 0,
     "vehicle": {
       "VehicleType": "CAR",
       "LicensePlateNumber": "P131313",
@@ -39,9 +39,73 @@
       "Brand": "Mazda",
       "Model": "CX5"
     },
+    "spotNumber": "3",
     "entryTime": "2026-02-13T19:02:29.6990872",
     "exitTime": "2026-02-14T00:02:29.6990872",
-    "totalFee": 42.0,
-    "spotNumber": 3
+    "totalFee": 42.0
+  },
+  {
+    "id": 8,
+    "ticketCode": "T-WA110-20260214120001",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "WA110",
+      "OwnerID": 35,
+      "Color": "RED",
+      "Brand": "PERODUA",
+      "Model": "MYVI"
+    },
+    "spotNumber": "2",
+    "entryTime": "2026-02-14T12:00:01.8086606",
+    "exitTime": "2026-02-14T12:17:14.8655217",
+    "totalFee": 0.0
+  },
+  {
+    "id": 13,
+    "ticketCode": "T-ABC110-20260214131458",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "ABC110",
+      "OwnerID": 35,
+      "Color": "RED",
+      "Brand": "PERODUA",
+      "Model": "MYVI"
+    },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-14T13:14:58.6925405",
+    "exitTime": "2026-02-14T14:05:15.5146283",
+    "totalFee": 2.0
+  },
+  {
+    "id": 11,
+    "ticketCode": "T-REG111-20260214125133",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "REG111",
+      "OwnerID": 1,
+      "Color": "RED",
+      "Brand": "Toyota",
+      "Model": "Vios"
+    },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-14T12:51:33.4879373",
+    "exitTime": "2026-02-14T14:14:11.8237024",
+    "totalFee": 4.0
+  },
+  {
+    "id": 15,
+    "ticketCode": "T-ZXC123-20260214153143",
+    "vehicle": {
+      "VehicleType": "HANDICAPPED_VEHICLE",
+      "LicensePlateNumber": "ZXC123",
+      "OwnerID": 36,
+      "Color": "BLUE",
+      "Brand": "PERODUA",
+      "Model": "AXIA"
+    },
+    "spotNumber": "F1-R1-S1",
+    "entryTime": "2026-02-14T15:31:43.6531244",
+    "exitTime": "2026-02-14T15:32:00.2041618",
+    "totalFee": 2.0
   }
 ]

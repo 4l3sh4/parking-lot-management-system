@@ -13,9 +13,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Component;
+import java.util.ArrayList;
 
 import model.Ticket;
 import model.User;
+import model.Admin;
 import storage.DataManager;
 
 public class ShowActiveTickets implements Actionable {
@@ -25,14 +27,38 @@ public class ShowActiveTickets implements Actionable {
         return "Active Tickets";
     }
 
+    private User currentUser;
+
     @Override
     public void execute(User u) {
+        this.currentUser = u;
         Dashboard.setContent(getPanel());
+    }
+
+    private ArrayList<Ticket> getVisibleActiveTickets() {
+        ArrayList<Ticket> out = new ArrayList<>();
+        if (DataManager.activeTickets == null) return out;
+
+        boolean isAdmin = (currentUser instanceof Admin);
+
+        for (Ticket t : DataManager.activeTickets) {
+            if (t == null || t.getVehicle() == null) continue;
+
+            if (isAdmin) {
+                out.add(t);
+            } else {
+                if (t.getVehicle().getVehicleOwnerID() == currentUser.getID()) {
+                    out.add(t);
+                }
+            }
+        }
+        return out;
     }
 
     @Override
     public JComponent getPanel() {
-        int total = DataManager.activeTickets.size();
+        ArrayList<Ticket> list = getVisibleActiveTickets();
+        int total = list.size();
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -45,41 +71,57 @@ public class ShowActiveTickets implements Actionable {
             row.setOpaque(false);
 
             // Left ticket
-            row.add(activeTicket(DataManager.activeTickets.get(i)));
+            row.add(activeTicket(list.get(i)));
 
             // Right ticket if exists
             if (i + 1 < total) {
                 row.add(Box.createHorizontalStrut(15));
-                row.add(activeTicket(DataManager.activeTickets.get(i + 1)));
+                row.add(activeTicket(list.get(i + 1)));
             }
 
             panel.add(row);
             panel.add(Box.createVerticalStrut(15));
         }
-        
-        // wrapper that holds title + content
+
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         wrapper.setOpaque(false);
-        
-        // Title
+
         JLabel title = new JLabel("Active Tickets");
         title.setFont(new Font("Tahoma", Font.BOLD, 30));
         title.setForeground(new Color(33, 102, 255));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        
+
         wrapper.add(title);
         wrapper.add(Box.createVerticalStrut(15));
-        wrapper.add(panel);
-        
-        // Scroll wrapper, not panel
+
+        if (total == 0) {
+            JLabel none = new JLabel("No active tickets.");
+            none.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            none.setAlignmentX(Component.CENTER_ALIGNMENT);
+            wrapper.add(none);
+        } else {
+            wrapper.add(panel);
+        }
+
         JScrollPane scrollPane = new JScrollPane(wrapper);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         scrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        
+
         return scrollPane;
+    }
+
+    private String ownerLabel(int ownerId) {
+        if (DataManager.users == null) return "Unknown (" + ownerId + ")";
+
+        for (User u : DataManager.users) {
+            if (u != null && u.getID() == ownerId) {
+                return u.getFirstName() + " " + u.getLastName() + " (" + ownerId + ")";
+            }
+        }
+        return "Unknown (" + ownerId + ")";
     }
 
     private JPanel activeTicket(Ticket ticket) {
@@ -95,41 +137,33 @@ public class ShowActiveTickets implements Actionable {
                 BorderFactory.createLineBorder(Color.blue, 2),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
 
-        // Ticket ID
-        ticketPanel.add(new JLabel("Ticket ID:"));
-        ticketPanel.add(new JLabel(String.valueOf(ticket.getID())));
+        ticketPanel.add(new JLabel("Ticket Code:"));
+        ticketPanel.add(new JLabel(ticket.getTicketCode()));
 
-        // License Plate Number
-        ticketPanel.add(new JLabel("Vehicle License Plate Number:"));
+        ticketPanel.add(new JLabel("Vehicle Plate:"));
         ticketPanel.add(new JLabel(ticket.getVehicle().getLicensePlateNumber()));
 
-        // Brand
         ticketPanel.add(new JLabel("Vehicle Brand:"));
         ticketPanel.add(new JLabel(ticket.getVehicle().getBrand()));
 
-        // Model
         ticketPanel.add(new JLabel("Vehicle Model:"));
         ticketPanel.add(new JLabel(ticket.getVehicle().getModel()));
 
-        // Color
         ticketPanel.add(new JLabel("Vehicle Color:"));
-        ticketPanel.add(new JLabel(ticket.getVehicle().getColor().toString()));
+        ticketPanel.add(new JLabel(String.valueOf(ticket.getVehicle().getColor())));
 
-        // Owner
         ticketPanel.add(new JLabel("Vehicle Owner:"));
-        ticketPanel.add(new JLabel(String.valueOf(ticket.getVehicle().getVehicleOwnerID())));
+        int ownerId = ticket.getVehicle().getVehicleOwnerID();
+        ticketPanel.add(new JLabel(ownerLabel(ownerId)));
 
-        // Entry Date
-        ticketPanel.add(new JLabel("Entry Date:"));
-        ticketPanel.add(new JLabel(ticket.getEntryDate()));
+        ticketPanel.add(new JLabel("Entry:"));
+        ticketPanel.add(new JLabel(ticket.getEntryDate() + " " + ticket.getEntryTimeToString()));
+        
+        ticketPanel.add(new JLabel("Exit:"));
+        ticketPanel.add(new JLabel(ticket.getExitDate() + " " + ticket.getExitTimeToString()));
 
-        // Entry Time
-        ticketPanel.add(new JLabel("Entry Time:"));
-        ticketPanel.add(new JLabel(ticket.getEntryTimeToString()));
-
-        // Spot Number
         ticketPanel.add(new JLabel("Spot Number:"));
-        ticketPanel.add(new JLabel(String.valueOf(ticket.getSpotNumber())));
+        ticketPanel.add(new JLabel(ticket.getspotNumber()));
 
         return ticketPanel;
     }

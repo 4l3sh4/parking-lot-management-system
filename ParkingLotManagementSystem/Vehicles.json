@@ -1,18 +1,58 @@
 [
   {
     "VehicleType": "CAR",
-    "LicensePlateNumber": "WKF110",
-    "OwnerID": 20,
-    "Color": "SILVER",
+    "LicensePlateNumber": "REG111",
+    "OwnerID": 1,
+    "Color": "RED",
+    "Brand": "Toyota",
+    "Model": "Vios"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "REG222",
+    "OwnerID": 2,
+    "Color": "BLUE",
+    "Brand": "Yamaha",
+    "Model": "R15"
+  },
+  {
+    "VehicleType": "SUV_TRUCK",
+    "LicensePlateNumber": "REG333",
+    "OwnerID": 3,
+    "Color": "BLACK",
+    "Brand": "Ford",
+    "Model": "Ranger"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "REG444",
+    "OwnerID": 4,
+    "Color": "WHITE",
+    "Brand": "Honda",
+    "Model": "City"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "ABC110",
+    "OwnerID": 35,
+    "Color": "RED",
     "Brand": "PERODUA",
     "Model": "MYVI"
   },
   {
     "VehicleType": "CAR",
-    "LicensePlateNumber": "VKL110",
-    "OwnerID": 21,
-    "Color": "WHITE",
+    "LicensePlateNumber": "QWE123",
+    "OwnerID": 35,
+    "Color": "SILVER",
+    "Brand": "PROTON",
+    "Model": "SAGA"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "ZXC123",
+    "OwnerID": 36,
+    "Color": "BLUE",
     "Brand": "PERODUA",
-    "Model": "BEZZA"
+    "Model": "AXIA"
   }
 ]

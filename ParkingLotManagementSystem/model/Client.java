@@ -7,6 +7,7 @@ import cli.Logout;
 import cli.ShowSpotsStatus;
 import cli.VehicleEntry;
 import cli.VehicleExit;
+import cli.ShowTicketsHistory;
 
 public class Client extends User {
 
@@ -27,6 +28,7 @@ public class Client extends User {
                 new VehicleEntry(),
                 new VehicleExit(),
                 new ShowSpotsStatus(),
+                new ShowTicketsHistory(),
                 new Logout()
         };
 
@@ -35,6 +37,7 @@ public class Client extends User {
                 new gui.VehicleEntry(),
                 new gui.VehicleExit(),
                 new gui.ShowActiveTickets(), 
+                new gui.ShowTicketsHistory(),
                 new gui.Logout()
         };
     }

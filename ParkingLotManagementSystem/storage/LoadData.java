@@ -15,20 +15,70 @@ import model.Vehicle;
 import model.User;
 import model.IDGenerator;
 import model.IDGeneratorState;
+import model.SpotType;
+import storage.SaveData;
+
 
 public class LoadData {
 
     public static void loadSpots() {
+    
         FileHandler.createFilesIfNotExists();
+    
         try (FileReader reader = new FileReader(new File(FileHandler.SPOTS_FILE))) {
+    
             Type listType = new TypeToken<ArrayList<ParkingSpot>>() {}.getType();
             List<ParkingSpot> spots = FileHandler.gson.fromJson(reader, listType);
-            if (spots == null)
-                spots = new ArrayList<>();
-            DataManager.parkingSpots = (ArrayList<ParkingSpot>) spots;
-        } catch (IOException e) {
-            System.err.println("Error loading slots: " + e.getMessage());
-            DataManager.parkingSpots = new ArrayList<>();
+    
+            if (spots == null || spots.isEmpty()) {
+                initDefaultSpots();
+            } else {
+                DataManager.parkingSpots = (ArrayList<ParkingSpot>) spots;
+            }
+    
+        } catch (Exception e) {
+            initDefaultSpots();
+        }
+    }
+    
+        
+    private static void initDefaultSpots() {
+    
+        DataManager.parkingSpots = new ArrayList<>();
+    
+        int floors = 4;
+        int rows = 4;
+        int slotsPerRow = 10;
+    
+        for (int f = 1; f <= floors; f++) {
+    
+            for (int r = 1; r <= rows; r++) {
+    
+                for (int s = 1; s <= slotsPerRow; s++) {
+    
+                    String id = "F" + f + "-R" + r + "-S" + s;
+    
+                    SpotType type;
+    
+                    // RULES (edit if you want)
+                    if (s == 1) {
+                        type = SpotType.HANDICAPPED;
+                    }
+                    else if (s == 2) {
+                        type = SpotType.RESERVED;
+                    }
+                    else if (s <= 5) {
+                        type = SpotType.COMPACT;
+                    }
+                    else {
+                        type = SpotType.REGULAR;
+                    }
+    
+                    DataManager.parkingSpots.add(
+                            new ParkingSpot(id, type)
+                    );
+                }
+            }
         }
     }
 

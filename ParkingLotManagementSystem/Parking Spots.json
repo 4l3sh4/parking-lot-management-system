@@ -1,89 +1,978 @@
 [
   {
-    "spotNumber": 1,
-    "isOccupied": false,
-    "type": "COMPACT"
+    "spotNumber": "F1-R1-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
   },
   {
-    "spotNumber": 2,
-    "isOccupied": false,
-    "type": "REGULAR"
+    "spotNumber": "F1-R1-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
   },
   {
-    "spotNumber": 3,
-    "isOccupied": false,
-    "type": "HANDICAPPED"
+    "spotNumber": "F1-R1-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
   },
   {
-    "spotNumber": 4,
-    "isOccupied": false,
-    "type": "RESERVED"
+    "spotNumber": "F1-R1-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
   },
   {
-    "spotNumber": 5,
-    "isOccupied": true,
-    "vehicle": {
-      "VehicleType": "CAR",
-      "LicensePlateNumber": "AAA111",
-      "OwnerID": 5,
-      "Color": "RED",
-      "Brand": "Toyota",
-      "Model": "Vios"
-    },
-    "type": "REGULAR"
+    "spotNumber": "F1-R1-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
   },
   {
-    "spotNumber": 6,
-    "isOccupied": true,
-    "vehicle": {
-      "VehicleType": "MOTORCYCLE",
-      "LicensePlateNumber": "BBB222",
-      "OwnerID": 6,
-      "Color": "BLUE",
-      "Brand": "Yamaha",
-      "Model": "R15"
-    },
-    "type": "COMPACT"
-  },
-  {
-    "spotNumber": 7,
-    "isOccupied": true,
-    "vehicle": {
-      "VehicleType": "SUV_TRUCK",
-      "LicensePlateNumber": "CCC333",
-      "OwnerID": 7,
-      "Color": "BLACK",
-      "Brand": "Ford",
-      "Model": "Ranger"
-    },
-    "type": "RESERVED"
-  },
-  {
-    "spotNumber": 8,
-    "isOccupied": true,
+    "spotNumber": "F1-R1-S6",
+    "type": "REGULAR",
+    "occupied": true,
     "vehicle": {
       "VehicleType": "HANDICAPPED_VEHICLE",
-      "LicensePlateNumber": "DDD444",
-      "OwnerID": 8,
-      "Color": "WHITE",
-      "Brand": "Honda",
-      "Model": "City"
+      "LicensePlateNumber": "ZXC123",
+      "OwnerID": 36,
+      "Color": "BLUE",
+      "Brand": "PERODUA",
+      "Model": "AXIA"
     },
-    "type": "HANDICAPPED"
+    "hourlyRate": 5.0
   },
   {
-    "spotNumber": 9,
-    "isOccupied": false,
-    "type": "REGULAR"
+    "spotNumber": "F1-R1-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
   },
   {
-    "spotNumber": 4,
-    "isOccupied": false,
-    "type": "COMPACT"
+    "spotNumber": "F1-R1-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
   },
   {
-    "spotNumber": 5,
-    "isOccupied": false,
-    "type": "COMPACT"
+    "spotNumber": "F1-R1-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R1-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R2-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R2-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F1-R2-S3",
+    "type": "COMPACT",
+    "occupied": true,
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "QWE123",
+      "OwnerID": 35,
+      "Color": "SILVER",
+      "Brand": "PROTON",
+      "Model": "SAGA"
+    },
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R2-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R2-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R2-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R2-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R2-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R2-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R2-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R3-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R3-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F1-R3-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R3-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R3-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R3-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R3-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R3-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R3-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R3-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R4-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R4-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F1-R4-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R4-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R4-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F1-R4-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R4-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R4-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R4-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F1-R4-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R1-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R1-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F2-R1-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R1-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R1-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R1-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R1-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R1-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R1-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R1-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R2-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R2-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F2-R2-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R2-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R2-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R2-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R2-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R2-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R2-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R2-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R3-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R3-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F2-R3-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R3-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R3-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R3-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R3-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R3-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R3-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R3-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R4-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R4-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F2-R4-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R4-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R4-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F2-R4-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R4-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R4-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R4-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F2-R4-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R1-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R1-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F3-R1-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R1-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R1-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R1-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R1-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R1-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R1-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R1-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R2-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R2-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F3-R2-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R2-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R2-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R2-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R2-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R2-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R2-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R2-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R3-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R3-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F3-R3-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R3-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R3-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R3-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R3-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R3-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R3-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R3-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R4-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R4-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F3-R4-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R4-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R4-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F3-R4-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R4-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R4-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R4-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F3-R4-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R1-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R1-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F4-R1-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R1-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R1-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R1-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R1-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R1-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R1-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R1-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R2-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R2-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F4-R2-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R2-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R2-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R2-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R2-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R2-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R2-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R2-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R3-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R3-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F4-R3-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R3-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R3-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R3-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R3-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R3-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R3-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R3-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R4-S1",
+    "type": "HANDICAPPED",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R4-S2",
+    "type": "RESERVED",
+    "occupied": false,
+    "hourlyRate": 10.0
+  },
+  {
+    "spotNumber": "F4-R4-S3",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R4-S4",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R4-S5",
+    "type": "COMPACT",
+    "occupied": false,
+    "hourlyRate": 2.0
+  },
+  {
+    "spotNumber": "F4-R4-S6",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R4-S7",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R4-S8",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R4-S9",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
+  },
+  {
+    "spotNumber": "F4-R4-S10",
+    "type": "REGULAR",
+    "occupied": false,
+    "hourlyRate": 5.0
   }
 ]

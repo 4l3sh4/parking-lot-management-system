@@ -1,58 +1,47 @@
 [
   {
-    "ID": 4,
+    "id": 12,
+    "ticketCode": "T-REG222-20260214125133",
     "vehicle": {
-      "VehicleType": "CAR",
-      "LicensePlateNumber": "ABC123",
-      "OwnerID": 1,
-      "Color": "RED",
-      "Brand": "Toyota",
-      "Model": "Vios"
-    },
-    "entryTime": "2026-02-14T02:31:13.6307534",
-    "totalFee": 0.0,
-    "spotNumber": 1
-  },
-  {
-    "ID": 5,
-    "vehicle": {
-      "VehicleType": "CAR",
-      "LicensePlateNumber": "DEF456",
+      "VehicleType": "MOTORCYCLE",
+      "LicensePlateNumber": "REG222",
       "OwnerID": 2,
       "Color": "BLUE",
-      "Brand": "Honda",
-      "Model": "City"
+      "Brand": "Yamaha",
+      "Model": "R15"
     },
-    "entryTime": "2026-02-14T02:31:13.6307534",
-    "totalFee": 0.0,
-    "spotNumber": 2
+    "spotNumber": "F1-R2-S4",
+    "entryTime": "2026-02-14T12:51:33.4879373",
+    "totalFee": 0.0
   },
   {
-    "ID": 6,
+    "id": 14,
+    "ticketCode": "T-QWE123-20260214135742",
     "vehicle": {
       "VehicleType": "CAR",
-      "LicensePlateNumber": "GHI789",
-      "OwnerID": 3,
-      "Color": "WHITE",
-      "Brand": "Mazda",
-      "Model": "CX5"
+      "LicensePlateNumber": "QWE123",
+      "OwnerID": 35,
+      "Color": "SILVER",
+      "Brand": "PROTON",
+      "Model": "SAGA"
     },
-    "entryTime": "2026-02-14T02:31:13.6307534",
-    "totalFee": 0.0,
-    "spotNumber": 3
+    "spotNumber": "F1-R2-S3",
+    "entryTime": "2026-02-14T13:57:42.9038468",
+    "totalFee": 0.0
   },
   {
-    "ID": 7,
+    "id": 16,
+    "ticketCode": "T-ZXC123-20260214153628",
     "vehicle": {
-      "VehicleType": "CAR",
-      "LicensePlateNumber": "JKL321",
-      "OwnerID": 4,
-      "Color": "BLACK",
-      "Brand": "Perodua",
-      "Model": "Bezza"
+      "VehicleType": "HANDICAPPED_VEHICLE",
+      "LicensePlateNumber": "ZXC123",
+      "OwnerID": 36,
+      "Color": "BLUE",
+      "Brand": "PERODUA",
+      "Model": "AXIA"
     },
-    "entryTime": "2026-02-14T02:31:13.6307534",
-    "totalFee": 0.0,
-    "spotNumber": 4
+    "spotNumber": "F1-R1-S6",
+    "entryTime": "2026-02-14T15:36:28.9748667",
+    "totalFee": 0.0
   }
 ]
