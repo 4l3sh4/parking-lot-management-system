@@ -123,5 +123,13 @@
     "Color": "RED",
     "Brand": "123",
     "Model": "123"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "A10",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "1",
+    "Model": "1"
   }
 ]

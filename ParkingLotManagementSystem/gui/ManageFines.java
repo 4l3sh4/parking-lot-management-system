@@ -3,6 +3,8 @@ package gui;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import model.*;
@@ -170,7 +172,12 @@ public class ManageFines implements Actionable {
             Dashboard.setContent(getPanel());
         });
 
+        JButton exportBtn = new JButton("Export Outstanding Fees to CSV");
+        exportBtn.addActionListener(e -> exportOutstandingFeesCSV());
+
         buttonPanel.add(refreshBtn);
+        buttonPanel.add(Box.createHorizontalStrut(10));
+        buttonPanel.add(exportBtn);
         buttonPanel.add(Box.createHorizontalGlue());
 
         // Table
@@ -298,5 +305,67 @@ public class ManageFines implements Actionable {
         card.add(valueLabel);
 
         return card;
+    }
+
+    private void exportOutstandingFeesCSV() {
+        ArrayList<Fine> unpaidFines = FineManager.getAllUnpaidFines();
+        
+        if (unpaidFines.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No unpaid fines to export.", "No Data", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File("outstanding_fines.csv"));
+        int option = fileChooser.showSaveDialog(null);
+        
+        if (option != JFileChooser.APPROVE_OPTION) return;
+        
+        File file = fileChooser.getSelectedFile();
+        
+        try (PrintWriter writer = new PrintWriter(file)) {
+            // Write header
+            writer.println("Fine ID,License Plate,Amount (RM),Reason,Created Date,Created Time");
+            
+            // Write data
+            for (Fine fine : unpaidFines) {
+                if (fine != null) {
+                    String line = String.format("%d,%s,%.2f,%s,%s,%s",
+                            fine.getId(),
+                            fine.getLicensePlate(),
+                            fine.getAmount(),
+                            escapeCsvField(fine.getReason()),
+                            fine.getCreatedDate(),
+                            fine.getCreatedTime());
+                    writer.println(line);
+                }
+            }
+            
+            // Write summary
+            writer.println();
+            FineManager.FineStatistics stats = FineManager.getStatistics();
+            writer.println("Summary Report");
+            writer.printf("Total Unpaid Fines: %d%n", stats.unpaidFines);
+            writer.printf("Total Outstanding Amount: RM %.2f%n", stats.unpaidAmount);
+            
+            JOptionPane.showMessageDialog(null, 
+                    "Successfully exported " + unpaidFines.size() + " unpaid fines to:\n" + file.getAbsolutePath(),
+                    "Export Complete",
+                    JOptionPane.INFORMATION_MESSAGE);
+            
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Export failed:\n" + ex.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private String escapeCsvField(String field) {
+        if (field == null) return "";
+        if (field.contains(",") || field.contains("\"") || field.contains("\n")) {
+            return "\"" + field.replace("\"", "\"\"") + "\"";
+        }
+        return field;
     }
 }
