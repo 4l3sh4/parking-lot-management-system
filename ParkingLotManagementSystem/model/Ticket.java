@@ -80,4 +80,30 @@ public class Ticket {
         // for now, totalFee = parkingFee (later you can add fines)
         this.totalFee = this.parkingFee;
     }
+    
+    public void exitVehicle(ParkingSpot spot) {
+        this.exitTime = LocalDateTime.now();
+        this.hourlyRate = spot.getHourlyRate();
+
+        long minutes = Duration.between(entryTime, exitTime).toMinutes();
+        long hours = (long) Math.ceil(minutes / 60.0);
+
+        if (hours < 1) hours = 1;
+
+        this.durationHours = hours;
+        
+        // Check if it's a handicapped card holder in a handicapped spot - FREE!
+        if (vehicle instanceof Handicapped_Vehicle && spot.getType() == SpotType.HANDICAPPED) {
+            Handicapped_Vehicle handicappedVehicle = (Handicapped_Vehicle) vehicle;
+            if (handicappedVehicle.getHasHandicappedCard()) {
+                this.parkingFee = 0.0;
+                this.hourlyRate = 0.0;
+                this.totalFee = 0.0;
+                return;
+            }
+        }
+        
+        this.parkingFee = hours * hourlyRate;
+        this.totalFee = this.parkingFee;
+    }
 }

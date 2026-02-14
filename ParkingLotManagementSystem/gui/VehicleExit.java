@@ -99,7 +99,7 @@ public class VehicleExit implements Actionable {
         }
 
         // 4) Calculate fee (Ticket will set exit time + duration hours + breakdown fields if you updated Ticket)
-        ticket.exitVehicle(spot.getHourlyRate());
+        ticket.exitVehicle(spot);
         double totalDue = ticket.getTotalFee();
 
         // 5) Ask payment method: CASH/CARD only

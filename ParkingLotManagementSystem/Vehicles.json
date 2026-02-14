@@ -29,7 +29,8 @@
     "OwnerID": 4,
     "Color": "WHITE",
     "Brand": "Honda",
-    "Model": "City"
+    "Model": "City",
+    "HasHandicappedCard": false
   },
   {
     "VehicleType": "CAR",
@@ -61,7 +62,8 @@
     "OwnerID": 35,
     "Color": "RED",
     "Brand": "-",
-    "Model": "-"
+    "Model": "-",
+    "HasHandicappedCard": false
   },
   {
     "VehicleType": "CAR",
@@ -78,5 +80,40 @@
     "Color": "RED",
     "Brand": "TOYOTA",
     "Model": "M1"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO3",
+    "OwnerID": 41,
+    "Color": "BLUE",
+    "Brand": "MOTOR",
+    "Model": "3",
+    "HasHandicappedCard": false
+  },
+  {
+    "VehicleType": "SUV_TRUCK",
+    "LicensePlateNumber": "A02",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "BRO",
+    "Model": "BRO"
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "A09",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "TOYOTA",
+    "Model": "123",
+    "HasHandicappedCard": true
+  },
+  {
+    "VehicleType": "HANDICAPPED_VEHICLE",
+    "LicensePlateNumber": "AO9",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "TOYOTA",
+    "Model": "123",
+    "HasHandicappedCard": false
   }
 ]

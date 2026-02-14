@@ -10,7 +10,7 @@ public class Reservation {
     private LocalDateTime createdAt;
 
     public Reservation() {
-        // for Gson
+        // Default constructor for JSON deserialization
     }
 
     public Reservation(String plate, String spotNumber) {

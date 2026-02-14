@@ -2,6 +2,8 @@
 comment0.target=Handicapped_Vehicle
 comment1.params=licensePlate\ hasHandicappedCard
 comment1.target=Handicapped_Vehicle(java.lang.String,\ boolean)
-comment2.params=duration
-comment2.target=double\ calculateFee(java.time.Duration)
-numComments=3
+comment2.params=
+comment2.target=boolean\ getHasHandicappedCard()
+comment3.params=duration
+comment3.target=double\ calculateFee(java.time.Duration)
+numComments=4

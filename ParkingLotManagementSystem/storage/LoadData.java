@@ -2,12 +2,10 @@ package storage;
 
 import java.io.File;
 import java.io.FileReader;
-import java.lang.reflect.Type;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
-
-import com.google.gson.reflect.TypeToken;
 
 import model.ParkingSpot;
 import model.Ticket;
@@ -16,7 +14,6 @@ import model.User;
 import model.IDGenerator;
 import model.IDGeneratorState;
 import model.SpotType;
-import storage.SaveData;
 
 
 public class LoadData {
@@ -25,10 +22,9 @@ public class LoadData {
     
         FileHandler.createFilesIfNotExists();
     
-        try (FileReader reader = new FileReader(new File(FileHandler.SPOTS_FILE))) {
-    
-            Type listType = new TypeToken<ArrayList<ParkingSpot>>() {}.getType();
-            List<ParkingSpot> spots = FileHandler.gson.fromJson(reader, listType);
+        try {
+            String json = readFile(FileHandler.SPOTS_FILE);
+            List<ParkingSpot> spots = JSONUtil.fromJsonArray(json, ParkingSpot.class);
     
             if (spots == null || spots.isEmpty()) {
                 initDefaultSpots();
@@ -84,9 +80,9 @@ public class LoadData {
 
     public static void loadActiveTickets() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.ACTIVE_TICKETS_FILE))) {
-            Type listType = new TypeToken<ArrayList<Ticket>>() {}.getType();
-            List<Ticket> activeTickets = FileHandler.gson.fromJson(reader, listType);
+        try {
+            String json = readFile(FileHandler.ACTIVE_TICKETS_FILE);
+            List<Ticket> activeTickets = JSONUtil.fromJsonArray(json, Ticket.class);
             if (activeTickets == null)
                 activeTickets = new ArrayList<>();
             DataManager.activeTickets = (ArrayList<Ticket>) activeTickets;
@@ -98,9 +94,9 @@ public class LoadData {
     
     public static void loadTicketsHistory() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.TICKETS_HISTORY_FILE))) {
-            Type listType = new TypeToken<ArrayList<Ticket>>() {}.getType();
-            List<Ticket> ticketHistory = FileHandler.gson.fromJson(reader, listType);
+        try {
+            String json = readFile(FileHandler.TICKETS_HISTORY_FILE);
+            List<Ticket> ticketHistory = JSONUtil.fromJsonArray(json, Ticket.class);
             if (ticketHistory == null)
                 ticketHistory = new ArrayList<>();
             DataManager.ticketHistory = (ArrayList<Ticket>) ticketHistory;
@@ -112,9 +108,9 @@ public class LoadData {
 
     public static void loadVehicles() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.VEHICLES_FILE))) {
-            Type listType = new TypeToken<ArrayList<Vehicle>>() {}.getType();
-            List<Vehicle> vehicles = FileHandler.gson.fromJson(reader, listType);
+        try {
+            String json = readFile(FileHandler.VEHICLES_FILE);
+            List<Vehicle> vehicles = JSONUtil.fromJsonArray(json, Vehicle.class);
             if (vehicles == null)
                 vehicles = new ArrayList<>();
             DataManager.registeredVehicles = (ArrayList<Vehicle>) vehicles;
@@ -126,44 +122,12 @@ public class LoadData {
 
     public static void loadUsers() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.USERS_FILE))) {
-    
-            com.google.gson.JsonElement root = com.google.gson.JsonParser.parseReader(reader);
-    
-            ArrayList<User> users = new ArrayList<>();
-    
-            if (root != null && root.isJsonArray()) {
-                com.google.gson.JsonArray arr = root.getAsJsonArray();
-    
-                for (com.google.gson.JsonElement el : arr) {
-                    if (!el.isJsonObject()) continue;
-    
-                    com.google.gson.JsonObject o = el.getAsJsonObject();
-    
-                    int id = o.get("ID").getAsInt();
-                    String first = o.get("firstName").getAsString();
-                    String last = o.get("lastName").getAsString();
-                    String email = o.get("email").getAsString();
-                    String pass = o.get("password").getAsString();
-    
-                    String role = "CLIENT";
-                    if (o.has("role") && !o.get("role").isJsonNull()) {
-                        role = o.get("role").getAsString();
-                    }
-    
-                    User u;
-                    if ("ADMIN".equalsIgnoreCase(role)) {
-                        u = new model.Admin(id, first, last, email, pass);
-                    } else {
-                        u = new model.Client(id, first, last, email, pass);
-                    }
-    
-                    users.add(u);
-                }
-            }
-    
-            DataManager.users = users;
-    
+        try {
+            String json = readFile(FileHandler.USERS_FILE);
+            List<User> users = JSONUtil.fromJsonArray(json, User.class);
+            if (users == null)
+                users = new ArrayList<>();
+            DataManager.users = (ArrayList<User>) users;
         } catch (Exception e) {
             System.err.println("Error loading users: " + e.getMessage());
             DataManager.users = new ArrayList<>();
@@ -172,9 +136,9 @@ public class LoadData {
 
     public static void loadIDs() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.IDS_FILE))) {
-            Type type = new TypeToken<IDGeneratorState>() {}.getType();
-            IDGeneratorState state = FileHandler.gson.fromJson(reader, type);
+        try {
+            String json = readFile(FileHandler.IDS_FILE);
+            IDGeneratorState state = JSONUtil.fromJson(json, IDGeneratorState.class);
             if (state == null)
                 state = new IDGeneratorState();
             IDGenerator.setData(state.getNextUserID(), state.getNextSpotNum(),
@@ -186,9 +150,9 @@ public class LoadData {
     
     public static void loadReservations() {
         FileHandler.createFilesIfNotExists();
-        try (FileReader reader = new FileReader(new File(FileHandler.RESERVATIONS_FILE))) {
-            Type listType = new TypeToken<ArrayList<model.Reservation>>() {}.getType();
-            List<model.Reservation> list = FileHandler.gson.fromJson(reader, listType);
+        try {
+            String json = readFile(FileHandler.RESERVATIONS_FILE);
+            List<model.Reservation> list = JSONUtil.fromJsonArray(json, model.Reservation.class);
             if (list == null) list = new ArrayList<>();
             DataManager.reservations = (ArrayList<model.Reservation>) list;
         } catch (Exception e) {
@@ -207,6 +171,18 @@ public class LoadData {
         loadUsers();
         loadIDs();
         loadReservations();
+    }
+    
+    // Helper method to read file content
+    private static String readFile(String filePath) throws IOException {
+        StringBuilder content = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(new File(filePath)))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+            }
+        }
+        return content.toString();
     }
     
 }
