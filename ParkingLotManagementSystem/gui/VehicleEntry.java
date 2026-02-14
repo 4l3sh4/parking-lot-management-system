@@ -170,7 +170,11 @@ public class VehicleEntry implements Actionable {
         // 8) Occupy spot properly
         chosenSpot.occupy(vehicle);
 
-        // 9) Create ticket
+        // 9) Double check then create ticket
+        if (hasActiveTicketForPlate(vehicle.getLicensePlateNumber())) {
+            showErr("This plate already has an active ticket.\n(Detected at final commit)");
+            return;
+        }
         Ticket t = new Ticket(vehicle, chosenSpot.getSpotNumber());
         DataManager.activeTickets.add(t);
 
@@ -198,7 +202,7 @@ public class VehicleEntry implements Actionable {
 
         if (ok != JOptionPane.OK_OPTION) return null;
 
-        String plate = plateField.getText().trim().toUpperCase();
+        String plate = plateField.getText().trim().toUpperCase().replaceAll("\\s+", "");
         if (plate.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Plate cannot be empty.");
             return null;
@@ -341,14 +345,28 @@ public class VehicleEntry implements Actionable {
     // Duplicate protections
     // =========================
     private boolean hasActiveTicketForPlate(String plate) {
+        if (plate == null) return false;
+        String target = plate.trim().toUpperCase().replaceAll("\\s+", "");
+    
         for (Ticket t : DataManager.activeTickets) {
-            if (t != null && t.getVehicle() != null &&
-                    t.getVehicle().getLicensePlateNumber().equalsIgnoreCase(plate)) {
-                return true;
+            if (t == null) continue;
+    
+            // Best: compare using ticket's plate if you have it
+            String p = null;
+    
+            // If your Ticket doesn't store plate directly, pull from vehicle
+            if (t.getVehicle() != null && t.getVehicle().getLicensePlateNumber() != null) {
+                p = t.getVehicle().getLicensePlateNumber();
             }
+    
+            if (p == null) continue;
+    
+            String norm = p.trim().toUpperCase().replaceAll("\\s+", "");
+            if (norm.equals(target)) return true;
         }
         return false;
     }
+
 
     private boolean hasActiveTicketForSpot(String spotNumber) {
         for (Ticket t : DataManager.activeTickets) {

@@ -30,29 +30,5 @@
     "Color": "WHITE",
     "Brand": "Honda",
     "Model": "City"
-  },
-  {
-    "VehicleType": "CAR",
-    "LicensePlateNumber": "ABC110",
-    "OwnerID": 35,
-    "Color": "RED",
-    "Brand": "PERODUA",
-    "Model": "MYVI"
-  },
-  {
-    "VehicleType": "CAR",
-    "LicensePlateNumber": "QWE123",
-    "OwnerID": 35,
-    "Color": "SILVER",
-    "Brand": "PROTON",
-    "Model": "SAGA"
-  },
-  {
-    "VehicleType": "HANDICAPPED_VEHICLE",
-    "LicensePlateNumber": "ZXC123",
-    "OwnerID": 36,
-    "Color": "BLUE",
-    "Brand": "PERODUA",
-    "Model": "AXIA"
   }
 ]
