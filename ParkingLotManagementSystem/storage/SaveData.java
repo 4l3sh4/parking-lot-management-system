@@ -77,6 +77,8 @@ public class SaveData {
     }
 
     public static void saveAll() {
+        FileHandler.createFilesIfNotExists();
+        
         saveSpots();
         saveActiveTickets();
         saveTicketsHistory();

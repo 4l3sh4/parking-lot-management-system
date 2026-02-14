@@ -13,6 +13,9 @@
     "spotNumber": "F2-R1-S1",
     "entryTime": "2026-02-14T18:01:12.6298343",
     "exitTime": "2026-02-14T18:01:12.6308344",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 5.0
   },
   {
@@ -29,6 +32,9 @@
     "spotNumber": "F3-R2-S8",
     "entryTime": "2026-02-14T18:01:12.6308344",
     "exitTime": "2026-02-14T18:01:12.6308344",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 10.0
   },
   {
@@ -45,6 +51,9 @@
     "spotNumber": "F1-R1-S6",
     "entryTime": "2026-02-14T15:36:28.9748667",
     "exitTime": "2026-02-14T18:36:23.5937801",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 15.0
   },
   {
@@ -61,6 +70,9 @@
     "spotNumber": "F1-R4-S3",
     "entryTime": "2026-02-14T18:44:35.2802206",
     "exitTime": "2026-02-14T18:44:44.0414816",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 2.0
   },
   {
@@ -77,6 +89,85 @@
     "spotNumber": "F1-R3-S2",
     "entryTime": "2026-02-14T19:07:59.0782599",
     "exitTime": "2026-02-14T19:08:18.7460222",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 10.0
+  },
+  {
+    "id": 23,
+    "ticketCode": "T-TBC2211-20260214215811",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "TBC2211",
+      "OwnerID": 39,
+      "Color": "BLACK",
+      "Brand": "PROTON",
+      "Model": "IRIS"
+    },
+    "spotNumber": "F1-R1-S3",
+    "entryTime": "2026-02-14T21:58:11.8890157",
+    "exitTime": "2026-02-14T21:58:33.2814745",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
+    "totalFee": 2.0
+  },
+  {
+    "id": 24,
+    "ticketCode": "T-TBC2211-20260214221339",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "TBC2211",
+      "OwnerID": 39,
+      "Color": "BLACK",
+      "Brand": "PROTON",
+      "Model": "IRIS"
+    },
+    "spotNumber": "F1-R1-S6",
+    "entryTime": "2026-02-14T22:13:39.3159651",
+    "exitTime": "2026-02-14T22:13:52.0972306",
+    "durationHours": 1,
+    "hourlyRate": 5.0,
+    "parkingFee": 5.0,
+    "totalFee": 5.0
+  },
+  {
+    "id": 25,
+    "ticketCode": "T-TBC2211-20260214221527",
+    "vehicle": {
+      "VehicleType": "CAR",
+      "LicensePlateNumber": "TBC2211",
+      "OwnerID": 39,
+      "Color": "BLACK",
+      "Brand": "PROTON",
+      "Model": "IRIS"
+    },
+    "spotNumber": "F4-R1-S3",
+    "entryTime": "2026-02-14T22:15:27.2112064",
+    "exitTime": "2026-02-14T22:15:54.812622",
+    "durationHours": 1,
+    "hourlyRate": 2.0,
+    "parkingFee": 2.0,
+    "totalFee": 2.0
+  },
+  {
+    "id": 26,
+    "ticketCode": "T-WPW2211-20260214222311",
+    "vehicle": {
+      "VehicleType": "MOTORCYCLE",
+      "LicensePlateNumber": "WPW2211",
+      "OwnerID": 35,
+      "Color": "RED",
+      "Brand": "TOYOTA",
+      "Model": "M1"
+    },
+    "spotNumber": "F1-R4-S5",
+    "entryTime": "2026-02-14T22:23:11.2027578",
+    "exitTime": "2026-02-14T22:23:23.8035393",
+    "durationHours": 1,
+    "hourlyRate": 2.0,
+    "parkingFee": 2.0,
+    "totalFee": 2.0
   }
 ]

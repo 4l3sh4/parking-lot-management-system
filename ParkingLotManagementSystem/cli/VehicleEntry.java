@@ -48,15 +48,14 @@ public class VehicleEntry implements Actionable {
             return;
         }
         
-        spot.occupy();
-        spot.setVehicle(vehicle);
+        spot.occupy(vehicle);
         
         Ticket ticket = new Ticket(vehicle, spot.getSpotNumber());
         DataManager.activeTickets.add(ticket);
         SaveData.saveAll();
         System.out.println("Vehicle entered succesfully");
         System.out.println("------------------------");
-        System.out.println("Ticket ID: "+ticket.getID());
+        System.out.println("Ticket ID: "+ticket.getId());
         System.out.println("Spot Number: "+spot.getSpotNumber());
         System.out.println("Spot Type: "+spot.getType());
         System.out.println("Entry Date:"+ticket.getEntryDate());

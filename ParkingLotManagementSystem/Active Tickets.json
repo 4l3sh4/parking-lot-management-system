@@ -12,6 +12,9 @@
     },
     "spotNumber": "F1-R2-S4",
     "entryTime": "2026-02-14T12:51:33.4879373",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 0.0
   },
   {
@@ -27,6 +30,9 @@
     },
     "spotNumber": "F1-R2-S3",
     "entryTime": "2026-02-14T13:57:42.9038468",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 0.0
   },
   {
@@ -42,6 +48,9 @@
     },
     "spotNumber": "F1-R1-S2",
     "entryTime": "2026-02-14T17:45:46.8451175",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 0.0
   },
   {
@@ -57,6 +66,9 @@
     },
     "spotNumber": "F1-R2-S2",
     "entryTime": "2026-02-14T18:36:12.737396",
+    "durationHours": 0,
+    "hourlyRate": 0.0,
+    "parkingFee": 0.0,
     "totalFee": 0.0
   }
 ]

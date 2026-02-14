@@ -62,5 +62,21 @@
     "Color": "RED",
     "Brand": "-",
     "Model": "-"
+  },
+  {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "TBC2211",
+    "OwnerID": 39,
+    "Color": "BLACK",
+    "Brand": "PROTON",
+    "Model": "IRIS"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "WPW2211",
+    "OwnerID": 35,
+    "Color": "RED",
+    "Brand": "TOYOTA",
+    "Model": "M1"
   }
 ]

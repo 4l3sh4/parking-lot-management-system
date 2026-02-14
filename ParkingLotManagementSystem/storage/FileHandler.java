@@ -90,5 +90,16 @@ public class FileHandler {
                 e.printStackTrace();
             }
         }
+        
+        File reservationsFile = new File(RESERVATIONS_FILE);
+        reservationsFile.getParentFile().mkdirs(); // ensure "data" folder exists
+        if (!reservationsFile.exists()) {
+            try {
+                reservationsFile.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }

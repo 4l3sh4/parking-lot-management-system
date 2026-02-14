@@ -10,12 +10,12 @@ import model.Reservation;
 
 
 public class DataManager {
-    
-    public static ArrayList<ParkingSpot> parkingSpots;
-    public static ArrayList<Ticket> activeTickets;
-    public static ArrayList<Ticket> ticketHistory;
-    public static ArrayList<Vehicle> registeredVehicles;
-    public static ArrayList<User> users;
+
+    public static ArrayList<ParkingSpot> parkingSpots = new ArrayList<>();
+    public static ArrayList<Ticket> activeTickets = new ArrayList<>();
+    public static ArrayList<Ticket> ticketHistory = new ArrayList<>();
+    public static ArrayList<Vehicle> registeredVehicles = new ArrayList<>();
+    public static ArrayList<User> users = new ArrayList<>();
     public static ArrayList<Reservation> reservations = new ArrayList<>();
 
 }

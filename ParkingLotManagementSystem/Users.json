@@ -22,5 +22,29 @@
     "email": "3",
     "password": "3",
     "role": "CLIENT"
+  },
+  {
+    "ID": 37,
+    "firstName": "1",
+    "lastName": "1",
+    "email": "1",
+    "password": "1",
+    "role": "CLIENT"
+  },
+  {
+    "ID": 38,
+    "firstName": "2",
+    "lastName": "2",
+    "email": "2",
+    "password": "2",
+    "role": "ADMIN"
+  },
+  {
+    "ID": 39,
+    "firstName": "ari",
+    "lastName": "ari",
+    "email": "ari",
+    "password": "ari",
+    "role": "CLIENT"
   }
 ]
