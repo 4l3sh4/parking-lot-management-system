@@ -140,8 +140,8 @@ public class Ticket {
         
         String plate = vehicle.getLicensePlateNumber();
         for (Reservation r : DataManager.reservations) {
-            if (r != null && r.isActiveForPlate(plate) && 
-                r.isActiveForSpot(spotNumber)) {
+            if (r != null && r.matchesPlate(plate) && 
+                r.matchesSpot(spotNumber)) {
                 return true;
             }
         }

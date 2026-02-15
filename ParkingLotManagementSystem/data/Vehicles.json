@@ -139,5 +139,13 @@
     "Color": "RED",
     "Brand": "111",
     "Model": "111"
+  },
+  {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "123",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "123",
+    "Model": "123"
   }
 ]

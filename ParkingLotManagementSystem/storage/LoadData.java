@@ -12,7 +12,6 @@ import model.Ticket;
 import model.Vehicle;
 import model.User;
 import model.IDGenerator;
-import model.IDGeneratorState;
 import model.SpotType;
 import model.Fine;
 

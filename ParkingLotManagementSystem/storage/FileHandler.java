@@ -4,16 +4,26 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileHandler {
-    public static final String SPOTS_FILE = "Parking Spots.json";
-    public static final String ACTIVE_TICKETS_FILE = "Active Tickets.json";
-    public static final String TICKETS_HISTORY_FILE = "Tickets History.json";
-    public static final String VEHICLES_FILE = "Vehicles.json";
-    public static final String USERS_FILE = "Users.json";
-    public static final String IDS_FILE = "IDs.json";
-    public static final String RESERVATIONS_FILE = "data/Reservations.json";
-    public static final String FINES_FILE = "Fines.json";
+    // Data directory path
+    private static final String DATA_DIR = "data";
+    
+    // All JSON files stored in data/ folder
+    public static final String SPOTS_FILE = DATA_DIR + "/Parking Spots.json";
+    public static final String ACTIVE_TICKETS_FILE = DATA_DIR + "/Active Tickets.json";
+    public static final String TICKETS_HISTORY_FILE = DATA_DIR + "/Tickets History.json";
+    public static final String VEHICLES_FILE = DATA_DIR + "/Vehicles.json";
+    public static final String USERS_FILE = DATA_DIR + "/Users.json";
+    public static final String IDS_FILE = DATA_DIR + "/IDs.json";
+    public static final String RESERVATIONS_FILE = DATA_DIR + "/Reservations.json";
+    public static final String FINES_FILE = DATA_DIR + "/Fines.json";
     
     public static void createFilesIfNotExists() {
+        // Ensure data directory exists
+        File dataDir = new File(DATA_DIR);
+        if (!dataDir.exists()) {
+            dataDir.mkdirs();
+        }
+        
         File spotsFile = new File(SPOTS_FILE);
         if (!spotsFile.exists()) {
             try{
@@ -69,7 +79,6 @@ public class FileHandler {
         }
         
         File reservationsFile = new File(RESERVATIONS_FILE);
-        reservationsFile.getParentFile().mkdirs(); // ensure "data" folder exists
         if (!reservationsFile.exists()) {
             try {
                 reservationsFile.createNewFile();

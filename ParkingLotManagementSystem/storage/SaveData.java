@@ -9,7 +9,6 @@ import model.ParkingSpot;
 import model.Ticket;
 import model.Vehicle;
 import model.User;
-import model.IDGeneratorState;
 
 public class SaveData {
 
