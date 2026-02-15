@@ -105,6 +105,10 @@ public class VehicleExit implements Actionable {
         ticket.exitVehicle(spot);
         double currentSessionFines = ticket.getFines();
         double currentSessionFinesToPay = currentSessionFines;
+        double overstayingFineAmount = ticket.isOverstaying()
+            ? FineManager.calculateFine(ticket.getDurationHours(), true, DataManager.currentFineScheme)
+            : 0.0;
+        double reservedSpotFineAmount = ticket.isReservedSpotViolation() ? 50.0 : 0.0;
         
         // 4c) Give option to defer current session fine payment (applies to all fine schemes)
         boolean deferCurrentSessionFine = false;
@@ -165,26 +169,20 @@ public class VehicleExit implements Actionable {
             FineManager.payAllFines(plate);
         }
 
-        // 5d) Create Fine records for deferred or unpaid fines from CURRENT session
-        if (deferCurrentSessionFine) {
-            // Customer chose to defer payment - create Fine records for entire current session fines
-            if (ticket.isOverstaying()) {
-                FineManager.createFine(plate, currentSessionFines, "Overstaying (more than 24 hours)");
+        // 5d) Create Fine records for CURRENT session and mark paid if applicable
+        double paidCurrentSessionFines = Math.max(0.0, amountPaidTowardsFines - unpaidFinesFromPrevious);
+        if (ticket.isOverstaying() && overstayingFineAmount > 0) {
+            Fine fine = FineManager.createFine(plate, overstayingFineAmount, "Overstaying (more than 24 hours)");
+            if (!deferCurrentSessionFine && paidCurrentSessionFines >= overstayingFineAmount) {
+                fine.markAsPaid();
+                paidCurrentSessionFines -= overstayingFineAmount;
             }
-            if (ticket.isReservedSpotViolation()) {
-                FineManager.createFine(plate, 50.0, "Reserved spot without reservation");
-            }
-        } else {
-            // Customer chose to pay now - only create Fine records if there's unpaid amount
-            double unpaidCurrentSessionFines = Math.max(0, currentSessionFines - (amountPaidTowardsFines - unpaidFinesFromPrevious));
-            if (unpaidCurrentSessionFines > 0) {
-                if (ticket.isOverstaying()) {
-                    double overstayingFineAmount = Math.min(currentSessionFines, unpaidCurrentSessionFines);
-                    FineManager.createFine(plate, overstayingFineAmount, "Overstaying (more than 24 hours)");
-                }
-                if (ticket.isReservedSpotViolation()) {
-                    FineManager.createFine(plate, 50.0, "Reserved spot without reservation");
-                }
+        }
+        if (ticket.isReservedSpotViolation() && reservedSpotFineAmount > 0) {
+            Fine fine = FineManager.createFine(plate, reservedSpotFineAmount, "Reserved spot without reservation");
+            if (!deferCurrentSessionFine && paidCurrentSessionFines >= reservedSpotFineAmount) {
+                fine.markAsPaid();
+                paidCurrentSessionFines -= reservedSpotFineAmount;
             }
         }
 

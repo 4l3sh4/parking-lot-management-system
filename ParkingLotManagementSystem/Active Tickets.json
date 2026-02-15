@@ -74,24 +74,5 @@
     "hourlyRate": 0.0,
     "parkingFee": 0.0,
     "totalFee": 0.0
-  },
-  {
-    "id": 29,
-    "ticketCode": "T-A10-20260215032345",
-    "vehicle": {
-    "VehicleType": "CAR",
-    "LicensePlateNumber": "A10",
-    "OwnerID": 41,
-    "Color": "RED",
-    "Brand": "1",
-    "Model": "1"
-  },
-    "spotNumber": "F1-R1-S8",
-    "entryTime": "2026-02-15T03:23:45.5133024",
-    "exitTime": null,
-    "durationHours": 0,
-    "hourlyRate": 0.0,
-    "parkingFee": 0.0,
-    "totalFee": 0.0
   }
 ]
