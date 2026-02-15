@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.util.regex.Pattern;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -22,6 +23,14 @@ import model.IDGenerator;
 
 @SuppressWarnings("serial")
 public class Register extends JPanel {
+
+    // ALL CAPS only
+    private static final Pattern ALL_CAPS_NAME =
+            Pattern.compile("^[A-Z]+(?:[\\s\\-'][A-Z]+)*$");
+
+    // Basic email validation (case-insensitive)
+    private static final Pattern EMAIL_PATTERN =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}$", Pattern.CASE_INSENSITIVE);
 
     public Register() {
         setLayout(new GridBagLayout());
@@ -57,17 +66,48 @@ public class Register extends JPanel {
         JButton createAccBtn = StyledComponents.createPrimaryButton("Create Account");
         createAccBtn.addActionListener((ActionEvent e) -> {
 
-            // validations
-            if (firstName.getText().trim().isEmpty()) {
+            // --------- Read inputs once (trimmed) ----------
+            String fn = firstName.getText().trim();
+            String ln = lastName.getText().trim();
+            String em = email.getText().trim();
+
+            // --------- Validations ----------
+            if (fn.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "First Name cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (lastName.getText().trim().isEmpty()) {
+            if (ln.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Last Name cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            if (email.getText().trim().isEmpty()) {
+
+            // 1) ALL CAPS name validation
+            if (!ALL_CAPS_NAME.matcher(fn).matches()) {
+                JOptionPane.showMessageDialog(this,
+                        "First Name must be in ALL CAPITAL letters.",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            if (!ALL_CAPS_NAME.matcher(ln).matches()) {
+                JOptionPane.showMessageDialog(this,
+                        "Last Name must be in ALL CAPITAL letters.",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            if (em.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Email cannot be empty", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // 2) Email format validation
+            if (!EMAIL_PATTERN.matcher(em).matches()) {
+                JOptionPane.showMessageDialog(this,
+                        "Please enter a valid email.\nExample: ali@gmail.com",
+                        "Warning",
+                        JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -91,17 +131,17 @@ public class Register extends JPanel {
             if ("Admin".equals(accType.getSelectedItem())) {
                 user = new Admin(
                         IDGenerator.getNextUserID(),
-                        firstName.getText().trim(),
-                        lastName.getText().trim(),
-                        email.getText().trim(),
+                        fn,
+                        ln,
+                        em,
                         pass
                 );
             } else {
                 user = new Client(
                         IDGenerator.getNextUserID(),
-                        firstName.getText().trim(),
-                        lastName.getText().trim(),
-                        email.getText().trim(),
+                        fn,
+                        ln,
+                        em,
                         pass
                 );
             }

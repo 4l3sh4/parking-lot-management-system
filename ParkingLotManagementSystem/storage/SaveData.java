@@ -58,7 +58,12 @@ public class SaveData {
     }
 
     public static void saveIDs() {
-        IDGeneratorState state = new IDGeneratorState();
+        IDGeneratorState state = new IDGeneratorState(
+            model.IDGenerator.getSaveNextUserID(),
+            model.IDGenerator.getSaveNextSpotNum(),
+            model.IDGenerator.getSaveNextTicketID(),
+            model.IDGenerator.getSaveNextFineID()
+        );
         try (FileWriter writer = new FileWriter(new File(FileHandler.IDS_FILE))) {
             writer.write(JSONUtil.toJson(state));
         } catch (IOException e) {

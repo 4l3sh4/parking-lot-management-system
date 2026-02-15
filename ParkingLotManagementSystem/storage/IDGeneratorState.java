@@ -1,36 +1,29 @@
 package storage;
 
-import model.IDGenerator;
+public class IDGeneratorState {
 
-/**
- * State object for persisting ID generator counters to JSON.
- * Used by SaveData and LoadData to maintain ID sequences across application restarts.
- * 
- * @author Parking Lot Management System
- * @version 1.0
- */
-public class IDGeneratorState
-{
-    private int nextUserID = IDGenerator.getSaveNextUserID();
-    private int nextSpotNum = IDGenerator.getSaveNextSpotNum();
-    private int nextTicketID = IDGenerator.getSaveNextTicketID();
-    private int nextFineID = IDGenerator.getSaveNextFineID();
-    
-    public IDGeneratorState() {}
-    
-    public int getNextUserID() {
-        return nextUserID;
+    private int nextUserID;
+    private int nextSpotNum;
+    private int nextTicketID;
+    private int nextFineID;
+
+    public IDGeneratorState() {
+        // Safe defaults (never 0)
+        this.nextUserID = 1;
+        this.nextSpotNum = 1;
+        this.nextTicketID = 1;
+        this.nextFineID = 1;
     }
-    
-    public int getNextSpotNum() {
-        return nextSpotNum;
+
+    public IDGeneratorState(int nextUserID, int nextSpotNum, int nextTicketID, int nextFineID) {
+        this.nextUserID = nextUserID;
+        this.nextSpotNum = nextSpotNum;
+        this.nextTicketID = nextTicketID;
+        this.nextFineID = nextFineID;
     }
-    
-    public int getNextTicketID() {
-        return nextTicketID;
-    }
-    
-    public int getNextFineID() {
-        return nextFineID;
-    }
+
+    public int getNextUserID() { return nextUserID; }
+    public int getNextSpotNum() { return nextSpotNum; }
+    public int getNextTicketID() { return nextTicketID; }
+    public int getNextFineID() { return nextFineID; }
 }

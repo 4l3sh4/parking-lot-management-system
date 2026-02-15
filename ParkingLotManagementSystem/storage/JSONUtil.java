@@ -387,9 +387,19 @@ public class JSONUtil {
     }
     
     private static IDGeneratorState jsonToIDGeneratorState(String json) {
-        IDGeneratorState state = new IDGeneratorState();
-        // The state reads from IDGenerator directly in its constructor
-        return state;
+
+        int nextUserID = extractIntValue(json, "nextUserID");
+        int nextSpotNum = extractIntValue(json, "nextSpotNum");
+        int nextTicketID = extractIntValue(json, "nextTicketID");
+        int nextFineID = extractIntValue(json, "nextFineID");
+
+        // Safety: never allow 0
+        if (nextUserID <= 0) nextUserID = 1;
+        if (nextSpotNum <= 0) nextSpotNum = 1;
+        if (nextTicketID <= 0) nextTicketID = 1;
+        if (nextFineID <= 0) nextFineID = 1;
+
+        return new IDGeneratorState(nextUserID, nextSpotNum, nextTicketID, nextFineID);
     }
     
     private static Reservation jsonToReservation(String json) {
