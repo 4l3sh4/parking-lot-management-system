@@ -488,5 +488,81 @@
     "hourlyRate": 10.0,
     "parkingFee": 10.0,
     "totalFee": 10.0
+  },
+  {
+    "id": 29,
+    "ticketCode": "T-A10-20260215032345",
+    "vehicle": {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "A10",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "1",
+    "Model": "1"
+  },
+    "spotNumber": "F1-R1-S8",
+    "entryTime": "2026-02-15T03:23:45.5133024",
+    "exitTime": "2026-02-15T14:46:27.9427216",
+    "durationHours": 12,
+    "hourlyRate": 5.0,
+    "parkingFee": 60.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 30,
+    "ticketCode": "T-A10-20260215144807",
+    "vehicle": {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "A10",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "1",
+    "Model": "1"
+  },
+    "spotNumber": "F2-R1-S2",
+    "entryTime": "2026-02-15T14:48:07.3224419",
+    "exitTime": "2026-02-15T14:48:13.5261469",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 31,
+    "ticketCode": "T-A10-20260215144958",
+    "vehicle": {
+    "VehicleType": "CAR",
+    "LicensePlateNumber": "A10",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "1",
+    "Model": "1"
+  },
+    "spotNumber": "F2-R1-S2",
+    "entryTime": "2026-02-15T14:49:58.9139082",
+    "exitTime": "2026-02-15T14:56:42.5263015",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 32,
+    "ticketCode": "T-A102-20260215145936",
+    "vehicle": {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "A102",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "111",
+    "Model": "111"
+  },
+    "spotNumber": "F1-R4-S2",
+    "entryTime": "2026-02-15T14:59:36.5909349",
+    "exitTime": "2026-02-15T14:59:43.7986883",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
   }
 ]

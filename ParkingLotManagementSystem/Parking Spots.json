@@ -58,15 +58,8 @@
   {
     "spotNumber": "F1-R1-S8",
     "type": "REGULAR",
-    "occupied": true,
-    "vehicle": {
-    "VehicleType": "CAR",
-    "LicensePlateNumber": "A10",
-    "OwnerID": 41,
-    "Color": "RED",
-    "Brand": "1",
-    "Model": "1"
-  },
+    "occupied": false,
+    "vehicle": null,
     "hourlyRate": 5.0
   },
   {
