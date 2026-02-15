@@ -27,40 +27,31 @@ public class Reservation {
 
     public void cancel() { this.active = false; }
 
-    // ===== Existing methods (keep for compatibility) =====
+    /**
+     * Checks if this reservation is active and matches the given plate number.
+     * @param plate The license plate to check (will be normalized)
+     * @return true if active and plate matches
+     */
     public boolean matchesPlate(String plate) {
         return active && this.plate != null && this.plate.equals(normalizePlate(plate));
     }
 
+    /**
+     * Checks if this reservation is active and matches the given spot number.
+     * @param spotNumber The spot number to check (case-insensitive)
+     * @return true if active and spot matches
+     */
     public boolean matchesSpot(String spotNumber) {
         if (!active) return false;
         if (this.spotNumber == null || spotNumber == null) return false;
         return this.spotNumber.equalsIgnoreCase(spotNumber.trim());
     }
 
-    // ===== New helper aliases (so your GUI code reads clean) =====
-
-    // alias: nicer name for matching by plate
-    public boolean matches(String plate) {
-        return matchesPlate(plate);
-    }
-
-    // alias: clearer meaning
-    public boolean matchesSpotNumber(String spotNumber) {
-        return matchesSpot(spotNumber);
-    }
-
-    // convenience: explicit "active reservation for X"
-    public boolean isActiveForPlate(String plate) {
-        return isActive() && this.plate != null && this.plate.equals(normalizePlate(plate));
-    }
-
-    public boolean isActiveForSpot(String spotNumber) {
-        if (!isActive()) return false;
-        if (this.spotNumber == null || spotNumber == null) return false;
-        return this.spotNumber.equalsIgnoreCase(spotNumber.trim());
-    }
-
+    /**
+     * Normalizes a license plate by removing spaces and converting to uppercase.
+     * @param plate The plate to normalize
+     * @return Normalized plate string
+     */
     public static String normalizePlate(String plate) {
         if (plate == null) return "";
         return plate.trim().toUpperCase().replaceAll("\\s+", "");

@@ -564,5 +564,43 @@
     "hourlyRate": 10.0,
     "parkingFee": 10.0,
     "totalFee": 60.0
+  },
+  {
+    "id": 33,
+    "ticketCode": "T-123-20260215185012",
+    "vehicle": {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "123",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "123",
+    "Model": "123"
+  },
+    "spotNumber": "F1-R4-S2",
+    "entryTime": "2026-02-15T18:50:12.9889704",
+    "exitTime": "2026-02-15T18:50:20.2310909",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
+  },
+  {
+    "id": 34,
+    "ticketCode": "T-123-20260215190101",
+    "vehicle": {
+    "VehicleType": "MOTORCYCLE",
+    "LicensePlateNumber": "123",
+    "OwnerID": 41,
+    "Color": "RED",
+    "Brand": "123",
+    "Model": "123"
+  },
+    "spotNumber": "F2-R1-S2",
+    "entryTime": "2026-02-15T19:01:01.3243569",
+    "exitTime": "2026-02-15T19:01:41.3416171",
+    "durationHours": 1,
+    "hourlyRate": 10.0,
+    "parkingFee": 10.0,
+    "totalFee": 60.0
   }
 ]

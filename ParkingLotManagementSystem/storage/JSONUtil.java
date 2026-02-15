@@ -36,6 +36,8 @@ public class JSONUtil {
             return idGeneratorStateToJson((IDGeneratorState) obj);
         } else if (obj instanceof Reservation) {
             return reservationToJson((Reservation) obj);
+        } else if (obj instanceof Fine) {
+            return fineToJson((Fine) obj);
         }
         
         return "{}";
@@ -164,6 +166,25 @@ public class JSONUtil {
         return json.toString();
     }
     
+    private static String fineToJson(Fine fine) {
+        StringBuilder json = new StringBuilder("{\n");
+        json.append("    \"id\": ").append(fine.getId()).append(",\n");
+        json.append("    \"licensePlate\": ").append(quote(fine.getLicensePlate())).append(",\n");
+        json.append("    \"amount\": ").append(fine.getAmount()).append(",\n");
+        json.append("    \"reason\": ").append(quote(fine.getReason())).append(",\n");
+        json.append("    \"paid\": ").append(fine.isPaid()).append(",\n");
+        json.append("    \"createdAt\": ").append(quote(fine.getCreatedAt().format(DATE_TIME_FORMATTER))).append(",\n");
+        
+        if (fine.getPaidAt() != null) {
+            json.append("    \"paidAt\": ").append(quote(fine.getPaidAt().format(DATE_TIME_FORMATTER))).append("\n");
+        } else {
+            json.append("    \"paidAt\": null\n");
+        }
+        
+        json.append("  }");
+        return json.toString();
+    }
+    
     // ==================== DESERIALIZATION ====================
     
     public static <T> List<T> fromJsonArray(String json, Class<T> clazz) {
@@ -211,6 +232,8 @@ public class JSONUtil {
             return (T) jsonToIDGeneratorState(json);
         } else if (clazz == Reservation.class) {
             return (T) jsonToReservation(json);
+        } else if (clazz == Fine.class) {
+            return (T) jsonToFine(json);
         }
         
         return null;
@@ -392,6 +415,43 @@ public class JSONUtil {
         }
         
         return reservation;
+    }
+    
+    private static Fine jsonToFine(String json) {
+        String licensePlate = extractStringValue(json, "licensePlate");
+        double amount = extractDoubleValue(json, "amount");
+        String reason = extractStringValue(json, "reason");
+        
+        Fine fine = new Fine(licensePlate, amount, reason);
+        
+        // Use reflection to set fields since constructor sets id and timestamps
+        try {
+            java.lang.reflect.Field idField = Fine.class.getDeclaredField("id");
+            idField.setAccessible(true);
+            idField.set(fine, extractIntValue(json, "id"));
+            
+            java.lang.reflect.Field paidField = Fine.class.getDeclaredField("paid");
+            paidField.setAccessible(true);
+            paidField.set(fine, extractBooleanValue(json, "paid"));
+            
+            java.lang.reflect.Field createdAtField = Fine.class.getDeclaredField("createdAt");
+            createdAtField.setAccessible(true);
+            String createdAtStr = extractStringValue(json, "createdAt");
+            if (createdAtStr != null) {
+                createdAtField.set(fine, LocalDateTime.parse(createdAtStr, DATE_TIME_FORMATTER));
+            }
+            
+            java.lang.reflect.Field paidAtField = Fine.class.getDeclaredField("paidAt");
+            paidAtField.setAccessible(true);
+            String paidAtStr = extractStringValue(json, "paidAt");
+            if (paidAtStr != null && !paidAtStr.equals("null")) {
+                paidAtField.set(fine, LocalDateTime.parse(paidAtStr, DATE_TIME_FORMATTER));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return fine;
     }
     
     // ==================== HELPER METHODS ====================

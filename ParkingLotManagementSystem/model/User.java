@@ -9,7 +9,6 @@ public abstract class User{
     private String password;
     private String role;
     private boolean vip;
-    protected transient Actionable[] actions;
     protected transient gui.Actionable[] guiActions;
     
     public User() {
@@ -78,10 +77,6 @@ public abstract class User{
     
     public String getPassword() {
         return password;
-    }
-    
-    public Actionable[] getActions() {
-        return actions;
     }
     
     public gui.Actionable[] getGUIActions() {

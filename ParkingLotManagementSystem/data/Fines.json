@@ -1,0 +1,11 @@
+[
+  {
+    "id": 0,
+    "licensePlate": "123",
+    "amount": 50.0,
+    "reason": "Reserved spot without reservation",
+    "paid": false,
+    "createdAt": "2026-02-15T19:01:45.5146478",
+    "paidAt": null
+  }
+]
