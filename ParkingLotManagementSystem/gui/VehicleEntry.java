@@ -175,30 +175,35 @@ public class VehicleEntry implements Actionable {
     
         // 6) Find or create vehicle
         Vehicle vehicle = findVehicleByPlate(plate);
-    
-        // If vehicle exists but belongs to different owner => block
-        if (vehicle != null && vehicle.getVehicleOwnerID() != currentUser.getID()) {
+
+        // If old data has ownerID = 0, bind it to the logged-in user
+        if (vehicle != null && vehicle.getVehicleOwnerID() == 0) {
+            vehicle.setVehicleOwnerID(currentUser.getID());
+            SaveData.saveAll();
+        }
+
+        // Only block if the vehicle already has a real owner AND it's not the current user
+        if (vehicle != null && vehicle.getVehicleOwnerID() != 0
+                && vehicle.getVehicleOwnerID() != currentUser.getID()) {
             showErr("This plate is registered under a different owner.\nCannot use this vehicle.");
             return;
         }
-    
+
         // If no vehicle exists, we MUST ask details
         if (vehicle == null) {
-    
-            // If reservation path: you still need vehicle type for object creation.
-            // So ask it here only if it wasn't asked earlier.
+
             if (vType == null) {
                 vType = askVehicleType();
                 if (vType == null) return;
-    
+
                 if (vType == VehicleType.HANDICAPPED_VEHICLE) {
                     hasHandicapCard = askHandicapCard();
                 }
             }
-    
+
             vehicle = buildVehicle(plate, vType, hasHandicapCard);
             if (vehicle == null) return;
-    
+
             DataManager.registeredVehicles.add(vehicle);
         }
     
