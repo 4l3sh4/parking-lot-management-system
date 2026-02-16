@@ -103,16 +103,13 @@ public class Ticket {
 
         this.durationHours = hours;
         
-        // Check if it's a handicapped card holder in a handicapped spot - FREE!
-        if (vehicle instanceof Handicapped_Vehicle && spot.getType() == SpotType.HANDICAPPED) {
-            Handicapped_Vehicle handicappedVehicle = (Handicapped_Vehicle) vehicle;
-            if (handicappedVehicle.getHasHandicappedCard()) {
-                this.parkingFee = 0.0;
-                this.hourlyRate = 0.0;
-                this.fines = 0.0;
-                this.totalFee = 0.0;
-                return;
-            }
+        // Check if vehicle gets free parking in this spot type (polymorphic behavior)
+        if (vehicle.hasFreeParkingIn(spot.getType())) {
+            this.parkingFee = 0.0;
+            this.hourlyRate = 0.0;
+            this.fines = 0.0;
+            this.totalFee = 0.0;
+            return;
         }
         
         this.parkingFee = hours * hourlyRate;

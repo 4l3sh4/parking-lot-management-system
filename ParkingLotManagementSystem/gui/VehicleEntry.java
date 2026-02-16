@@ -322,11 +322,13 @@ public class VehicleEntry implements Actionable {
 
         if (ok != JOptionPane.OK_OPTION) return null;
 
-        Vehicle v;
-        if (type == VehicleType.CAR) v = new Car(plate);
-        else if (type == VehicleType.MOTORCYCLE) v = new Motorcycle(plate);
-        else if (type == VehicleType.SUV_TRUCK) v = new SUV_Truck(plate);
-        else v = new Handicapped_Vehicle(plate, hasCard);
+        // Use VehicleFactory to create the vehicle
+        Vehicle v = VehicleFactory.createVehicle(type, plate, hasCard);
+        
+        if (v == null) {
+            showErr("Failed to create vehicle of type: " + type);
+            return null;
+        }
 
         v.setBrand(brand.getText().trim());
         v.setModel(model.getText().trim());
@@ -385,26 +387,14 @@ public class VehicleEntry implements Actionable {
             // backup safety: don’t show spots already used by active ticket
             if (hasActiveTicketForSpot(s.getSpotNumber())) continue;
 
-            if (isSpotAllowed(vt, s.getType())) result.add(s);
+            // Use polymorphic method to check if spot is allowed
+            Vehicle tempVehicle = VehicleFactory.createVehicle(vt, "TEMP");
+            if (tempVehicle != null && tempVehicle.getAllowedSpotTypes().contains(s.getType())) {
+                result.add(s);
+            }
         }
 
         return result;
-    }
-
-    private boolean isSpotAllowed(VehicleType vt, SpotType st) {
-        if (st == SpotType.RESERVED) return true;
-        switch (vt) {
-            case MOTORCYCLE:
-                return st == SpotType.COMPACT;
-            case CAR:
-                return st == SpotType.COMPACT || st == SpotType.REGULAR;
-            case SUV_TRUCK:
-                return st == SpotType.REGULAR;
-            case HANDICAPPED_VEHICLE:
-                return true;
-            default:
-                return false;
-        }
     }
 
     // =========================

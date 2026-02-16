@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Set;
+import gui.VehicleType;
 
 public abstract class Vehicle {
     
@@ -52,5 +54,29 @@ public abstract class Vehicle {
     
     public Color getColor() {
         return color;
+    }
+    
+    /**
+     * Returns the set of allowed spot types for this vehicle.
+     * This method must be implemented by all vehicle subclasses.
+     * @return Set of SpotType that this vehicle can park in
+     */
+    public abstract Set<SpotType> getAllowedSpotTypes();
+    
+    /**
+     * Returns the vehicle type enum for this vehicle.
+     * This method must be implemented by all vehicle subclasses.
+     * @return VehicleType enum value
+     */
+    public abstract VehicleType getVehicleType();
+    
+    /**
+     * Determines if this vehicle gets free parking in a specific spot type.
+     * Override this method to implement special pricing logic.
+     * @param spotType The spot type to check
+     * @return true if parking is free, false otherwise
+     */
+    public boolean hasFreeParkingIn(SpotType spotType) {
+        return false; // Default: no vehicles get free parking
     }
 }

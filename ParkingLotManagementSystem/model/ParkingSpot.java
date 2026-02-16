@@ -13,17 +13,7 @@ public class ParkingSpot {
         this.type = type;
         this.occupied = false;
         this.vehicle = null;
-        this.hourlyRate = assignRate(type);
-    }
-
-    private double assignRate(SpotType type) {
-        switch (type) {
-            case COMPACT: return 2.0;
-            case REGULAR: return 5.0;
-            case HANDICAPPED: return 2.0;
-            case RESERVED: return 10.0;
-            default: return 0.0;
-        }
+        this.hourlyRate = type.getHourlyRate();
     }
 
     public String getSpotNumber() {

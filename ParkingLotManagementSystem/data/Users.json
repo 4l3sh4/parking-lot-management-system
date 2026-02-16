@@ -1,0 +1,11 @@
+[
+  {
+    "UserType": "Client",
+    "ID": 1,
+    "firstName": "BOB",
+    "lastName": "BURNER",
+    "email": "BOB@GMAIL.COM",
+    "vip": false,
+    "password": "1234"
+  }
+]

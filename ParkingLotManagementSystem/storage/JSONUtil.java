@@ -79,15 +79,8 @@ public class JSONUtil {
     private static String vehicleToJson(Vehicle vehicle) {
         StringBuilder json = new StringBuilder("{\n");
         
-        if (vehicle instanceof Motorcycle) {
-            json.append("    \"VehicleType\": \"MOTORCYCLE\",\n");
-        } else if (vehicle instanceof Car) {
-            json.append("    \"VehicleType\": \"CAR\",\n");
-        } else if (vehicle instanceof SUV_Truck) {
-            json.append("    \"VehicleType\": \"SUV_TRUCK\",\n");
-        } else if (vehicle instanceof Handicapped_Vehicle) {
-            json.append("    \"VehicleType\": \"HANDICAPPED_VEHICLE\",\n");
-        }
+        // Use polymorphic method instead of instanceof
+        json.append("    \"VehicleType\": \"").append(vehicle.getVehicleType().name()).append("\",\n");
         
         json.append("    \"LicensePlateNumber\": ").append(quote(vehicle.getLicensePlateNumber())).append(",\n");
         json.append("    \"OwnerID\": ").append(vehicle.getVehicleOwnerID()).append(",\n");
@@ -271,24 +264,22 @@ public class JSONUtil {
         String vehicleType = extractStringValue(json, "VehicleType");
         String plate = extractStringValue(json, "LicensePlateNumber");
         
-        Vehicle vehicle;
+        // Convert string to VehicleType enum
+        gui.VehicleType type;
+        try {
+            type = gui.VehicleType.valueOf(vehicleType);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
         
-        switch (vehicleType) {
-            case "MOTORCYCLE":
-                vehicle = new Motorcycle(plate);
-                break;
-            case "CAR":
-                vehicle = new Car(plate);
-                break;
-            case "SUV_TRUCK":
-                vehicle = new SUV_Truck(plate);
-                break;
-            case "HANDICAPPED_VEHICLE":
-                boolean hasCard = extractBooleanValue(json, "HasHandicappedCard");
-                vehicle = new Handicapped_Vehicle(plate, hasCard);
-                break;
-            default:
-                return null;
+        // Get handicap card status if applicable
+        boolean hasCard = extractBooleanValue(json, "HasHandicappedCard");
+        
+        // Use VehicleFactory to create the vehicle
+        Vehicle vehicle = VehicleFactory.createVehicle(type, plate, hasCard);
+        
+        if (vehicle == null) {
+            return null;
         }
         
         vehicle.setLicensePlateNumber(plate);
